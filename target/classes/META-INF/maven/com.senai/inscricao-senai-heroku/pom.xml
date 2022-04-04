@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.senai</groupId>
-	<artifactId>pagina-inscricao-senai</artifactId>
+	<artifactId>inscricao-senai-heroku</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pagina-inscricao-senai</name>
 	<description>Pagina de inscrições de cursos no SENAI</description>

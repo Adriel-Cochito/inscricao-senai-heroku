@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prod -jat target/inscricao-senai-heroku-0.0.1-SNAPSHOT.jar
