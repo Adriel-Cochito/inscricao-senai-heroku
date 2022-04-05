@@ -62,7 +62,6 @@ public class UsuarioService implements UserDetailsService {
 		return datatables.getResponse(page);
 	}
 
-	@Transactional(readOnly = false)
 	public void salvarUsuario(Usuario usuario) {
 		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(crypt);
