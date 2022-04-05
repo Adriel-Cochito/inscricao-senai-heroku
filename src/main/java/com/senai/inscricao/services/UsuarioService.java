@@ -63,8 +63,8 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public void salvarUsuario(Usuario usuario) {
-		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
-		usuario.setSenha(crypt);
+//		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
+//		usuario.setSenha(crypt);
 
 		repository.save(usuario);
 	}
@@ -88,8 +88,15 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
+		
+		if (senhaDigitada == senhaArmazenada) {
+			return true;
+		} else {
+			return false;
+		}
+	
 
-		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
+		
 	}
 
 	@Transactional(readOnly = false)
