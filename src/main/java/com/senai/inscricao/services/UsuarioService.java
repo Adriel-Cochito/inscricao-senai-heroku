@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -13,13 +14,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.senai.inscricao.datatables.Datatables;
 import com.senai.inscricao.datatables.DatatablesColunas;
-import com.senai.inscricao.domains.Assistente;
-import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.Perfil;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.repositories.UsuarioRepository;
@@ -31,6 +31,8 @@ public class UsuarioService implements UserDetailsService {
 	private UsuarioRepository repository;
 	@Autowired
 	private Datatables datatables;
+	@Autowired
+	private BCryptPasswordEncoder passwordEnconder;
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorCpf(String cpf) {
@@ -63,12 +65,17 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public void salvarUsuario(Usuario usuario) {
-//		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
-//		usuario.setSenha(crypt);
+		String crypt = passwordEncoder().encode(usuario.getSenha());
+		usuario.setSenha(crypt);
 
 		repository.save(usuario);
 	}
 	
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 	@Transactional(readOnly = false)
 	public void salvarEdicaoUsuario(Usuario usuario) {
 		repository.save(usuario);
@@ -101,7 +108,7 @@ public class UsuarioService implements UserDetailsService {
 
 	@Transactional(readOnly = false)
 	public void alterarSenha(Usuario usuario, String senha) {
-		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
+		usuario.setSenha(passwordEncoder().encode(senha));
 		repository.save(usuario);
 	}
 
