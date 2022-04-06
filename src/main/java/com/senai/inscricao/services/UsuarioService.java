@@ -14,10 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.senai.inscricao.config.PasswordEncoder;
 import com.senai.inscricao.datatables.Datatables;
 import com.senai.inscricao.datatables.DatatablesColunas;
 import com.senai.inscricao.domains.Perfil;
@@ -64,18 +64,14 @@ public class UsuarioService implements UserDetailsService {
 		return datatables.getResponse(page);
 	}
 
+	@Transactional(readOnly = false)
 	public void salvarUsuario(Usuario usuario) {
-		String crypt = passwordEncoder().encode(usuario.getSenha());
+		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(crypt);
 
 		repository.save(usuario);
 	}
 	
-	@Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
 	@Transactional(readOnly = false)
 	public void salvarEdicaoUsuario(Usuario usuario) {
 		repository.save(usuario);
@@ -95,15 +91,8 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
-		
-		if (senhaDigitada == senhaArmazenada) {
-			return true;
-		} else {
-			return false;
-		}
-	
 
-		
+		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
 	}
 
 	@Transactional(readOnly = false)
@@ -111,6 +100,13 @@ public class UsuarioService implements UserDetailsService {
 		usuario.setSenha(passwordEncoder().encode(senha));
 		repository.save(usuario);
 	}
+
+
+
+	@Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 	public List<Usuario> obterLista() { 
 		return (List<Usuario>)repository.findAll(); 
