@@ -1,5 +1,6 @@
 package com.senai.inscricao.config;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,8 +20,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UsuarioService service;
-	@Autowired
-	private BCryptPasswordEncoder passwordEnconder;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -69,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(service).passwordEncoder(passwordEnconder);
+		auth.userDetailsService(service);
 	}
 	
 	

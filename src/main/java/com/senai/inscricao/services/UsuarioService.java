@@ -1,10 +1,12 @@
 package com.senai.inscricao.services;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -12,14 +14,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.senai.inscricao.datatables.Datatables;
 import com.senai.inscricao.datatables.DatatablesColunas;
-import com.senai.inscricao.domains.Assistente;
-import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.Perfil;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.repositories.UsuarioRepository;
@@ -31,8 +30,6 @@ public class UsuarioService implements UserDetailsService {
 	private UsuarioRepository repository;
 	@Autowired
 	private Datatables datatables;
-	@Autowired
-	private static BCryptPasswordEncoder passwordEnconder;
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorCpf(String cpf) {
@@ -66,7 +63,7 @@ public class UsuarioService implements UserDetailsService {
 
 	@Transactional(readOnly = false)
 	public void salvarUsuario(Usuario usuario) {
-		String crypt = passwordEnconder.encode(usuario.getSenha());
+		String crypt = Base64.encodeBase64String(usuario.getSenha().getBytes());
 		usuario.setSenha(crypt);
 
 		repository.save(usuario);
@@ -91,14 +88,19 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
-
-		return passwordEnconder.matches(senhaDigitada, senhaArmazenada);
+		byte[] decoded = Base64.decodeBase64(senhaArmazenada.getBytes());
+		senhaArmazenada = Arrays.toString(decoded);
+		if(senhaArmazenada == senhaDigitada) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 
 	@Transactional(readOnly = false)
 	public void alterarSenha(Usuario usuario, String senha) {
-		usuario.setSenha(passwordEnconder.encode(senha));
+		usuario.setSenha(Base64.encodeBase64String(usuario.getSenha().getBytes()));
 		repository.save(usuario);
 	}
 
