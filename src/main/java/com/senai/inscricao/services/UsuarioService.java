@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -14,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +31,6 @@ public class UsuarioService implements UserDetailsService {
 	private UsuarioRepository repository;
 	@Autowired
 	private Datatables datatables;
-	@Autowired
-	private BCryptPasswordEncoder passwordEnconder;
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorCpf(String cpf) {
@@ -67,7 +63,7 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public void salvarUsuario(Usuario usuario) {
-		String crypt = passwordEncoder().encode(usuario.getSenha());
+		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
 		usuario.setSenha(crypt);
 
 		repository.save(usuario);
@@ -93,19 +89,14 @@ public class UsuarioService implements UserDetailsService {
 
 	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
 
-		return passwordEncoder().matches(senhaDigitada, senhaArmazenada);
+		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
 	}
 
 	@Transactional(readOnly = false)
 	public void alterarSenha(Usuario usuario, String senha) {
-		usuario.setSenha(passwordEncoder().encode(senha));
+		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
 		repository.save(usuario);
 	}
-
-	@Bean
-    public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
 	public List<Usuario> obterLista() { 
 		return (List<Usuario>)repository.findAll(); 
