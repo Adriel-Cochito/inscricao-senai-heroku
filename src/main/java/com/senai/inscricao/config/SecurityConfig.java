@@ -19,6 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private UsuarioService service;
+	@Autowired
+	private BCryptPasswordEncoder passwordEnconder;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -67,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(service).passwordEncoder(new BCryptPasswordEncoder());
+		auth.userDetailsService(service).passwordEncoder(passwordEnconder);
 	}
 	
 	

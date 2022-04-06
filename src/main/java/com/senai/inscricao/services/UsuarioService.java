@@ -31,6 +31,8 @@ public class UsuarioService implements UserDetailsService {
 	private UsuarioRepository repository;
 	@Autowired
 	private Datatables datatables;
+	@Autowired
+	private static BCryptPasswordEncoder passwordEnconder;
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorCpf(String cpf) {
@@ -63,7 +65,7 @@ public class UsuarioService implements UserDetailsService {
 	}
 
 	public void salvarUsuario(Usuario usuario) {
-		String crypt = new BCryptPasswordEncoder().encode(usuario.getSenha());
+		String crypt = passwordEnconder.encode(usuario.getSenha());
 		usuario.setSenha(crypt);
 
 		repository.save(usuario);
@@ -89,12 +91,13 @@ public class UsuarioService implements UserDetailsService {
 
 	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
 
-		return new BCryptPasswordEncoder().matches(senhaDigitada, senhaArmazenada);
+		return passwordEnconder.matches(senhaDigitada, senhaArmazenada);
 	}
+
 
 	@Transactional(readOnly = false)
 	public void alterarSenha(Usuario usuario, String senha) {
-		usuario.setSenha(new BCryptPasswordEncoder().encode(senha));
+		usuario.setSenha(passwordEnconder.encode(senha));
 		repository.save(usuario);
 	}
 
