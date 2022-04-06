@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@SuppressWarnings("deprecation")
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(NoOpPasswordEncoder.getInstance());
+        auth.userDetailsService(service).passwordEncoder(NoOpPasswordEncoder.getInstance());
     }
 	
 	
