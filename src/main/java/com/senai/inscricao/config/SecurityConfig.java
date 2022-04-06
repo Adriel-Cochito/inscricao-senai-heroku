@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.senai.inscricao.domains.PerfilTipo;
 import com.senai.inscricao.services.UsuarioService;
@@ -65,11 +66,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.accessDeniedPage("/acesso-negado");
 	}
 
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		
-//		auth.userDetailsService(service).passwordEncoder(Base64());
-//	}
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		auth.userDetailsService(service);
+	}
+
 	
 	
 
