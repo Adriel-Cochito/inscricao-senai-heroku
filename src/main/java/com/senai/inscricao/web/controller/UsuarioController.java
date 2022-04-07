@@ -1,6 +1,7 @@
 package com.senai.inscricao.web.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class UsuarioController {
 	Usuario user = new Usuario();
 	Perfil perfil = new Perfil();
 	
+	List<Perfil> perfis = new ArrayList<Perfil>();
+	
 	user.setCpf("09112853");
 	user.setEmail("adr@adr");
 	user.setSenha("123123");
@@ -47,12 +50,20 @@ public class UsuarioController {
 	
 	
 	perfil.setId(1L);
-	List<Perfil> perfis = null;
 	
+	
+	perfis.add(perfil);
+	perfil.setId(2L);
 	perfis.add(perfil);
 	
 	user.setPerfis(perfis);
 	service.salvarUsuario(user);
+	System.err.println("         salvando usuario");
+	System.err.println("         salvando usuario");
+	System.err.println("         salvando usuario");
+	System.err.println("         salvando usuario");
+	System.err.println("         salvando usuario");
+	System.err.println("         salvando usuario");
 	
 	}
 
