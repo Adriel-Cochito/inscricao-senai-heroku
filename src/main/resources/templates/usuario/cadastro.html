@@ -78,8 +78,8 @@
 								<label for="perfis">Perfil</label> <select id="perfis"
 									class="custom-select" size="4" th:field="*{perfis}" multiple
 									required>
-									<option value="1" sec:authorize="hasAuthority('ADMIN')">Administrador</option>
-									<option value="2" sec:authorize="hasAuthority('ASSISTENTE')">Assistente</option>
+									<option value="1" >Administrador</option>
+									<option value="2" >Assistente</option>
 									<option value="3">Candidato</option>
 								</select> <input type="hidden" value="0" name="perfis">
 
