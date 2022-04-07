@@ -61,6 +61,7 @@ public class UsuarioService implements UserDetailsService {
 				AuthorityUtils.createAuthorityList(getAtuthorities(usuario.getPerfis())));
 	}
 
+	@Transactional(readOnly = false)
 	private String[] getAtuthorities(List<Perfil> perfis) {
 		String[] authorities = new String[perfis.size()];
 		for (int i = 0; i < perfis.size(); i++) {
@@ -97,7 +98,7 @@ public class UsuarioService implements UserDetailsService {
 		return repository.findById(id).get();
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = false)
 	public Usuario buscarPorIdEPerfis(Long usuarioId, Long[] perfisId) {
 
 		return repository.findByIdAndPerfis(usuarioId, perfisId)
