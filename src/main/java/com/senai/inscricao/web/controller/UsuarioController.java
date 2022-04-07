@@ -37,7 +37,9 @@ public class UsuarioController {
 	@Autowired
 	private AssistenteService assistenteService;
 	
-	public static void main(String[] args) {
+	// Abrir cadstro de usuarios (assistente/admin/paciente)
+		@GetMapping("/admin")
+		public String CadastroAdmin() {
 	Usuario user = new Usuario();
 	Perfil perfil = new Perfil();
 	
@@ -65,6 +67,7 @@ public class UsuarioController {
 	System.err.println("         salvando usuario");
 	System.err.println("         salvando usuario");
 	
+	return "home";
 	}
 
 	// Abrir cadstro de usuarios (assistente/admin/paciente)
