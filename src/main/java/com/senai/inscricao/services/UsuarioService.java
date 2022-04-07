@@ -42,6 +42,13 @@ public class UsuarioService implements UserDetailsService {
 		Usuario usuario = buscarPorCpf(username);
 		byte[] decoded = Base64.decodeBase64(usuario.getSenha().getBytes());
 		String senhaUsuario = Arrays.toString(decoded);
+		
+		System.out.println("loadUserByUsername: ");
+		System.out.print("senha criptografada: ");
+		System.out.println(usuario.getSenha());
+		System.out.print("Senha descriptografgada: ");
+		System.out.println(senhaUsuario);
+		
 		return new User(usuario.getCpf(), senhaUsuario,
 				AuthorityUtils.createAuthorityList(getAtuthorities(usuario.getPerfis())));
 	}
