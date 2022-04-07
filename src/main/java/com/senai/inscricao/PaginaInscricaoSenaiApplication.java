@@ -9,7 +9,8 @@ public class PaginaInscricaoSenaiApplication {
 	public static void main(String[] args) {
 		//System.out.println("Senha 123123:");
 		//System.out.println(new BCryptPasswordEncoder().encode("123123"));
-
+		
+		
 		SpringApplication.run(PaginaInscricaoSenaiApplication.class, args);
 	} 
    
