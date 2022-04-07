@@ -31,30 +31,10 @@ import com.senai.inscricao.services.UsuarioService;
 public class UsuarioController {
 
 	@Autowired
-	private static UsuarioService service;
+	private UsuarioService service;
 
 	@Autowired
 	private AssistenteService assistenteService;
-	
-	public static void main(String[] args) {
-	Usuario user = new Usuario();
-	Perfil perfil = new Perfil();
-	
-	user.setCpf("09112853");
-	user.setEmail("adr@adr");
-	user.setSenha("123123");
-	user.setAtivo(true);
-	
-	
-	perfil.setId(1L);
-	List<Perfil> perfis = null;
-	
-	perfis.add(perfil);
-	
-	user.setPerfis(perfis);
-	service.salvarUsuario(user);
-	
-	}
 
 	// Abrir cadstro de usuarios (assistente/admin/paciente)
 	@GetMapping("/novo/cadastro/usuario")
