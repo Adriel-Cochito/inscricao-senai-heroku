@@ -41,18 +41,27 @@ public class UsuarioService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Usuario usuario = buscarPorCpf(username);
 		byte[] decoded = Base64.decodeBase64(usuario.getSenha().getBytes());
-		String senhaUsuario = Arrays.toString(decoded);
+//		String senhaUsuario = Arrays.toString(decoded);
 		
+		String decodedString = new String(decoded);
+		
+		System.out.println("            ==================================================");
+		System.out.println("            ==================================================");
 		System.out.println("loadUserByUsername: ");
 		System.out.print("senha criptografada: ");
 		System.out.println(usuario.getSenha());
 		System.out.print("Senha descriptografgada: ");
-		System.out.println(senhaUsuario);
+		System.out.println(decodedString);
 		
-		return new User(usuario.getCpf(), senhaUsuario,
+		
+		System.out.println("            ==================================================");
+		System.out.println("            ==================================================");
+		
+		return new User(usuario.getCpf(), decodedString,
 				AuthorityUtils.createAuthorityList(getAtuthorities(usuario.getPerfis())));
 	}
 
+	@Transactional(readOnly = false)
 	private String[] getAtuthorities(List<Perfil> perfis) {
 		String[] authorities = new String[perfis.size()];
 		for (int i = 0; i < perfis.size(); i++) {
@@ -89,7 +98,7 @@ public class UsuarioService implements UserDetailsService {
 		return repository.findById(id).get();
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional(readOnly = false)
 	public Usuario buscarPorIdEPerfis(Long usuarioId, Long[] perfisId) {
 
 		return repository.findByIdAndPerfis(usuarioId, perfisId)
