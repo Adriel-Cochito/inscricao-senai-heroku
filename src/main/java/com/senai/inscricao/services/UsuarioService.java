@@ -79,6 +79,7 @@ public class UsuarioService implements UserDetailsService {
 		return datatables.getResponse(page);
 	}
 
+	@Transactional(readOnly = false)
 	public void salvarUsuario(Usuario usuario) {
 		String crypt = Base64.encodeBase64String(usuario.getSenha().getBytes());
 		usuario.setSenha(crypt);
@@ -86,6 +87,7 @@ public class UsuarioService implements UserDetailsService {
 		repository.save(usuario);
 	}
 	
+	@Transactional(readOnly = false)
 	public void salvarEdicaoUsuario(Usuario usuario) {
 		repository.save(usuario);
 	}
