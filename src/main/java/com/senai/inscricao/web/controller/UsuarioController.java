@@ -37,38 +37,38 @@ public class UsuarioController {
 	@Autowired
 	private AssistenteService assistenteService;
 	
-	// Abrir cadstro de usuarios (assistente/admin/paciente)
-		@GetMapping("/admin")
-		public String CadastroAdmin() {
-	Usuario user = new Usuario();
-	Perfil perfil = new Perfil();
-	
-	List<Perfil> perfis = new ArrayList<Perfil>();
-	
-	user.setCpf("09112853");
-	user.setEmail("adr@adr");
-	user.setSenha("123123");
-	user.setAtivo(true);
-	
-	
-	perfil.setId(1L);
-	
-	
-	perfis.add(perfil);
-	perfil.setId(2L);
-	perfis.add(perfil);
-	
-	user.setPerfis(perfis);
-	service.salvarUsuario(user);
-	System.err.println("         salvando usuario");
-	System.err.println("         salvando usuario");
-	System.err.println("         salvando usuario");
-	System.err.println("         salvando usuario");
-	System.err.println("         salvando usuario");
-	System.err.println("         salvando usuario");
-	
-	return "home";
-	}
+//	// Abrir cadstro de usuarios (assistente/admin/paciente)
+//		@GetMapping("/admin")
+//		public String CadastroAdmin() {
+//	Usuario user = new Usuario();
+//	Perfil perfil = new Perfil();
+//	
+//	List<Perfil> perfis = new ArrayList<Perfil>();
+//	
+//	user.setCpf("09112853");
+//	user.setEmail("adr@adr");
+//	user.setSenha("123123");
+//	user.setAtivo(true);
+//	
+//	
+//	perfil.setId(1L);
+//	
+//	
+//	perfis.add(perfil);
+//	perfil.setId(2L);
+//	perfis.add(perfil);
+//	
+//	user.setPerfis(perfis);
+//	service.salvarUsuario(user);
+//	System.err.println("         salvando usuario");
+//	System.err.println("         salvando usuario");
+//	System.err.println("         salvando usuario");
+//	System.err.println("         salvando usuario");
+//	System.err.println("         salvando usuario");
+//	System.err.println("         salvando usuario");
+//	
+//	return "home";
+//	}
 
 	// Abrir cadstro de usuarios (assistente/admin/paciente)
 	@GetMapping("/novo/cadastro/usuario")
