@@ -28,11 +28,15 @@ public class HomeController {
 
 			if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
 				return "home-candidato";
+			} else if (us.getPerfis().contains(new Perfil(PerfilTipo.ASSISTENTE.getCod())) || us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
+				return "redirect:/inscricoes/estatisticas";
+			} else {
+				return "login";
 			}
 		} catch (Exception e) {
-			return "home";
+			return "login";
 		}
-		return "home";
+		
 	}
 
 	// abrir pagina login

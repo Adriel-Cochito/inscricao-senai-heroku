@@ -24,7 +24,7 @@
 			<div class="container rounded-3">
 
 				<div class="d-flex justify-content-center rounded-3">
-					<div class="col-md-8 shadow bg-white rounded-3"
+					<div class="col-md-8 shadow bg-white rounded-3" sec:authorize="hasAuthority('CANDIDATO')"
 						style="background-color: white; padding: 40px; padding-top: 60px">
 
 						<div th:replace="fragments/alert  :: alerta-sucesso"></div>
@@ -36,7 +36,7 @@
 
 						<h3>Dados Pessoais</h3>
 
-						<form sec:authorize="hasAuthority('CANDIDATO')"
+						<form 
 							th:action="${candidato.id == null} ? @{/candidatos/salvar} : @{/candidatos/editar}"
 							th:object="${candidato}" method="POST" class="was-validated">
 
@@ -152,13 +152,13 @@
 
 				<div class="d-flex justify-content-center rounded-3"
 					style="margin-top: 50px;">
-					<div class="col-md-8 shadow bg-white rounded-3"
+					<div class="col-md-8 shadow bg-white rounded-3" sec:authorize="hasAuthority('CANDIDATO')"
 						style="background-color: white; padding: 40px; padding-top: 60px">
 
 
 
 
-						<h4 sec:authorize="hasAuthority('CANDIDATO')">Dados
+						<h4 >Dados
 							Cadastrais</h4>
 
 						<form th:action="@{/u/cadastro/salvar}" th:object="${usuario}"
