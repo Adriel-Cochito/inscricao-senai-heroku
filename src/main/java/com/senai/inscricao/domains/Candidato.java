@@ -1,6 +1,7 @@
 package com.senai.inscricao.domains;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,6 +37,9 @@ public class Candidato extends AbstractEntity {
 	
 	@Column(name = "rendaPercapta", nullable = false)
 	private Double rendaPercapta;
+	
+	@Column(name = "familiares", nullable = false)
+	private String familiares;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "candidato")
@@ -112,6 +116,14 @@ public class Candidato extends AbstractEntity {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getFamiliares() {
+		return familiares;
+	}
+
+	public void setFamiliares(String familiares) {
+		this.familiares = familiares;
 	}
 	
 	

@@ -70,18 +70,35 @@
 								<div class="invalid-feedback">Senha é requerida para confirmar a operação.</div>
 							</div>
 
+<!-- 							<div class="mb-3"> -->
+<!-- 								<label for="perfis">Perfil</label> -->
+<!-- 								<select id="perfis" class="custom-select" size="4" -->
+<!-- 										th:field="*{perfis}" multiple required > -->
+<!-- 									<option value="1" sec:authorize="hasAuthority('ADMIN')">Administrador</option> -->
+<!-- 									<option value="2" sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Assistente</option> -->
+<!-- 									<option value="3">Candidato</option> -->
+<!-- 								</select> -->
+<!-- 								<input type="hidden" value="0" name="perfis"> -->
+
+<!-- 								<div class="invalid-feedback">Pelo menos um perfil é requerido.</div> -->
+<!-- 							</div> -->
+
 							<div class="mb-3">
 								<label for="perfis">Perfil</label>
 								<select id="perfis" class="custom-select" size="4"
 										th:field="*{perfis}" multiple required >
-									<option value="1" sec:authorize="hasAuthority('ADMIN')">Administrador</option>
-									<option value="2" sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Assistente</option>
-									<option value="3">Candidato</option>
+										
+										<optgroup label="" id="perfil-html"></optgroup>
+
 								</select>
 								<input type="hidden" value="0" name="perfis">
 
 								<div class="invalid-feedback">Pelo menos um perfil é requerido.</div>
 							</div>
+							
+							
+							
+							
 							
 							<div class="mb-3" sec:authorize="hasAuthority('ADMIN')">
 								<div class="custom-control custom-switch">
@@ -126,7 +143,22 @@
 			})
 		});
 		
+		var mostraPerfil = function() {
+			console.log("iniciando mostraPerfil ")
+			
+			var perfilHtml = new Array();
+			
+			perfilHtml.push('<option value="1" >Administrador</option>'+
+		'<option value="2" >Assistente</option>'+
+		'<option value="3">Candidato</option>');
 		
+		console.log(perfilHtml);
+
+	document.getElementById("perfil-html").innerHTML = perfilHtml;
+	document.getElementById("perfilId").value = 1;
+		};
+		
+		mostraPerfil();
 	</script>
 </body>
 </html>

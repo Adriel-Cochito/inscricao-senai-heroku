@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,10 +32,18 @@ public class CandidatoController {
 
 	// Abrir pagina de dados pessoais de medicos pelo CANDIDATO
 	@GetMapping({ "/dados" })
-	public String abrirPorCandidato(Candidato candidato, ModelMap model, @AuthenticationPrincipal User user) {
-		if (candidato.hasNotId()) {
+	public String abrirPorCandidato(Candidato candidato, ModelMap model,RedirectAttributes attr, @AuthenticationPrincipal User user) {
+		if (service.buscarPorUsuarioCpf(user.getUsername()).getId() == null) {
+			
+			System.out.println("Candidato SEM ID ! ! ! ");
+			
+		} else {
+			model.addAttribute("nomeFamiliar", "Nome");
+			model.addAttribute("valor", 0);
 			candidato = service.buscarPorUsuarioCpf(user.getUsername());
 			model.addAttribute("candidato", candidato);
+			model.addAttribute("listaFamiliares", candidato.getFamiliares());
+			System.out.println("Candidato COM ID ! ! ! ");
 		}
 		
 		Usuario usuario = usuarioService.buscarPorCpf(user.getUsername());
@@ -63,7 +72,7 @@ public class CandidatoController {
 	
 	// Salvar assistente
 	@PostMapping({ "/salvar" })
-	public String salvar(Candidato candidato, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+	public String salvar(Candidato candidato, RedirectAttributes attr,@AuthenticationPrincipal User user) {
 		
 		Usuario us = usuarioService.buscarPorCpf(user.getUsername());
 		
@@ -78,7 +87,8 @@ public class CandidatoController {
 		
 		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
 		attr.addFlashAttribute("candidato", candidato);
-		return "redirect:/candidatos/dados";
+		
+		return "redirect:/home";
 	}
 	
 
@@ -89,6 +99,7 @@ public class CandidatoController {
 		service.editar(candidato);
 		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
 		attr.addFlashAttribute("candidato", candidato);
+		attr.addFlashAttribute("listaFamiliares", candidato.getFamiliares());
 		System.out.println(candidato);
 		return "redirect:/candidatos/dados";
 	}

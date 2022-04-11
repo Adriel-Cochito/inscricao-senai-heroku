@@ -3,7 +3,9 @@ package com.senai.inscricao.config;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
@@ -33,6 +35,17 @@ public class TesteAlgoritmo {
      //
      String decodedString = new String(decoded);
      System.out.println(helloWorld + " = " + decodedString);
+     
+     
+//     String[] myArray = new String[] {"nome"=>"Alceu", "idade"=>32};
+//     
+//     myArray.
+//     
+//     List<String> myList = new ArrayList<>();
+//     for (int i=0; i<myArray.length; i++){
+//         myList.add(myArray[i]);
+//     }
+//     System.out.println(myList);
    }
 
 }

@@ -80,8 +80,9 @@
 
 							<hr>
 							<h4>Renda Percapta</h4>
-							<p>Escreva o nome e a renda de cada pessoa que mora com você
+							<p>Escreva o nome, a renda e o grau de parentesco de cada pessoa que mora com você
 								e clique em "Adicionar" para incluir na lista</p>
+							<p>Adicione todos que moram com você, <b>mesmo que a renda seja R$0,00</b></p>
 
 
 							<!-- 								<div class="form-group col-md-6"> -->
@@ -94,20 +95,20 @@
 							<div class="form-row" style="width: 100%; margin-left: 0;">
 								<h6>Adicionar um familiar</h6>
 								<div class="input-group" style="width: 100%; margin-left: 0;">
-									<input type="text" class="form-control" id="nomeFamiliar"
-										style="width: 30px;" placeholder="Nome" required /> <input
-										type="number" class="form-control" id="valorRenda1"
+									<input type="text" class="form-control" id="nomeFamiliar"  th:value="${nomeFamiliar}"
+										style="width: 30px;" placeholder="Nome" required /> <input 
+										type="number" class="form-control" id="valorRenda1"  th:value="${valor}"
 										style="width: 30px;" placeholder="1000,00" required />
 										<select class="form-control" required id="grauParentesco"
 										 aria-label="Default select example">
-										<option value="1º grau: pai ou mãe">1º grau: pai ou mãe</option>
-										<option value="2º grau: avô ou avó">2º grau: avô ou avó</option>
-										<option value="3º grau: bisavô ou bisavó">3º grau: bisavô ou bisavó</option>
-										<option value="1º grau: filho ou filha">1º grau: filho ou filha</option>
-										<option value="2º grau: neto ou neta">2º grau: neto ou neta</option>
-										<option value="2º grau: irmão ou irmã">2º grau: irmão ou irmã</option>
-										<option value="3º grau: tio ou tia">3º grau: tio ou tia</option>
-										<option value="3º grau: sobrinho ou sobrinha">3º grau: sobrinho ou sobrinha</option>
+										<option value="Pai/mãe">Pai ou mãe</option>
+										<option value="Avô(ó)">Avô ou avó</option>
+										<option value="Bisavô(ó)">Bisavô ou bisavó</option>
+										<option value="Filho(a)">Filho ou filha</option>
+										<option value="Neto(a)">Neto ou neta</option>
+										<option value="Irmão(ã)">Irmão ou irmã</option>
+										<option value="Tio(a)">Tio ou tia</option>
+										<option value="Sobrinho(a)">Sobrinho ou sobrinha</option>
 									</select>
 									<div class="input-group-append">
 										<span class="input-group-text"
@@ -117,11 +118,22 @@
 
 									<div class="invalid-feedback">Nome e Renda são
 										obrigatórios, mesmo que seja R$ 0,00.</div>
+										
+										
+									<input type="hidden" 
+											th:field="*{familiares}"
+											id="familiares" />
+											
+											
 								</div>
+								
 							</div>
 
-							<div>
-								<div id="resultado" class="form-group col-md-6"></div>
+							<div class="p-3 mb-5 rounded card" style="background-color: #ebeef2;padding: 20px;">
+								<div id="resultado" class="form-group col-md-6" >
+									<h6>Familiares cadastrados: </h6>
+									[(${listaFamiliares})]
+								</div>
 							</div>
 
 
@@ -136,6 +148,7 @@
 										<input type="number" step="1.00" min="0.00"
 											class="form-control" th:field="*{rendaPercapta}"
 											id="rendaPercapta" readonly placeholder="R$ 0,00" required />
+										
 										<div class="input-group-prepend">
 											<span class="input-group-text">.00</span>
 										</div>
@@ -143,6 +156,19 @@
 									</div>
 								</div>
 							</div>
+							
+<!-- 							<div class="form-group col-md-6"> -->
+<!-- 									<label for="familiares" class="form-group">familiares</label> <input -->
+<!-- 										type="text" class="form-control" th:field="*{familiares}" -->
+<!-- 										id="familiares" placeholder="Escreva seu familiares" required /> -->
+<!-- 									<div class="invalid-feedback">familiares é requerido.</div> -->
+<!-- 							</div> -->
+							
+<!-- 							<div class="form-group col-md-6"> -->
+<!-- 								<div id="familiares-html">Familiares resposta -->
+<!-- 									<p id="familiares-html"></p> -->
+<!-- 								</div> -->
+<!-- 							</div>	 -->
 
 
 
@@ -299,7 +325,7 @@
 						</div>
 					</div>
 
-					<input type="hidden" name="uid" th:field="*{usuario.id}"> <input
+					<input type="hidden" name="uid" th:field="*{usuario.id}"> <input th:value="${c.id}"
 						type="hidden" name="id" th:field="*{id}">
 
 					<div class="form-group row"
@@ -341,6 +367,7 @@
  	var nomesFamiliares = new Array();
 	var rendaDependentes = new Array();
 	var resultado = new Array();
+	var listaFamiliares = new Array();
 	var valor= 0 ;
 	var removidos = 1;
 	
@@ -403,9 +430,20 @@
 	        			'</div>');
 	    	};
 	    	
+	    	listaFamiliares = [];
+	    	for(let i = 1; i <= lista_resultado.length; i++ ) {
+	    		var x = i-1;
+	    		listaFamiliares.push('<p>'+lista_resultado[x].nome+' : R$'+lista_resultado[x].valor + ' - '+lista_resultado[x].grauParentesco+'</p>');
+	    	};
+	    	
 	    	valor = parseInt(valor);
 	    	document.getElementById("resultado").innerHTML = resultado.join('');
 	    	document.getElementById("rendaPercapta").value = valor;
+	    	
+	    	var familiares = listaFamiliares.join('').toString()
+	    	console.log(familiares);
+	    	document.getElementById("familiares").value = familiares;
+	    	document.getElementById("familiares-html").innerHTML = familiares;
 	    	
 	 };
 	 
