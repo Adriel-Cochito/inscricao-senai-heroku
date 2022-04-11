@@ -54,16 +54,20 @@ public class CandidatoController {
 	
 	// Pre edição de credenciais de usuarios
 	@GetMapping("/dados/{id}")
-	public ModelAndView dadosCandidatoPorInscricao(@PathVariable("id") Long id) {	
+	public ModelAndView dadosCandidatoPorInscricao(@PathVariable("id") Long id, ModelMap model) {
+		
+		model.addAttribute("listaFamiliares", service.buscarPorCandidatoId(id).getFamiliares());
 		
 		System.out.print("Id: ");
 		System.out.println(id);
-		return new ModelAndView("candidato/cadastro", "candidato", service.buscarPorCandidatoId(inscricaoService.buscarPorId(id).getCandidato().getId()));
+		return new ModelAndView("candidato/cadastro", "candidato", service.buscarPorCandidatoId(id));
 	} 
 
 	// Pre edição de credenciais de usuarios
 	@GetMapping("/dados/usuario/{id}")
-	public ModelAndView dadosCandidatoPorUsuarioId(@PathVariable("id") Long id) {	
+	public ModelAndView dadosCandidatoPorUsuarioId(@PathVariable("id") Long id, ModelMap model) {	
+		
+		model.addAttribute("listaFamiliares", service.buscarPorUsuarioId(id).getFamiliares());
 		
 		System.out.print("Id: ");
 		System.out.println(id);

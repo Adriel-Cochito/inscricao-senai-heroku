@@ -324,18 +324,17 @@
 								requerida.</div>
 						</div>
 					</div>
+					
+					<div class="p-3 mb-5 rounded card" style="background-color: #ebeef2;padding: 20px;">
+								<div id="resultado" class="form-group col-md-6" >
+									<h6>Familiares cadastrados: </h6>
+									[(${listaFamiliares})]
+								</div>
+							</div>
 
-					<input type="hidden" name="uid" th:field="*{usuario.id}"> <input th:value="${c.id}"
-						type="hidden" name="id" th:field="*{id}">
+					<input type="hidden" name="uid" th:field="*{usuario.id}">
+							<input type="hidden" name="id" th:field="*{id}">
 
-					<div class="form-group row"
-						sec:authorize="hasAuthority('CANDIDATO')">
-						<div class="col-sm-10">
-							<button type="submit" class="btn btn-primary"
-								data-toggle="tooltip" data-placement="right" title="Salvar">
-								Salvar</button>
-						</div>
-					</div>
 				</form>
 				<a class="btn btn-primary" type="button"
 					href="javascript:history.back()"
