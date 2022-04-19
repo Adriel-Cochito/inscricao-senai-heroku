@@ -96,15 +96,17 @@
 										<select class="form-control" required id="grauParentesco"
 										 aria-label="Default select example">
 										 <option value="Candidato">Minha renda</option>
+										 <option value="Irmão(ã)">Irmão ou irmã</option>
 										<option value="Pai/mãe">Pai ou mãe</option>
-										<option value="Avô(ó)">Avô ou avó</option>
-										<option value="Bisavô(ó)">Bisavô ou bisavó</option>
 										<option value="Filho(a)">Filho ou filha</option>
-										<option value="Neto(a)">Neto ou neta</option>
-										<option value="Irmão(ã)">Irmão ou irmã</option>
+										<option value="Cônjuge">Cônjuge (Marido ou esposa)</option>
 										<option value="Tio(a)">Tio ou tia</option>
 										<option value="Sobrinho(a)">Sobrinho ou sobrinha</option>
+										<option value="Neto(a)">Neto ou neta</option>
+										<option value="Avô(ó)">Avô ou avó</option>
+										<option value="Bisavô(ó)">Bisavô ou bisavó</option>
 									</select>
+									
 									<div class="input-group-append">
 										<span class="input-group-text"
 											style="color: white; background-color: #007bff;"><a
@@ -221,24 +223,22 @@
 
 
 							<div class="mb-3">
-								<label for="senha">Senha</label> <input type="password"
-									class="form-control" id="senha" maxlength="6"
-									th:field="*{senha}" placeholder="Insira sua senha de acesso"
-									required />
-								<div class="invalid-feedback">Senha é requerida para
-									confirmar a operação.</div>
+								<label for="senha">Senha</label> 
+								<input type="password" class="form-control" id="senha" minlength="4" maxlength="8"
+										th:field="*{senha}" placeholder="Senha de acesso de 4 a 8 caracteres" required />
+								<div class="invalid-feedback">Senha é requerida para confirmar a operação.</div>
 							</div>
 
 
 							<!-- 							style="visibility:hidden;" -->
 							<div class="mb-3">
-								<label for="perfis">Perfil</label> <select id="perfis" disabled
+								<label for="perfis">Perfil</label> <select id="perfis"  readonly
 									class="custom-select" size="4" th:field="*{perfis}" multiple
 									required>
 									<option value="1" sec:authorize="hasAuthority('ADMIN')">Administrador</option>
 									<option value="2" sec:authorize="hasAuthority('ASSISTENTE')">Assistente</option>
 									<option value="3">Candidato</option>
-								</select> <input type="hidden" value="0" name="perfis">
+								</select> <input type="hidden" value="3" name="perfis">
 
 								<div class="invalid-feedback">Pelo menos um perfil é
 									requerido.</div>

@@ -44,6 +44,12 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
+	
+	// abrir pagina recuperação de senha
+		@GetMapping({ "/recuperar-senha" })
+		public String recuperarSenha() {
+			return "recuperar-senha";
+		}
 
 	// abrir pagina cadastro
 	@GetMapping({ "/cadastro" })

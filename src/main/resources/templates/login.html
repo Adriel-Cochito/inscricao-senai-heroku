@@ -45,11 +45,11 @@
 <!-- 				width="72" height="72"> -->
 			<br>
 			<h1 class="h3 mb-3 font-weight-normal">Sistemas de Inscrições Online</h1>
-			<h1 class="h3 mb-3 font-weight-normal" style="color:red;"> PAGINA DE TESTES</h1>
-			<h1 class="h3 mb-3 font-weight-normal"style="color:red;">INDISPONIVEL PARA INSCRIÇÕES VÁLIDAS</h1>
+			<h1 class="h3 mb-3 font-weight-normal" style="color: #f2f200;"> PAGINA DE TESTES</h1>
+			<h1 class="h3 mb-3 font-weight-normal"style="color: #f2f200;">INDISPONIVEL PARA INSCRIÇÕES VÁLIDAS</h1>
 
 			<p class="font-weight-lighter">Seja bem-vindo.</p>
-			<p class="text-muted">Realize seu login para continuar</p>					
+			<p class="text-muted">Realize seu login ou um novo cadastro para continuar</p>					
 			<div th:if="${alerta != null}" th:class="${alerta == 'erro'} ? 'alert alert-danger' : 'alert alert-success'"
 				 role="alert">
 			  <h4 th:text="${titulo}" class="alert-heading">Credenciais...</h4>
@@ -82,7 +82,7 @@
 		<hr>
 		<nav class="nav nav-pills flex-column flex-sm-row" >
 			<a class="flex-sm-fill text-sm-left nav-link text-decoration-none" th:href="@{u/novo/cadastro/usuario}"><i class="far fa-arrow-alt-circle-right"></i>&nbsp;Novo cadastro</a>
-			<a class="flex-sm-fill text-sm-left nav-link text-decoration-none" th:href="@{/u/editar/senha}"><i class="fas fa-key"></i>&nbsp;Recuperar senha</a>
+			<a class="flex-sm-fill text-sm-left nav-link text-decoration-none" th:href="@{/recuperar-senha}"><i class="fas fa-key"></i>&nbsp;Recuperar senha</a>
 			<a class="flex-sm-fill text-sm-left nav-link text-decoration-none" th:href="@{/}"><i class="fas fa-home"></i>&nbsp;Home</a>
 		</nav>
 		<p class="mt-5 mb-3 text-muted text-center">Inscrições Online&copy; 2022</p>

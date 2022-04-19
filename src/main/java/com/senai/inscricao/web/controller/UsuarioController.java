@@ -106,7 +106,7 @@ public class UsuarioController {
 				Usuario us = service.buscarPorCpf(user.getUsername());
 
 				if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
-					return "redirect:/candidatos/dados";
+					return "redirect:/home";
 				} else {
 					return "redirect:/assistentes/dados";
 				}
