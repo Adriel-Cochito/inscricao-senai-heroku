@@ -179,7 +179,7 @@ public class InscricaoController {
 		inscricao.setCandidato(candidato);
 		service.salvar(inscricao);
 		attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso.");
-		return "redirect:/inscricoes/inscrever";
+		return "redirect:/home";
 	}
 	
 	// localizar agendamento pelo id e envia-lo para a pagina de cadastro

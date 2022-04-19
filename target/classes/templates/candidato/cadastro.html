@@ -238,7 +238,7 @@
 									<option value="1" sec:authorize="hasAuthority('ADMIN')">Administrador</option>
 									<option value="2" sec:authorize="hasAuthority('ASSISTENTE')">Assistente</option>
 									<option value="3">Candidato</option>
-								</select> <input type="hidden" value="3" name="perfis">
+								</select> <input type="hidden" value="0" name="perfis">
 
 								<div class="invalid-feedback">Pelo menos um perfil é
 									requerido.</div>
@@ -280,13 +280,13 @@
 						<div class="form-group col-md-6">
 							<label for="nome" class="form-group">Nome Completo</label> <input
 								disabled="" type="text" class="form-control" th:field="*{nome}"
-								id="nome" placeholder="João da Silva" required />
+								id="nome" placeholder="" required />
 							<div class="invalid-feedback">Nome completo é requerido.</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="bairro" class="form-group">Bairro</label> <input
 								disabled="" type="text" class="form-control"
-								th:field="*{bairro}" id="bairro" placeholder="Bairro" required />
+								th:field="*{bairro}" id="bairro" placeholder="" required />
 							<div class="invalid-feedback">Bairro é requerido.</div>
 						</div>
 					</div>
@@ -295,7 +295,7 @@
 						<div class="form-group col-md-6">
 							<label for="telefone" class="form-group">Telefone</label> <input
 								disabled="" type="number" class="form-control"
-								th:field="*{telefone}" id="telefone" placeholder="34988765456"
+								th:field="*{telefone}" id="telefone" placeholder=""
 								required />
 							<div class="invalid-feedback">Telefone é requerido.</div>
 						</div>
@@ -305,7 +305,7 @@
 							<label for="rendaPercapta" class="form-group">Renda
 								PerCapita</label> <input disabled="" type="number" class="form-control"
 								th:field="*{rendaPercapta}" id="rendaPercapta"
-								placeholder="2000,00" required />
+								placeholder="" required />
 							<div class="invalid-feedback">Renda é requerido.</div>
 						</div>
 					</div>

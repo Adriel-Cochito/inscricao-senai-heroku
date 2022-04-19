@@ -19,7 +19,7 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )"><a
 						class="btn dropdown-toggle" href="#" id="dropdown01" style="color:white; background-color: #005caa;"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administradores</a>
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown01">
 							<a class="dropdown-item" th:href="@{/u/admin/novo/cadastro/usuario}" 
 							sec:authorize="hasAuthority('ADMIN')">Cadastro de Usuários</a>
@@ -46,17 +46,18 @@
 						</div>
 					</li>
 					
-					<li class="nav-item dropdown" sec:authorize="hasAuthority('CANDIDATO')"><a
-						class="btn dropdown-toggle" href="#" id="dropdown03" style="color:white; background-color: #005caa;"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Candidatos</a>
-						<div class="dropdown-menu" aria-labelledby="dropdown03">
-							<a class="dropdown-item" th:href="@{/candidatos/dados}">Cadastrar Dados</a>
-							<a class="dropdown-item" th:href="@{/u/editar/senha}">Editar Senha</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" th:href="@{/inscricoes/inscrever}">Realizar Inscrição</a>
-							<a class="dropdown-item" th:href="@{/inscricoes/historico/candidato}">Histórico de Inscrições</a>
-						</div>
-					</li>
+					
+
+						<li class="nav-item" sec:authorize="hasAuthority('CANDIDATO')">
+							<a class="nav-link active" th:href="@{/candidatos/dados}">Cadastrar Dados</a>
+						</li>
+						<li class="nav-item" sec:authorize="hasAuthority('CANDIDATO')">
+							<a class="nav-link active" th:href="@{/inscricoes/inscrever}">Realizar Inscrição</a>
+						</li>
+						<li class="nav-item" sec:authorize="hasAuthority('CANDIDATO')">
+							<a class="nav-link active" th:href="@{/inscricoes/historico/candidato}">Acompanhar inscrição</a>
+						</li>
+						
 					<li class="nav-item">
     					<a class="nav-link active" aria-current="page" href="https://sites.google.com/view/senaiaraxainscricoes">Página de cursos</a>
   					</li>

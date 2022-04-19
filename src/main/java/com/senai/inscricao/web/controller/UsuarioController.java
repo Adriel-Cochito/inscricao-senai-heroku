@@ -96,7 +96,7 @@ public class UsuarioController {
 				service.salvarUsuario(usuario);
 				attr.addFlashAttribute("sucesso", "Operação realizada com sucesso!");
 			} catch (Exception e) {
-				attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente");
+				attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
 			}
 		}
 
@@ -195,14 +195,15 @@ public class UsuarioController {
 								new Assistente(new Usuario(usuarioId)))
 						: new ModelAndView("assistente/cadastro-pessoal", "assistente", assistente);
 
-			} else if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
-				ModelAndView model = new ModelAndView("error");
-
-				model.addObject("status", 403);
-				model.addObject("error", "Área restrita");
-				model.addObject("message", "Os dados cadastrais de candidato são restritos a ele");
-				return model;
 			}
+//			else if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
+//				ModelAndView model = new ModelAndView("error");
+//
+//				model.addObject("status", 403);
+//				model.addObject("error", "Área restrita");
+//				model.addObject("message", "Os dados cadastrais de candidato são restritos a ele");
+//				return model;
+//			}
 		} catch (IllegalStateException e) {
 			attr.addFlashAttribute("falha", "Dados pessoais indisponíveis ou ausentes");
 			return new ModelAndView("redirect:/u/lista");
