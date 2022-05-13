@@ -1,20 +1,23 @@
 /**
  * busca as especialidades com auto-complete
  */
-$("#curso").autocomplete({
-    source: function (request, response) {
-        $.ajax({
-            method: "GET",
-            url: "/cursos/titulo",
-            data: {
-            	termo: request.term
-			},
-            success: function (data) {
-            	response(data);
-            }
-        });
-    }
-});
+ 
+ 
+ // Quando habilitado, faz SELECT no DB somente ao selecionar, mesmo sem clicar em salvar
+//$("#curso").autocomplete({
+//    source: function (request, response) {
+//        $.ajax({
+//            method: "GET",
+//            url: "/cursos/titulo",
+//            data: {
+//            	termo: request.term
+//			},
+//            success: function (data) {
+//            	response(data);
+//            }
+//        });
+//    }
+//});
 
 //
 ///**
@@ -85,11 +88,17 @@ $(document).ready(function() {
 						
 				}
 			},
+			
 			{	data : 'curso.cargaHoraria',
 				render : function(turno) {
 					return turno + ' horas';
 				}
 			},
+			{	data : '', 
+				render : function(turno) {
+						return 'Em análise';
+					
+			}},
             {orderable : false,	data : 'id', "render" : function(id) {
                     return '<a class="btn btn-success btn-sm btn-block" href="/inscricoes/editar/inscricao/'
                             + id + '" role="button"><i class="fas fa-edit"></i></a>';
