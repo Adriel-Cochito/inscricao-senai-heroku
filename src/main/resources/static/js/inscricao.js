@@ -95,9 +95,8 @@ $(document).ready(function() {
 				}
 			},
 			{	data : '', 
-				render : function(turno) {
+				render : function(Situação) {
 						return 'Em análise';
-					
 			}},
             {orderable : false,	data : 'id', "render" : function(id) {
                     return '<a class="btn btn-success btn-sm btn-block" href="/inscricoes/editar/inscricao/'
@@ -115,50 +114,7 @@ $(document).ready(function() {
 
 
 
-//datatables - lista de inscrições
-$(document).ready(function() {
-	moment.locale('pt-BR');
-	var table = $('#table-inscricoes').DataTable({
-		searching : true,
-		lengthMenu : [ 10, 20, 30, 40 ],
-		processing : true,
-		serverSide : true,
-		responsive : true,
-		ajax : {
-			url : '/inscricoes/datatables/server/lista',
-            data : 'data'
-        },
-        columns : [
-            {data : 'id'},
-            {data : 'curso.titulo'},
-            {	data : 'curso.turno', 
-				render : function(turno) {
-					if(turno == '1'){
-						return 'Manhã';
-					} else if(turno == '2') {
-						return 'Tarde';
-					} else if(turno == '3') {
-						return 'Noite';
-					}
-						
-				}
-			},
-            {data : 'candidato.nome'},
-            {data : 'candidato.rendaPercapta'},
-            {data : 'candidato.bairro'},
-            {orderable : false,	data : 'candidato.id', "render" : function(id) {
-            	console.log("Teste de impressão id: ")
-            	console.log(id)
-                    return '<a class="btn btn-outline-success btn-sm btn-block" href="/candidatos/dados/'
-                            + id + '" role="button"><i class="bi bi-arrow-right-circle-fill"></i></a>';
-                }
-            }
-        ]
-    });
-	
-	console.log("Teste de impressão")
-	
-});
+
 
 
 
@@ -172,6 +128,70 @@ $(document).ready(function() {
 
 
 
+//datatables - lista de cursos
+$(document).ready(function() {
+	moment.locale('pt-BR');
+	
+
+	
+	var table = $('#table-cursos').DataTable({
+		searching : false,
+		lengthMenu : [ 10 ],
+		processing : false,
+		serverSide : true,
+		responsive : true,
+		ajax : {
+			url : '/cursos/datatables/server/cursos',
+			data : 'data'
+		},
+		columns : [
+				{data : 'id'},
+				{data : 'titulo'},
+				{	data : 'turno', 
+					render : function(turno) {
+						if(turno == '1'){
+							return 'Manhã';
+						} else if(turno == '2') {
+							return 'Tarde';
+						} else if(turno == '3') {
+							return 'Noite';
+						}
+							
+					}
+				},
+				{	data : 'ativo', 
+					render : function(ativo) {
+						return ativo == true ? 'Sim' : 'Não';
+					}
+				},
+				{	data : 'cargaHoraria'},
+				{	data : 'id',	
+					render : function(id) {
+						return ''.concat('<a class="btn btn-success btn-sm btn-block"', ' ')
+								 .concat('href="').concat('/inscricoes/lista/').concat(id, '"', ' ') 
+								 .concat('role="button" title="Editar" data-toggle="tooltip" data-placement="right">', ' ')
+								 .concat('<i class="bi bi-arrow-down-circle"></i></a>');
+					},
+					orderable : false
+				}
+
+		]
+	});
+	
+	
+	
+//    $('#table-cursos tbody').on('click', '[id*="dp_"]', function () {
+//    	var data = table.row($(this).parents('tr')).data();
+//    	var aux = new Array();
+//		$.each(data.perfis, function( index, value ) {
+//			  aux.push(value.id);
+//		});
+//		document.location.href = '/cursos/excluir/' + data.id
+//    } );
+    
+    
+	
+});	
 
 
 

@@ -27,13 +27,72 @@
 		<div class="album py-5 bg-light">
 			<div class="container">
 			
+<!-- 			<input id="id" th:value="${idCurso}"></input> -->
 			
+<!-- 			<div class="row " > -->
+<!-- 					<div class="col-md-12 "> -->
+<!-- 				<form th:action="@{/inscricoes/lista/curso}"  -->
+<!-- 							 class="was-validated" method="POST"> -->
+
+<!-- 							<div class="form-row col-lg-12" > -->
+<!-- 								<div class="form-group col-lg-12" > -->
+<!-- 									<label for="cursos">Filtrar por Curso</label> <select id="cursos"  -->
+<!-- 										class="form-control col-lg-12" th:field="*{cursos}" -->
+<!-- 										th:classappend="${#fields.hasErrors('cursos')} ? 'is-invalid'"> -->
+<!-- 										<option th:each="c : ${cursos}" th:value="${c}" th:if="${c.ativo} == true" -->
+<!-- 											th:text="${c.titulo}+ ' -' +${c.id}+ '- ' + ${c.cargaHoraria}+' horas' + -->
+<!-- 											 ' - ' + (${c.turno} == 1 ? 'Manhã' -->
+<!-- 											  : (${c.turno} == 2 ? 'Tarde': 'Noite') ) "></option> -->
+<!-- 									</select> -->
+<!-- 									<div class="invalid-feedback"> -->
+<!-- 										<span th:errors="*{cursos}"></span> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
+<!-- 							<div class="form-group row" style="margin: auto;"> -->
+<!-- 								<div class="col-sm-10"> -->
+<!-- 									<button id="btn-salvar" type="submit" class="btn btn-primary" -->
+<!-- 										data-toggle="tooltip" data-placement="right" title="Filtrar"> -->
+<!-- 										Filtrar -->
+<!-- 									</button> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</form> -->
+<!-- 				</div> -->
+<!-- 				</div> -->
+
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<h4>Filtrar por Curso</h4>
+						<p>Selecione na ultima coluna o curso a ser filtrado</p>
+
+						<table id="table-cursos"
+							class="table table-sm table-striped table-bordered nowrap"
+							style="width: 100%">
+							<thead class="thead-dark">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Titulo</th>
+									<th scope="col">Turno</th>
+									<th scope="col">Ativo</th>
+									<th scope="col">Carga Horária</th>
+									<th scope="col">SELECIONAR</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+				
+				
 
 				<div class="row">
 					<div class="col-md-12">
 
 
-						<h2>Inscrições Realizadas</h2>
+						<h2>Inscrições</h2>
 
 						<!-- 						<p th:text="${tamanho}">Test</p> -->
 						<!-- 						[(${tamanho})] -->
@@ -51,6 +110,7 @@
 									<th scope="col">Nome de Usuário</th>
 									<th scope="col">Renda Percapta</th>
 									<th scope="col">Bairro</th>
+									<th scope="col">Situação</th>
 									<th scope="col">Ver Usuario</th>
 								</tr>
 							</thead>
@@ -67,7 +127,64 @@
 	<script th:inline="javascript" th:fragment="inlinescript">
 	
  
-    
+	//datatables - lista de inscrições
+	$(document).ready(function() {
+		moment.locale('pt-BR');
+		
+		var num = [[${idCurso}]];
+		var numUrl = "/inscricoes/datatables/server/lista/" + num;
+		
+		console.log("Numero de Id: ", num);
+		console.log(num);
+		
+		console.log("numUrl: ", numUrl);
+		
+		
+		var table = $('#table-inscricoes').DataTable({
+			searching : true,
+			lengthMenu : [ 10, 20, 30, 40 ],
+			processing : true,
+			serverSide : true,
+			responsive : true,
+			ajax : {
+				url : numUrl,
+	            data : 'data'
+	        },
+	        columns : [
+	            {data : 'id'},
+	            {data : 'curso.titulo'},
+	            {	data : 'curso.turno', 
+					render : function(turno) {
+						if(turno == '1'){
+							return 'Manhã';
+						} else if(turno == '2') {
+							return 'Tarde';
+						} else if(turno == '3') {
+							return 'Noite';
+						}
+							
+					}
+				},
+	            {data : 'candidato.nome'},
+	            {data : 'candidato.rendaPercapta'},
+	            {data : 'candidato.bairro'},
+	            {	data : '', 
+					render : function(Situação) {
+							return 'Em análise';
+				}},
+	            {orderable : false,	data : 'candidato.id', "render" : function(id) {
+	            	console.log("Teste de impressão id: ")
+	            	console.log(id)
+	                    return '<a class="btn btn-outline-success btn-sm btn-block" href="/candidatos/dados/'
+	                            + id + '" role="button"><i class="bi bi-arrow-right-circle-fill"></i></a>';
+	                }
+	            }
+	        ]
+	    });
+		
+		console.log("Teste de impressão")
+		
+	});
 	</script>
 </body>
 </html>

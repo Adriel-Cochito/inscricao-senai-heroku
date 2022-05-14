@@ -16,6 +16,7 @@ import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.exception.AcessoNegadoException;
 import com.senai.inscricao.repositories.InscricoesRepository;
 import com.senai.inscricao.repositories.projection.HistoricoCandidato;
+import com.senai.inscricao.repositories.projection.HistoricoCurso;
 
 @Service
 public class InscricaoService {
@@ -52,6 +53,15 @@ public class InscricaoService {
 		Page<HistoricoCandidato> page = repository.findHistoricoByCandidatoCpf(cpf, datatables.getPageable());
 		return datatables.getResponse(page);
 	}
+	
+	@Transactional(readOnly = true)
+	public Map<String, Object> buscarInscricoesPorCursoId(Long id, HttpServletRequest request) {
+		datatables.setRequest(request);
+		datatables.setColunas(DatatablesColunas.INSCRICOES);
+		Page<HistoricoCurso> page = repository.findInscricoesPorCursoId(id, datatables.getPageable());
+		return datatables.getResponse(page);
+	}
+	
 
 	public List<Inscricao> obterLista() { 
 		return (List<Inscricao>)repository.findAll(); 

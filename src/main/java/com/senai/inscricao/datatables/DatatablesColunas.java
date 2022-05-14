@@ -12,4 +12,4 @@ public class DatatablesColunas {
 
 	public static final String[] USUARIOS = {"id", "cpf","email","dtInscricao", "ativo", "perfis"};	
 }
- 
+  

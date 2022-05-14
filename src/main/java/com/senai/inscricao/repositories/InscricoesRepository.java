@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.repositories.projection.HistoricoCandidato;
+import com.senai.inscricao.repositories.projection.HistoricoCurso;
 
 public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 
@@ -20,7 +21,14 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 		+ "from Inscricao a "
 		+ "where a.candidato.usuario.cpf like :cpf")
 	Page<HistoricoCandidato> findHistoricoByCandidatoCpf(String cpf, Pageable pageable);
-
+	
+	@Query("select b.id as id,"
+			+ "b.candidato as candidato,"
+			+ "b.curso as curso "
+		+ "from Inscricao b "
+		+ "where b.curso.id like :id")
+	Page<HistoricoCurso> findInscricoesPorCursoId(Long id, Pageable pageable);
+	
 	
 //	@Query("select distinct u from Usuario u "+
 //			" join u.perfis p "+
@@ -36,5 +44,8 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 			+ "where "
 			+ "	(i.id = :id AND i.candidato.usuario.cpf like :cpf) ")
 	Optional<Inscricao> findByIdAndCandidato(Long id, String cpf);
+
+
+	
 
 }

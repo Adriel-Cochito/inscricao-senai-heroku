@@ -1,3 +1,4 @@
+
 //datatables - lista de cursos
 $(document).ready(function() {
 	moment.locale('pt-BR');
