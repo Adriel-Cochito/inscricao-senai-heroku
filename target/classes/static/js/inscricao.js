@@ -167,7 +167,7 @@ $(document).ready(function() {
 				{	data : 'cargaHoraria'},
 				{	data : 'id',	
 					render : function(id) {
-						return ''.concat('<a class="btn btn-success btn-sm btn-block"', ' ')
+						return ''.concat('<a class="btn btn-primary btn-sm btn-block"', ' ')
 								 .concat('href="').concat('/inscricoes/lista/').concat(id, '"', ' ') 
 								 .concat('role="button" title="Editar" data-toggle="tooltip" data-placement="right">', ' ')
 								 .concat('<i class="bi bi-arrow-down-circle"></i></a>');

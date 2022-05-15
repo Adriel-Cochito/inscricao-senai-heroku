@@ -99,6 +99,7 @@ public class InscricaoController {
 		System.out.println(tamanho.size());
 		
 		model.addAttribute("idCurso", id);
+		model.addAttribute("tituloCurso", cursoService.buscarPorId(id).getTitulo());
 		
 		model.addAttribute("tamanho", tamanho.size());
 		model.addAttribute("quantidadeInscricao", listaInscricao.size());

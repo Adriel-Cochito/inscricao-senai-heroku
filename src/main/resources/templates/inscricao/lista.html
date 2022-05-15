@@ -28,6 +28,7 @@
 			<div class="container">
 			
 <!-- 			<input id="id" th:value="${idCurso}"></input> -->
+
 			
 <!-- 			<div class="row " > -->
 <!-- 					<div class="col-md-12 "> -->
@@ -68,6 +69,10 @@
 
 						<h4>Filtrar por Curso</h4>
 						<p>Selecione na ultima coluna o curso a ser filtrado</p>
+						<div style="margin-top: 10px; margin-bottom: 10px;">
+							<a class="btn btn-primary" th:href="@{/inscricoes/lista/0}" role="button">Ver todos os Cursos</a>
+						</div>						
+<!-- 						<h4 th:text="${tituloCurso}" ></h4> -->
 
 						<table id="table-cursos"
 							class="table table-sm table-striped table-bordered nowrap"
@@ -83,6 +88,7 @@
 								</tr>
 							</thead>
 						</table>
+						
 					</div>
 				</div>
 				
@@ -92,7 +98,9 @@
 					<div class="col-md-12">
 
 
-						<h2>Inscrições</h2>
+						<h2>Inscrições [(${tituloCurso})]</h2>
+						
+						
 
 						<!-- 						<p th:text="${tamanho}">Test</p> -->
 						<!-- 						[(${tamanho})] -->
