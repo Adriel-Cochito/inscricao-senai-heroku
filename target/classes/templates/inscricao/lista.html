@@ -119,6 +119,7 @@
 									<th scope="col">Renda Percapta</th>
 									<th scope="col">Bairro</th>
 									<th scope="col">Situação</th>
+									<th scope="col">Editar Situação</th>
 									<th scope="col">Ver Usuario</th>
 								</tr>
 							</thead>
@@ -176,10 +177,22 @@
 	            {data : 'candidato.nome'},
 	            {data : 'candidato.rendaPercapta'},
 	            {data : 'candidato.bairro'},
-	            {	data : '', 
-					render : function(Situação) {
-							return 'Em análise';
-				}},
+	            {data : 'situacao', 
+					render : function(situacao) {
+						console.log('Situação: ');
+						console.log(situacao);
+						return situacao == true ? 'Aprovado' : 'Em análise';
+					}
+				},
+				{orderable : false,	data : 'candidato.id', "render" : function(id) {
+	            	console.log("Teste de impressão id: ")
+	            	console.log(id)
+	                    return '<a class="btn btn-outline-warning btn-sm btn-block" href="/inscricoes/remover/'
+	                            + id + '" role="button">Remover</a>'
+	                            + '<a class="btn btn-outline-success btn-sm btn-block" href="/inscricoes/aprovar/'
+	                            + id + '" role="button">Aprovar</a>';
+	                }
+	            },
 	            {orderable : false,	data : 'candidato.id', "render" : function(id) {
 	            	console.log("Teste de impressão id: ")
 	            	console.log(id)

@@ -189,7 +189,7 @@ public class InscricaoController {
 		if(id == 0) {
 			return ResponseEntity.ok(service.buscarTodos(request));
 		} else {
-			return ResponseEntity.ok(service.buscarInscricoesPorCursoId(id, request));
+			return ResponseEntity.ok(service.buscarInscricoesPorCurso(id, request));
 		}
 		
 	}
@@ -231,6 +231,7 @@ public class InscricaoController {
 		Curso curso= cursoService.buscarPorTitulos(new String[] { titulo }).stream()
 				.findFirst().get();
 		inscricao.setCurso(curso);
+		inscricao.setSituacao(1);
 		inscricao.setCandidato(candidato);
 		service.salvar(inscricao);
 		attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso.");
@@ -247,6 +248,24 @@ public class InscricaoController {
 		model.addAttribute("cursos", listaCursos);
 		model.addAttribute("inscricao", inscricao);
 		return "inscricao/cadastro";
+	}
+	
+	@GetMapping("/aprovar/{id}") 
+	public String aprovarCandidato(@PathVariable("id") Long id, 
+										    ModelMap model, @AuthenticationPrincipal User user) {
+		Inscricao inscricao = service.buscarPorId(id);
+		inscricao.setSituacao(1);
+		service.salvar(inscricao);
+		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();
+	}
+	
+	@GetMapping("/remover/{id}") 
+	public String removerAprovacaoCandidato(@PathVariable("id") Long id, 
+										    ModelMap model, @AuthenticationPrincipal User user) {
+		Inscricao inscricao = service.buscarPorId(id);
+		inscricao.setSituacao(0);
+		service.salvar(inscricao);
+		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();
 	}
 	
 	@GetMapping("/excluir/inscricao/{id}")

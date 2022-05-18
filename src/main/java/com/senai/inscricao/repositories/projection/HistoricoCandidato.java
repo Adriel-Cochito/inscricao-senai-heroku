@@ -12,5 +12,6 @@ public interface HistoricoCandidato{
 	String getDataConsulta();
 	
 	Curso getCurso();
+	
 }
 

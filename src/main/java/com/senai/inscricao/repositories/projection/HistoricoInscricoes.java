@@ -3,7 +3,7 @@ package com.senai.inscricao.repositories.projection;
 import com.senai.inscricao.domains.Candidato;
 import com.senai.inscricao.domains.Curso;
 
-public interface HistoricoCurso{
+public interface HistoricoInscricoes{
 
 	Long getId();
 	
@@ -12,5 +12,7 @@ public interface HistoricoCurso{
 	String getDataConsulta();
 	
 	Curso getCurso();
+	
+	Integer getSituacao();
 }
 
