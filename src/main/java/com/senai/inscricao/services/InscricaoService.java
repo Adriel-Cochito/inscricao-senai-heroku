@@ -80,7 +80,6 @@ public class InscricaoService {
 		
 		repository.deleteById(id);
 	}
-	
-	
+
 
 }
