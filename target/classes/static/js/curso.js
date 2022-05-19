@@ -33,6 +33,12 @@ $(document).ready(function() {
 					}
 				},
 				{	data : 'cargaHoraria'},
+				{	data : 'vagas'},
+				{	data : 'liberaResultados', 
+					render : function(liberaResultados) {
+						return liberaResultados == true ? 'Liberado' : 'Não Liberado';
+					}
+				},
 				{	data : 'id',	
 					render : function(id) {
 						return ''.concat('<a class="btn btn-success btn-sm btn-block"', ' ')

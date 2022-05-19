@@ -22,6 +22,14 @@ public class Curso extends AbstractEntity {
 	@Column(name = "ativo", nullable = false, columnDefinition = "TINYINT(1)")
 	private boolean ativo;
 	
+	@Column(name = "liberaResultados", nullable = false, columnDefinition = "TINYINT(1)")
+	private boolean liberaResultados;
+	
+	@Column(name = "vagas", nullable = false)
+	private Integer vagas;
+	
+	
+	
 //	public Curso() {
 //		super();
 //	}
@@ -61,6 +69,22 @@ public class Curso extends AbstractEntity {
 
 	public void setAtivo(boolean ativo) {
 		this.ativo = ativo;
+	}
+
+	public boolean isLiberaResultados() {
+		return liberaResultados;
+	}
+
+	public void setLiberaResultados(boolean liberaResultados) {
+		this.liberaResultados = liberaResultados;
+	}
+
+	public Integer getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(Integer vagas) {
+		this.vagas = vagas;
 	}
 	
 	

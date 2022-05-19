@@ -48,11 +48,19 @@
 										th:field="*{cargaHoraria}" placeholder="Em horas" required />
 								<div class="invalid-feedback">Turno é requerido para confirmar a operação.</div>
 							</div>
+							
+							<div class="mb-3">
+								<label for="vagas">Vagas</label> 
+								<input type="number" class="form-control" id="vagas" maxlength="6"
+										th:field="*{vagas}" placeholder="" required />
+								<div class="invalid-feedback">O numero de vagas é requerido</div>
+							</div>
 
 							<div class="mb-3">
 								<label for="turno">Turno</label>
 								<select id="turno" class="custom-select" size="4"
 										th:field="*{turno}" multiple required>
+									<option value="0">Indefinido</option>
 									<option value="1">Manhã</option>
 									<option value="2">Tarde</option>
 									<option value="3">Noite</option>
@@ -70,6 +78,16 @@
 								  <label class="custom-control-label" for="ativo">Cadastro Ativo Inscrições</label>
 								</div>
 							</div>
+							
+							<div class="mb-3">
+								<div class="custom-control custom-switch">
+								  <input type="checkbox" class="custom-control-input" 
+								  			th:field="*{liberaResultados}" id="liberaResultados" 
+								  			th:if="${liberaResultados == true ? 'checked=checked' : ''}" />
+								  <label class="custom-control-label" for="liberaResultados">Liberar resultados</label>
+								</div>
+							</div>
+							
 
 							<input type="hidden" th:field="*{id}"> 
 							<div class="form-group row">
