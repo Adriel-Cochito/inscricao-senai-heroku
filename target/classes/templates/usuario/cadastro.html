@@ -30,6 +30,7 @@
 
 						<form th:action="@{/u/cadastro/salvar}" th:object="${usuario}"
 							method="POST" class="was-validated">
+							<p>Após salvar seu cadastro, você deverá entrar com Login e senha na pagina de login</p>
 
 							<div class="mb-3">
 								<label for="cpf">CPF</label>
@@ -99,10 +100,11 @@
 
 							<input type="hidden" th:field="*{id}">
 							<div class="form-group row">
+								
 								<div class="col-sm-10">
 									<button type="submit" class="btn btn-primary"
 										data-toggle="tooltip" data-placement="right" title="Salvar">
-										<i class="fas fa-save"></i>
+										salvar
 									</button>
 								</div>
 							</div>

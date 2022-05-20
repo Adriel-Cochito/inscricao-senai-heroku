@@ -94,7 +94,7 @@ public class UsuarioController {
 //					usuario.setEmail("");
 //				}
 				service.salvarUsuario(usuario);
-				attr.addFlashAttribute("sucesso", "Operação realizada com sucesso!");
+				attr.addFlashAttribute("sucesso", "Cadastro realizad com sucesso! Agora entre com Login e Senha cadastrados");
 			} catch (Exception e) {
 				attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
 			}
