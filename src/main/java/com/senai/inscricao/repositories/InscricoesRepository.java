@@ -1,5 +1,6 @@
 package com.senai.inscricao.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -31,6 +32,14 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 		+ "where b.curso.id like :id AND (b.candidato.nome like :search% OR b.candidato.rendaPercapta like :search% OR b.candidato.bairro like :search% OR b.situacao like :search%)")
 	public Page<HistoricoInscricoes> findInscricoesPorCursoId(@Param("search") String search, Long id, Pageable pageable);
 	
+	@Query("select b.id as id,"
+			+ "b.candidato as candidato,"
+			+ "b.curso as curso, "
+			+ "b.situacao as situacao "
+		+ "from Inscricao b "
+		+ "where b.curso.id like :id")
+	public List<Inscricao> findInscricoesPorCursoSituacao(Long id);
+	
 	
 //	@Query("select distinct u from Usuario u "+ 
 //			" join u.perfis p "+
@@ -47,7 +56,5 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 			+ "	(i.id = :id AND i.candidato.usuario.cpf like :cpf) ")
 	Optional<Inscricao> findByIdAndCandidato(Long id, String cpf);
 
-
-	
 
 }

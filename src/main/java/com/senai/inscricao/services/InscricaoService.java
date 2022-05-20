@@ -81,5 +81,11 @@ public class InscricaoService {
 		repository.deleteById(id);
 	}
 
+	@Transactional(readOnly = true)
+	public List<Inscricao> buscarInscricoesPorCursoSituacao(Long id) {
+
+		return repository.findInscricoesPorCursoSituacao(id);
+	}
+
 
 }

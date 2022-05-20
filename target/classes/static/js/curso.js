@@ -60,13 +60,13 @@ $(document).ready(function() {
 				{	data : 'id',	
 					render : function(id) {
 						return ''.concat('<a class="btn btn-warning btn-sm btn-block"', ' ') 
-								 .concat('href="').concat('/cursos/lista" ')
-								 .concat('role="button" title="Liberar" data-toggle="modal-results" data-target="#confirm-modal-results">', ' ')
-								 .concat('Liberar Resultados</a>')
+								 .concat('href="').concat('/cursos/libera/resultado/').concat(id, '"', ' ')
+								 .concat('role="button" title="Libera" data-toggle="modal" data-target="#confirm-modal">', ' ')
+								 .concat('Libera Resultados</a>')
 								 .concat('<a class="btn btn-danger btn-sm btn-block"', ' ') 
-								 .concat('href="').concat('/cursos/lista" ')
-								 .concat('role="button" title="Remover" data-toggle="modal-results" data-target="#confirm-modal-results">', ' ')
-								 .concat('Remove Resultados</a>');
+								 .concat('href="').concat('/cursos/cancela/resultado/').concat(id, '"', ' ')
+								 .concat('role="button" title="Cancela" data-toggle="modal" data-target="#confirm-modal">', ' ')
+								 .concat('Cancela Resultados</a>');
 					},
 					orderable : false
 				}
