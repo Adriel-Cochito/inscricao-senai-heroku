@@ -17,7 +17,8 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 
 	@Query("select a.id as id,"
 			+ "a.candidato as candidato,"
-			+ "a.curso as curso "
+			+ "a.curso as curso, "
+			+ "a.situacao as situacao "
 		+ "from Inscricao a "
 		+ "where a.candidato.usuario.cpf like :cpf")
 	Page<HistoricoCandidato> findHistoricoByCandidatoCpf(String cpf, Pageable pageable);
@@ -27,17 +28,17 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 			+ "b.curso as curso, "
 			+ "b.situacao as situacao "
 		+ "from Inscricao b "
-		+ "where b.curso.id like :id")
-	Page<HistoricoInscricoes> findInscricoesPorCursoId(Long id, Pageable pageable);
+		+ "where b.curso.id like :id AND (b.candidato.nome like :search% OR b.candidato.rendaPercapta like :search% OR b.candidato.bairro like :search% OR b.situacao like :search%)")
+	public Page<HistoricoInscricoes> findInscricoesPorCursoId(@Param("search") String search, Long id, Pageable pageable);
 	
 	
-//	@Query("select distinct u from Usuario u "+
+//	@Query("select distinct u from Usuario u "+ 
 //			" join u.perfis p "+
 //			"where u.cpf like :search% OR p.desc like :search%")
 	
-	@Query("select distinct i from Inscricao i "+
+	@Query("select i from Inscricao i "+
 			" join i.candidato c "+
-			"where i.curso.titulo like :search% OR c.nome like :search% OR c.rendaPercapta like :search% OR c.bairro like :search%")
+			"where i.curso.titulo like :search% OR c.nome like :search% OR c.rendaPercapta like :search% OR c.bairro like :search% OR i.situacao like :search%")
 	public Page<Inscricao> findByCursoOrCandidato(@Param("search") String search, Pageable pageable);
 
 

@@ -88,16 +88,18 @@ $(document).ready(function() {
 						
 				}
 			},
-			
 			{	data : 'curso.cargaHoraria',
 				render : function(turno) {
 					return turno + ' horas';
 				}
 			},
-			{	data : '', 
-				render : function(Situação) {
-						return 'Em análise';
-			}},
+			{data : 'situacao', 
+					render : function(situacao) {
+						console.log('Situação: ');
+						console.log(situacao);
+						return situacao == 1 ? 'Aprovado' : 'Em análise';
+					}
+				},
             {orderable : false,	data : 'id', "render" : function(id) {
                     return '<a class="btn btn-success btn-sm btn-block" href="/inscricoes/editar/inscricao/'
                             + id + '" role="button"><i class="fas fa-edit"></i></a>';

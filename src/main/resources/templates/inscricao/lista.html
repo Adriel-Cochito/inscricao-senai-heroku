@@ -63,7 +63,7 @@
 <!-- 				</div> -->
 <!-- 				</div> -->
 
-
+					<div th:replace="fragments/alert :: alerta-sucesso"></div>
 				<div class="row">
 					<div class="col-md-12">
 
@@ -183,21 +183,27 @@
 					render : function(situacao) {
 						console.log('Situação: ');
 						console.log(situacao);
-						return situacao == true ? 'Aprovado' : 'Em análise';
+						if(situacao == '0'){
+							return 'Em analise';
+						} else if(situacao == '1') {
+							return 'Aprovado';
+						} else if(situacao == '2') {
+							return 'Selecionado';
+						}
 					}
 				},
-				{orderable : false,	data : 'candidato.id', "render" : function(id) {
-	            	console.log("Teste de impressão id: ")
-	            	console.log(id)
+				{orderable : false,	data : 'id', "render" : function(id) {
+// 	            	console.log("Teste de impressão id: ")
+// 	            	console.log(id)
 	                    return '<a class="btn btn-outline-warning btn-sm btn-block" href="/inscricoes/remover/'
 	                            + id + '" role="button">Remover</a>'
 	                            + '<a class="btn btn-outline-success btn-sm btn-block" href="/inscricoes/aprovar/'
-	                            + id + '" role="button">Aprovar</a>';
+	                            + id + '" role="button">Selecionar</a>';
 	                }
 	            },
 	            {orderable : false,	data : 'candidato.id', "render" : function(id) {
-	            	console.log("Teste de impressão id: ")
-	            	console.log(id)
+// 	            	console.log("Teste de impressão id: ")
+// 	            	console.log(id)
 	                    return '<a class="btn btn-outline-success btn-sm btn-block" href="/candidatos/dados/'
 	                            + id + '" role="button"><i class="bi bi-arrow-right-circle-fill"></i></a>';
 	                }

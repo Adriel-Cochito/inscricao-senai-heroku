@@ -231,7 +231,7 @@ public class InscricaoController {
 		Curso curso= cursoService.buscarPorTitulos(new String[] { titulo }).stream()
 				.findFirst().get();
 		inscricao.setCurso(curso);
-		inscricao.setSituacao(1);
+		inscricao.setSituacao(0);
 		inscricao.setCandidato(candidato);
 		service.salvar(inscricao);
 		attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso.");
@@ -251,20 +251,24 @@ public class InscricaoController {
 	}
 	
 	@GetMapping("/aprovar/{id}") 
-	public String aprovarCandidato(@PathVariable("id") Long id, 
+	public String aprovarCandidato(@PathVariable("id") Long id, RedirectAttributes attr, 
 										    ModelMap model, @AuthenticationPrincipal User user) {
 		Inscricao inscricao = service.buscarPorId(id);
-		inscricao.setSituacao(1);
+		inscricao.setSituacao(2);
 		service.salvar(inscricao);
+		
+		attr.addFlashAttribute("sucesso", "Usuario aprovado com sucesso.");
 		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();
-	}
+	} 
 	
 	@GetMapping("/remover/{id}") 
-	public String removerAprovacaoCandidato(@PathVariable("id") Long id, 
+	public String removerAprovacaoCandidato(@PathVariable("id") Long id, RedirectAttributes attr,
 										    ModelMap model, @AuthenticationPrincipal User user) {
 		Inscricao inscricao = service.buscarPorId(id);
 		inscricao.setSituacao(0);
 		service.salvar(inscricao);
+		
+		attr.addFlashAttribute("sucesso", "Aprovação removida com sucesso.");
 		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();
 	}
 	

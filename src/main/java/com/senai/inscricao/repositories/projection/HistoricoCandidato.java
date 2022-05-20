@@ -13,5 +13,7 @@ public interface HistoricoCandidato{
 	
 	Curso getCurso();
 	
+	Integer getSituacao();
+	
 }
 

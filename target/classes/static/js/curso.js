@@ -41,7 +41,7 @@ $(document).ready(function() {
 				},
 				{	data : 'id',	
 					render : function(id) {
-						return ''.concat('<a class="btn btn-success btn-sm btn-block"', ' ')
+						return ''.concat('<a class="btn btn-outline-success btn-sm btn-block"', ' ')
 								 .concat('href="').concat('/cursos/editar/').concat(id, '"', ' ') 
 								 .concat('role="button" title="Editar" data-toggle="tooltip" data-placement="right">', ' ')
 								 .concat('<i class="fas fa-edit"></i></a>');
@@ -50,10 +50,23 @@ $(document).ready(function() {
 				},
 				{	data : 'id',	
 					render : function(id) {
-						return ''.concat('<a class="btn btn-danger btn-sm btn-block"', ' ') 
+						return ''.concat('<a class="btn btn-outline-danger btn-sm btn-block"', ' ') 
 								 .concat('href="').concat('/cursos/excluir/').concat(id, '"', ' ')
 								 .concat('role="button" title="Excluir" data-toggle="modal" data-target="#confirm-modal">', ' ')
 								 .concat('<i class="fas fa-edit"></i></a>');
+					},
+					orderable : false
+				},
+				{	data : 'id',	
+					render : function(id) {
+						return ''.concat('<a class="btn btn-warning btn-sm btn-block"', ' ') 
+								 .concat('href="').concat('/cursos/lista" ')
+								 .concat('role="button" title="Liberar" data-toggle="modal-results" data-target="#confirm-modal-results">', ' ')
+								 .concat('Liberar Resultados</a>')
+								 .concat('<a class="btn btn-danger btn-sm btn-block"', ' ') 
+								 .concat('href="').concat('/cursos/lista" ')
+								 .concat('role="button" title="Remover" data-toggle="modal-results" data-target="#confirm-modal-results">', ' ')
+								 .concat('Remove Resultados</a>');
 					},
 					orderable : false
 				}

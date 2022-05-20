@@ -12,11 +12,11 @@ import javax.persistence.Table;
 public class Inscricao extends AbstractEntity {
 	
 	@ManyToOne
-	@JoinColumn(name="id_curso")
+	@JoinColumn(name="id_curso") 
 	private Curso curso;
 	
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name="id_candidato")
 	private Candidato candidato;
 	
 	

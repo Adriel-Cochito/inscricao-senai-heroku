@@ -58,7 +58,7 @@ public class InscricaoService {
 	public Map<String, Object> buscarInscricoesPorCurso(Long id, HttpServletRequest request) {
 		datatables.setRequest(request);
 		datatables.setColunas(DatatablesColunas.INSCRICOES);
-		Page<HistoricoInscricoes> page = repository.findInscricoesPorCursoId(id, datatables.getPageable());
+		Page<HistoricoInscricoes> page = repository.findInscricoesPorCursoId(datatables.getSearch(), id, datatables.getPageable());
 		return datatables.getResponse(page);
 	}
 	
