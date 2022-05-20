@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+<link th:href="@{/css/style.css(v=${version})}" rel="stylesheet" />
+
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+		<main role="main">
+
+			<section class="jumbotron text-center">
+				<div class="container">
+					<h1 class="jumbotron-heading h1"
+						style="font-family: Raleway, Arial, sans-serif;">Inscrições
+						Online - Ajuda</h1>
+					<p class="lead text-muted">Informações de ajuda sobre o sistema
+						de cadastros.</p>
+				</div>
+			</section>
+
+			<div class="album py-5 bg-light">
+
+				<div class="container">
+
+					<div class="row" style="width: 100%;">
+
+						<div class="accordion" id="accordionExample" style="width: 100%;">
+							<hr>
+							<h3 style="color: #005caa;">Cadastros</h3>
+							<br>
+							<div class="card">
+								<div class="card-header" id="headingOne">
+									<h5 class="mb-0">
+										<button class="btn btn-link" type="button"
+											data-toggle="collapse" data-target="#collapseOne"
+											aria-expanded="true" aria-controls="collapseOne">
+											Tipos de usuários</button>
+									</h5>
+								</div>
+
+								<div id="collapseOne" class="collapse show"
+									aria-labelledby="headingOne" data-parent="#accordionExample">
+									<div class="card-body">
+										<p><u>Administradores </u>- Possuem permissão para cadastrar e excluir,
+										 visualizar dados de inscrição e candidatos</p>
+										<p><u>Assistentes </u>- Possuem permissão para visualizar cursos,
+										Inscrições, dados de usuarios </p>
+										<p><u>Candidatos </u>- Possuem permissão para se cadastrarem,
+										visualizar cursos disponíveis, realizar inscrição, e acompanhar status da própria inscrição</p>
+										<p>Observação: As funções administrativas, cursos, listas, 
+										estatísticas só ficam visíveis a Administradores e Assistentes</p>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingTwo">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" type="button"
+											data-toggle="collapse" data-target="#collapseTwo"
+											aria-expanded="false" aria-controls="collapseTwo">
+											Cadastro de candidatos</button>
+									</h5>
+								</div>
+								<div id="collapseTwo" class="collapse"
+									aria-labelledby="headingTwo" data-parent="#accordionExample">
+										<div class="card-body">
+											<p>Novos candidatos podem ser cadastrados livremente através do CPF. Sendo que email é opcional,
+										 e a data de inscrição é criada automaticamente </p>
+											<p>O cadastro de Candidatos só pode ser realizado pelo próprio candidato</p>
+										</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingThree">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" type="button"
+											data-toggle="collapse" data-target="#collapseThree"
+											aria-expanded="false" aria-controls="collapseThree">
+											Cadastro de Administradores e assistentes</button>
+									</h5>
+								</div>
+								<div id="collapseThree" class="collapse"
+									aria-labelledby="headingThree" data-parent="#accordionExample">
+									<div class="card-body">
+										<p>O cadastro de Administradores e Assistentes só 
+										podem ser realizados por Administradores</p>
+										<p>Administradores podem alterar dados cadastrais de usuarios</p>
+									</div>
+								</div>
+							</div>
+							
+							<div class="card">
+								<div class="card-header" id="headingFour">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" type="button"
+											data-toggle="collapse" data-target="#collapseFour"
+											aria-expanded="false" aria-controls="collapseFour">
+											Cadastro de cursos</button>
+									</h5>
+								</div>
+								<div id="collapseFour" class="collapse"
+									aria-labelledby="headingFour" data-parent="#accordionExample">
+									<div class="card-body">
+										<p>Ao realizar o cadastro de um curso, ele só vai ficar
+										disponível pra inscrições se ativar o campo "Cadastro ativo para inscrições"</p>
+										<p>Ao clicar em liberar resultados, ficará visível a todos os candidatos 
+										se eles foram ou não aprovados neste curso </p>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+
+<!-- ===============================	===============================	===============================	===============================					 -->
+						<br>
+						
+						
+						<div class="accordion" id="accordionExample" style="width: 100%;">
+							<hr>
+							<h3 style="color: #005caa;">Inscrições</h3>
+							<br>
+							<div class="card">
+								<div class="card-header" id="headingOne2">
+									<h5 class="mb-0">
+										<button class="btn btn-link" type="button"
+											data-toggle="collapse" data-target="#collapseOne2"
+											aria-expanded="true" aria-controls="collapseOne2">
+											Realizar inscrição por Candidato</button>
+									</h5>
+								</div>
+
+								<div id="collapseOne2" class="collapse show"
+									aria-labelledby="headingOne2" data-parent="#accordionExample">
+									<div class="card-body">
+										<p>Novos candidatos podem ser cadastrados livremente e aguardar o resultado</p>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingTwo2">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" type="button"
+											data-toggle="collapse" data-target="#collapseTwo2"
+											aria-expanded="false" aria-controls="collapseTwo2">
+											Visualizar Inscrições</button>
+									</h5>
+								</div>
+								<div id="collapseTwo2" class="collapse"
+									aria-labelledby="headingTwo2" data-parent="#accordionExample">
+									<div class="card-body">
+										<p>Os administradores e assistentes podem visualizar todas as incrições,
+										 organizar por curso e por ondem de dados, que são do curso e do candidato</p>
+										<p>O Candidato pode acompanhar sua inscrição por Histórico do candidato</p>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingThree2">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" type="button"
+											data-toggle="collapse" data-target="#collapseThree2"
+											aria-expanded="false" aria-controls="collapseThree2">
+											Selecionar candidato por Inscrição</button>
+									</h5>
+								</div>
+								<div id="collapseThree2" class="collapse"
+									aria-labelledby="headingThree" data-parent="#accordionExample">
+									<div class="card-body">
+										<p>Na lista de todas as incrições e Por curso, os administradores e assistentes 
+										podem selecionar os candidatos para cada curso, e também remover essa seleção</p>
+									</div>
+								</div>
+							</div>
+							
+							<div class="card">
+								<div class="card-header" id="headingFour2">
+									<h5 class="mb-0">
+										<button class="btn btn-link collapsed" type="button"
+											data-toggle="collapse" data-target="#collapseFour2"
+											aria-expanded="false" aria-controls="collapseFour2">
+											Liberar resultados do processo Seletivo</button>
+									</h5>
+								</div>
+								<div id="collapseFour2" class="collapse"
+									aria-labelledby="headingFour2" data-parent="#accordionExample">
+									<div class="card-body">
+										<p>Ao liberar os resultados de cada curso, o Status/situação dos candidatos 
+										selecionados é alterado pra “Aprovado”, de forma que JÁ SERÁ VISÍVEL AO CANDIDATO.</p>
+										<p>Os candidatos que não foram selecionados, terá seu status alterado para “Não aprovado”</p>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+
+		</main>
+	</section>
+	<script th:src="~{}" th:fragment="js"></script>
+	<script th:inline="javascript" th:fragment="inlinescript"></script>
+</body>
+</html>

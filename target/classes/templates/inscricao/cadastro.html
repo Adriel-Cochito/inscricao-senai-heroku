@@ -18,7 +18,7 @@
 		<section class="jumbotron text-center">
 			<div class="container">
 				<h1 class="jumbotron-heading">Inscrição</h1>
-				<p class="lead text-muted">Inscrição de cursos</p>
+				<p class="lead text-muted">Inscrição nos cursos</p>
 			</div>
 		</section>
 		
@@ -35,7 +35,7 @@
 						
 						<div class="shadow p-3 mb-5 rounded" style="background-color: #cff6bf;padding: 30px;color: #6b6b6b;text-align: center;
 						border-radius: 10px;margin-left: 20%; margin-right: 20%" th:if="${isAtivo} == false">
-							<h2 > <u> Cadastro incompleto! </u></h2>
+							<h2 > <u>Seu cadastro está incompleto</u></h2>
 							<h5 >Finalize o cadastro de dados pessoais para se inscrever nos cursos disponíveis</h5>
 							<p>Acesse o menu "Candidatos > Cadastrar dados" e insira todos os seus dados pessoais</p>
 							<p>Ou <a th:href="@{/candidatos/dados}">clique aqui</a></p>
@@ -58,7 +58,7 @@
 
 							<div class="form-row col-lg-12" style="width: 100%;">
 								<div class="form-group col-lg-12" style="width: 100%;">
-									<label for="curso">Curso</label> <select id="curso" style="width: 100%;" size="5"
+									<label for="curso">Cursos Disponíveis</label> <select id="curso" style="width: 100%;" size="5"
 										class="form-control col-lg-12" th:field="*{curso}"
 										th:classappend="${#fields.hasErrors('curso')} ? 'is-invalid'">
 										<option th:each="c : ${cursos}" th:value="${c.id}" th:if="${c.ativo} == true"
