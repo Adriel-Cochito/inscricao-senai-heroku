@@ -97,7 +97,15 @@ $(document).ready(function() {
 					render : function(situacao) {
 						console.log('Situação: ');
 						console.log(situacao);
-						return situacao == 1 ? 'Aprovado' : 'Em análise';
+						if(situacao == '0'){
+							return 'Em analise';
+						} else if(situacao == '1') {
+							return 'Aprovado';
+						} else if(situacao == '2') {
+							return 'Selecionado';
+						} else if(situacao == '3') {
+							return 'Não aprovado';
+						}
 					}
 				},
             {orderable : false,	data : 'id', "render" : function(id) {

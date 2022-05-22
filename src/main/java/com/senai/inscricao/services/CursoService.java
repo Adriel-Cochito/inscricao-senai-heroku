@@ -57,7 +57,7 @@ public class CursoService {
 	}
 	
 	public List<Curso> obterLista() { 
-		return (List<Curso>)repository.findAll(); 
+		return (List<Curso>)repository.findAll();
 	}
 
 	@Transactional(readOnly = true)
