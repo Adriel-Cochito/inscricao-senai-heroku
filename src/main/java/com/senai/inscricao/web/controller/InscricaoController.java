@@ -188,14 +188,20 @@ public class InscricaoController {
 	
 	// localizar agendamento pelo id e envia-lo para a pagina de cadastro
 	@GetMapping("/editar/inscricao/{id}") 
-	public String preEditarConsultaPaciente(@PathVariable("id") Long id, 
+	public String preEditarConsultaPaciente(@PathVariable("id") Long id, RedirectAttributes attr, 
 										    ModelMap model, @AuthenticationPrincipal User user) {
 		List<Curso> listaCursos = cursoService.obterLista();
 		Inscricao inscricao= service.buscarPorIdECandidato(id, user.getUsername());
 		
-		model.addAttribute("cursos", listaCursos);
-		model.addAttribute("inscricao", inscricao);
-		return "inscricao/cadastro";
+		if (inscricao.getCurso().isAtivo() == true) {
+			model.addAttribute("cursos", listaCursos);
+			model.addAttribute("inscricao", inscricao);
+			return "inscricao/cadastro";
+		} else {
+			attr.addFlashAttribute("falha", "Não é possivel editar. O periodo de Inscrição e Edição foi finalizado.");
+			return "redirect:/inscricoes/historico/candidato";
+		}
+		
 	}
 	
 	@GetMapping("/aprovar/{id}") 
@@ -221,10 +227,17 @@ public class InscricaoController {
 	}
 	
 	@GetMapping("/excluir/inscricao/{id}")
-	public String excluirConsulta(@PathVariable("id") Long id, RedirectAttributes attr) {
+	public String excluirConsulta(@PathVariable("id") Long id, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+		Inscricao inscricao= service.buscarPorIdECandidato(id, user.getUsername());
+		
+		if (inscricao.getCurso().isAtivo() == true) {
 		service.remover(id);
 		attr.addFlashAttribute("sucesso", "Inscrição excluída com sucesso.");
 		return "redirect:/inscricoes/historico/candidato";
+		} else {
+			attr.addFlashAttribute("falha", "Não é possivel excluir. O periodo de Inscrição e Edição foi finalizado.");
+			return "redirect:/inscricoes/historico/candidato";
+		}
 	}
 
 

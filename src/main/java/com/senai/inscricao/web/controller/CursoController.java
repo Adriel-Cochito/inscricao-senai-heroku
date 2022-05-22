@@ -40,7 +40,7 @@ public class CursoController {
 		return "redirect:/cursos/lista";
 	}
 	
-	@GetMapping({ "/libera/resultado/{id}" })
+	@GetMapping({ "/resultado/liberar/{id}" })
 	public String liberaResultado(@PathVariable("id") Long id, RedirectAttributes attr, HttpServletRequest request) {
 		
 		Curso curso = service.buscarPorId(id);
@@ -69,7 +69,7 @@ public class CursoController {
 		return "redirect:/cursos/lista";
 	}
 	
-	@GetMapping({ "/cancela/resultado/{id}" })
+	@GetMapping({ "/resultado/cancelar/{id}" })
 	public String cancelaResultado(@PathVariable("id") Long id, RedirectAttributes attr, HttpServletRequest request) {
 		
 		Curso curso = service.buscarPorId(id);

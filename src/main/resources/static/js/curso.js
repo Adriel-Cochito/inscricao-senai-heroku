@@ -60,11 +60,11 @@ $(document).ready(function() {
 				{	data : 'id',	
 					render : function(id) {
 						return ''.concat('<a class="btn btn-warning btn-sm btn-block"', ' ') 
-								 .concat('href="').concat('/cursos/libera/resultado/').concat(id, '"', ' ')
+								 .concat('href="').concat('/cursos/resultado/liberar/').concat(id, '"', ' ')
 								 .concat('role="button" title="Libera" data-toggle="modal" data-target="#confirm-modal">', ' ')
 								 .concat('Libera Resultados</a>')
 								 .concat('<a class="btn btn-danger btn-sm btn-block"', ' ') 
-								 .concat('href="').concat('/cursos/cancela/resultado/').concat(id, '"', ' ')
+								 .concat('href="').concat('/cursos/resultado/cancelar/').concat(id, '"', ' ')
 								 .concat('role="button" title="Cancela" data-toggle="modal" data-target="#confirm-modal">', ' ')
 								 .concat('Cancela Resultados</a>');
 					},
