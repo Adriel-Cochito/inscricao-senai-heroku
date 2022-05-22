@@ -45,6 +45,7 @@ public class CursoController {
 		
 		Curso curso = service.buscarPorId(id);
 		curso.setLiberaResultados(true);
+		curso.setAtivo(false);
 		
 		service.salvar(curso);
 		
@@ -52,10 +53,7 @@ public class CursoController {
 		
 		for (Inscricao inscricao : listaInscricao) {
 		    if (inscricao.getCurso().getId() == id ) {
-		    	System.out.println("Iniciando Inscrição: ");
-		    	System.out.println("Id Inscricao: "+inscricao.getId());
-		    	System.out.println(inscricao.getCurso().getTitulo());
-		    	System.out.println("Situação: " + inscricao.getSituacao());
+
 		    	if (inscricao.getSituacao() == 2) {
 					inscricao.setSituacao(1);
 					inscricaoService.salvar(inscricao);
@@ -67,7 +65,7 @@ public class CursoController {
 			}
 		}
 
-		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
+		attr.addFlashAttribute("sucesso", "Resultados liberados pra este curso! E inativado para inscrições ");
 		return "redirect:/cursos/lista";
 	}
 	
@@ -83,10 +81,7 @@ public class CursoController {
 		
 		for (Inscricao inscricao : listaInscricao) {
 		    if (inscricao.getCurso().getId() == id ) {
-		    	System.out.println("Iniciando Inscrição: ");
-		    	System.out.println("Id Inscricao: "+inscricao.getId());
-		    	System.out.println(inscricao.getCurso().getTitulo());
-		    	System.out.println("Situação: " + inscricao.getSituacao());
+
 		    	if (inscricao.getSituacao() == 1) {
 					inscricao.setSituacao(2);
 					inscricaoService.salvar(inscricao);
@@ -98,7 +93,7 @@ public class CursoController {
 			}
 		}
 		
-		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
+		attr.addFlashAttribute("sucesso", "Liberação de Resultados cancelados para este curso! Curso permanece Inativo para inscrições");
 		return "redirect:/cursos/lista";
 	}
 	
@@ -137,7 +132,7 @@ public class CursoController {
 	@GetMapping("/excluir/{id}")
 	public String abrir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		service.remover(id);
-		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso.");
+		attr.addFlashAttribute("sucesso", "Curso excluido com sucesso.");
 		return "redirect:/cursos/lista";
 	}
 	

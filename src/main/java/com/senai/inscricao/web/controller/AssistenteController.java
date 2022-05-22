@@ -59,11 +59,8 @@ public class AssistenteController {
 			assistente.setUsuario(usuario);		
 		}
 		
-		System.out.print("Ativo: ");
-		System.out.println(usuario.isAtivo());
-		
 		service.salvar(assistente);
-		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
+		attr.addFlashAttribute("sucesso", "Assistente salvo com sucesso");
 		attr.addFlashAttribute("assistente", assistente);
 		return "redirect:/assistentes/dados";
 	}
@@ -75,9 +72,8 @@ public class AssistenteController {
 		usuario.setAtivo(true);
 		
 		service.editar(assistente);
-		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
+		attr.addFlashAttribute("sucesso", "Assistente editado com sucesso");
 		attr.addFlashAttribute("assistente", assistente);
-		System.out.println(assistente);
 		return "redirect:/assistentes/dados";
 	}
 

@@ -16,7 +16,7 @@ public class Inscricao extends AbstractEntity {
 	private Curso curso;
 	
 	@ManyToOne
-	@JoinColumn(name="id_candidato")
+	@JoinColumn(name="id_candidato", unique = true)
 	private Candidato candidato;
 	
 	

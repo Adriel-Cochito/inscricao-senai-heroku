@@ -35,7 +35,6 @@ public class CandidatoController {
 	public String abrirPorCandidato(Candidato candidato, ModelMap model,RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		if (service.buscarPorUsuarioCpf(user.getUsername()).getId() == null) {
 			
-			System.out.println("Candidato SEM ID ! ! ! ");
 			
 		} else {
 			model.addAttribute("nomeFamiliar", "Nome");
@@ -43,7 +42,6 @@ public class CandidatoController {
 			candidato = service.buscarPorUsuarioCpf(user.getUsername());
 			model.addAttribute("candidato", candidato);
 			model.addAttribute("listaFamiliares", candidato.getFamiliares());
-			System.out.println("Candidato COM ID ! ! ! ");
 		}
 		
 		Usuario usuario = usuarioService.buscarPorCpf(user.getUsername());
@@ -58,8 +56,6 @@ public class CandidatoController {
 		
 		model.addAttribute("listaFamiliares", service.buscarPorCandidatoId(id).getFamiliares());
 		
-		System.out.print("Id: ");
-		System.out.println(id);
 		return new ModelAndView("candidato/cadastro", "candidato", service.buscarPorCandidatoId(id));
 	} 
 
@@ -69,8 +65,6 @@ public class CandidatoController {
 		
 		model.addAttribute("listaFamiliares", service.buscarPorUsuarioId(id).getFamiliares());
 		
-		System.out.print("Id: ");
-		System.out.println(id);
 		return new ModelAndView("candidato/cadastro", "candidato", service.buscarPorUsuarioId(id));
 	}
 	
@@ -89,7 +83,7 @@ public class CandidatoController {
 		us.setAtivo(true);		
 		usuarioService.salvarEdicaoUsuario(us);
 		
-		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
+		attr.addFlashAttribute("sucesso", "Candidato salvo com sucesso");
 		attr.addFlashAttribute("candidato", candidato);
 		
 		return "redirect:/home";
@@ -101,10 +95,9 @@ public class CandidatoController {
 	public String editar(Candidato candidato, RedirectAttributes attr) {
 
 		service.editar(candidato);
-		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
+		attr.addFlashAttribute("sucesso", "Candidato editado com sucesso");
 		attr.addFlashAttribute("candidato", candidato);
 		attr.addFlashAttribute("listaFamiliares", candidato.getFamiliares());
-		System.out.println(candidato);
 		return "redirect:/candidatos/dados";
 	}
 	

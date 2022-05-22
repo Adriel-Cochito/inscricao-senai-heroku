@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -78,11 +79,7 @@ public class UsuarioController {
 
 		if (usuario.getDtInscricao() == null) {
 			usuario.setDtInscricao(dataAtual);
-			System.out.println("DATA nula!! ");
 		}
-
-		System.out.println("DATA ATUAL: ");
-		System.out.println(dataAtual);
 
 		if (perfis.size() > 2 || perfis.containsAll(Arrays.asList(new Perfil(1L), new Perfil(3L)))
 				|| perfis.containsAll(Arrays.asList(new Perfil(2L), new Perfil(3L)))) {
@@ -94,8 +91,8 @@ public class UsuarioController {
 //					usuario.setEmail("");
 //				}
 				service.salvarUsuario(usuario);
-				attr.addFlashAttribute("sucesso", "Cadastro realizad com sucesso! Agora entre com Login e Senha cadastrados");
-			} catch (Exception e) {
+				attr.addFlashAttribute("sucesso", "Cadastro realizado com sucesso! Agora entre com Login e Senha cadastrados");
+			} catch (DataIntegrityViolationException ex) {
 				attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
 			}
 		}
@@ -113,7 +110,6 @@ public class UsuarioController {
 
 			}
 		} catch (Exception e) {
-			System.out.println("Usuario NÂO logado!!");
 			return "redirect:/login";
 		}
 		return null;
@@ -128,25 +124,14 @@ public class UsuarioController {
 
 		if (usuario.getDtInscricao() == null) {
 			usuario.setDtInscricao(dataAtual);
-			System.out.println("DATA nula!! ");
 		}
-
-		System.out.println("DATA ATUAL: ");
-		System.out.println(dataAtual);
 
 		if (perfis.size() > 2 || perfis.containsAll(Arrays.asList(new Perfil(1L), new Perfil(3L)))
 				|| perfis.containsAll(Arrays.asList(new Perfil(2L), new Perfil(3L)))) {
 			attr.addFlashAttribute("falha", "Candidato não pode ser Admin e/ou Assistente");
 			attr.addFlashAttribute("usuario", usuario);
 		} else {
-//			try {
-//				if (usuario.getEmail() == null) {
-//				}
-//
-//			} catch (Exception e) {
-//				usuario.setEmail("");
-//				attr.addFlashAttribute("falha", "Cadastro não realizado, Dados inválidos");
-//			}
+
 			
 			try {
 				

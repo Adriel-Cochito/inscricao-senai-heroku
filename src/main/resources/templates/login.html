@@ -72,14 +72,21 @@
 			<label for="inputPassword">Senha</label>
 			<div class="invalid-feedback">Digite sua senha.</div>	
 		</div>
+		
+		<br>
 
-		<div class="checkbox mb-3" style="width: 90%;margin:auto;">
-			<label> <input type="checkbox" value="remember-me">
-				Remember me
-			</label>
-		</div>
-		<button class="btn btn-lg btn-primary btn-block" type="submit" style="width: 90%;margin:auto;">Entrar</button>
+<!-- 		<div class="checkbox mb-3" style="width: 90%;margin:auto;"> -->
+<!-- 			<label> <input type="checkbox" value="remember-me"> -->
+<!-- 				Remember me -->
+<!-- 			</label> -->
+<!-- 		</div> -->
+		<button class="btn btn-lg btn-primary btn-block" type="submit" style="width: 90%;margin:auto;">ENTRAR</button>
+		<br>				
+		<a class="btn btn-lg btn-outline-primary btn-block" th:href="@{u/novo/cadastro/usuario}"
+		role="button"style="width: 90%;margin:auto;margin-top: 20px">NOVO CADASTRO</a>
+		
 		<hr>
+		
 		<nav class="nav nav-pills flex-column flex-sm-row" >
 			<a class="flex-sm-fill text-sm-left nav-link text-decoration-none" th:href="@{u/novo/cadastro/usuario}"><i class="far fa-arrow-alt-circle-right"></i>&nbsp;Novo cadastro</a>
 			<a class="flex-sm-fill text-sm-left nav-link text-decoration-none" th:href="@{/recuperar-senha}"><i class="fas fa-key"></i>&nbsp;Recuperar senha</a>

@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -46,11 +47,6 @@ public class InscricaoController {
 	@GetMapping({ "/inscrever" })
 	public String abrirInscricao(Inscricao inscricao, Model model, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		
-		System.out.println("Imprimindo usuario da sessao: ");
-		System.out.println(user);
-		System.out.println("Imprimindo ATIVO do usuario da sessao: ");
-		System.out.println(usuarioService.buscarPorCpf(user.getUsername()).isAtivo());
-		
 		if (!(usuarioService.buscarPorCpf(user.getUsername()).isAtivo())) {
 			model.addAttribute("isAtivo", usuarioService.buscarPorCpf(user.getUsername()).isAtivo());
 			attr.addFlashAttribute("sucesso", "Finalize o cadastro de dados pessoais para se inscrever nos cursos.");
@@ -83,20 +79,12 @@ public class InscricaoController {
 		List<Curso> listaCursos = cursoService.obterLista();
 		List<Inscricao> listaInscricao = service.obterLista();
 		
-		System.out.println("Lista curso: ");
-		System.out.println(listaCursos.size());
-		
 		List<String> tamanho = new ArrayList<String>();
 		
 		for (Curso curso : listaCursos) {
-		    System.out.println(curso.getTitulo());
 		    tamanho.add(curso.getTitulo());
 		    
 		}
-		
-		
-		System.out.println("Tamanho do Array list :");
-		System.out.println(tamanho.size());
 		
 		model.addAttribute("idCurso", id);
 		model.addAttribute("tituloCurso", cursoService.buscarPorId(id).getTitulo());
@@ -108,37 +96,6 @@ public class InscricaoController {
 		return "inscricao/lista";
 	}
 	
-//	@GetMapping("/lista/curso/{id}")
-//	public String listarInscricoesPorCurso(@PathVariable("id") Long id, Model model,HttpServletRequest request) {
-//		
-//		System.out.println("Curso captado: ");
-//		System.out.println(id);
-//		System.out.println("^^^^^^^^");
-//		List<Curso> listaCursos = cursoService.obterLista();
-//		List<Inscricao> listaInscricao = service.buscarInscricoesPorCursoId(id, request);
-//		
-//		System.out.println("Lista curso: ");
-//		System.out.println(listaCursos.size());
-//		
-//		List<String> tamanho = new ArrayList<String>();
-//		
-//		for (Curso curso : listaCursos) {
-//		    System.out.println(curso.getTitulo());
-//		    tamanho.add(curso.getTitulo());
-//		    
-//		}
-//		
-//		
-//		System.out.println("Tamanho do Array list :");
-//		System.out.println(tamanho.size());
-//		
-//		model.addAttribute("tamanho", tamanho.size());
-//		model.addAttribute("quantidadeInscricao", listaInscricao.size());
-//		model.addAttribute("cursos", listaCursos);
-//		model.addAttribute("inscricoes", listaInscricao);
-//		return "inscricao/lista";
-//	}
-	
 	
 	// Abrir lista de inscricoes
 	@GetMapping("/estatisticas")
@@ -149,20 +106,12 @@ public class InscricaoController {
 		List<Candidato> listaCandidatos = candidatoService.obterLista();
 		List<Usuario> listaUsuarios = usuarioService.obterLista();
 		
-		System.out.println("Lista curso: ");
-		System.out.println(listaCursos.size());
-		
 		List<String> tamanho = new ArrayList<String>();
 		
 		for (Curso curso : listaCursos) {
-		    System.out.println(curso.getTitulo());
 		    tamanho.add(curso.getTitulo());
 		    
 		}
-		
-		
-		System.out.println("Tamanho do Array list :");
-		System.out.println(tamanho.size());
 		
 		model.addAttribute("tamanho", tamanho.size());
 		model.addAttribute("quantidadeInscricao", listaInscricao.size());
@@ -180,11 +129,11 @@ public class InscricaoController {
 	// Listar Usuarios na tabela
 	@GetMapping("/datatables/server/lista/{id}")
 	public ResponseEntity<?> listarInscricoesDataTables(@PathVariable("id") Long id,HttpServletRequest request) {
-		Curso curso = cursoService.buscarPorId(id);
-		
-		System.out.print("Imprimindo cursoId: ");
-		System.out.println(id);
-		System.out.println(curso.getTitulo());
+//		Curso curso = cursoService.buscarPorId(id);
+//		
+//		System.out.print("Imprimindo cursoId: ");
+//		System.out.println(id);
+//		System.out.println(curso.getTitulo());
 		
 		if(id == 0) {
 			return ResponseEntity.ok(service.buscarTodos(request));
@@ -212,15 +161,6 @@ public class InscricaoController {
 		return ResponseEntity.ok(service.buscarHistoricoPorCandidatoCpf(user.getUsername(), request));
 	}
 	
-//	// localizar o historico de inscricoes por usuario logado
-//		@GetMapping("/datatables/server/curso/{id}")
-//		public ResponseEntity<?> historicoInscricoesCurso(HttpServletRequest request, Model model, @PathVariable("id") Long id) {
-//				Curso curso = cursoService.buscarPorId(id);
-//				List<Curso> listaCursos = cursoService.obterLista();
-//				model.addAttribute("cursos", listaCursos);
-//				System.out.println();
-//			return ResponseEntity.ok(service.buscarInscricoesPorCursoId(curso.getTitulo(), request));
-//		}
 	
 	
 	// salvar um consulta agendada
@@ -233,8 +173,16 @@ public class InscricaoController {
 		inscricao.setCurso(curso);
 		inscricao.setSituacao(0);
 		inscricao.setCandidato(candidato);
-		service.salvar(inscricao);
-		attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso.");
+		
+		try {
+			service.salvar(inscricao);
+			attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso.");
+		} catch (DataIntegrityViolationException ex) {
+			attr.addFlashAttribute("falha", "Você já possui uma inscrição, tente editar ou excluir para criar uma nova inscrição");
+		}
+		
+		
+		
 		return "redirect:/home";
 	}
 	
