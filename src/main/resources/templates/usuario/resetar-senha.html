@@ -34,14 +34,15 @@
 							<div class="mb-3">
 								<label for="cpf">CPF</label> 
 								<input type="text" class="form-control pass" id="cpf" name="cpf" 
-									placeholder="Insira sua senha de acesso" value="" required />
+									placeholder="Insira seu CPF de acesso" value="" required />
 								<div class="invalid-feedback">Digite seu CPF.</div>
 							</div>	
 							
 							<div class="mb-3">
 								<label for="email">Email</label> 
-								<input type="email" class="form-control pass" id="email" name="email" 									placeholder="Insira sua senha de acesso" value="" required />
-								<div class="invalid-feedback">Digite seu CPF.</div>
+								<input type="email" class="form-control pass" id="email" name="email" 
+								placeholder="Insira seu email cadastrado" value="" required />
+								<div class="invalid-feedback">Digite seu Email.</div>
 							</div>	
 							
 													
@@ -55,6 +56,8 @@
 								</div>
 							</div>
 						</form>
+						<a class="btn btn-primary" type="button" href="javascript:history.back()"
+						sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Voltar a página anterior</a>
 
 					</div>
 				</div>
