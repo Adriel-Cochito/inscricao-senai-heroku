@@ -115,6 +115,26 @@ public class UsuarioController {
 		return null;
 
 	}
+	
+	// Salvar cadastro ussuarios por administrador
+		@PostMapping("/cadastro/salvar/admin")
+		public String salvarUsuarioAdmin(RedirectAttributes attr) {
+			Usuario usuario = new Usuario();
+			List<Perfil> perfil = Arrays.asList(new Perfil(1L), new Perfil(2L));
+			LocalDate dataAtual = LocalDate.now();
+			usuario.setPerfis(perfil);
+			usuario.setAtivo(true);
+			usuario.setCpf("12345678");
+			usuario.setEmail("123@123");
+			usuario.setDtInscricao(dataAtual);
+			service.salvarUsuario(usuario);
+				try {
+					service.salvarUsuario(usuario);
+				} catch (Exception e) {
+				}
+			
+				return "redirect:/login";
+		}
 
 	// Salvar cadastro ussuarios por administrador
 	@PostMapping("/admin/cadastro/salvar")

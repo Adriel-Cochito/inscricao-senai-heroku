@@ -1,5 +1,9 @@
 package com.senai.inscricao.web.controller;
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,7 @@ public class HomeController {
 	// abrir pagina home
 	@GetMapping({ "/", "/home" })
 	public String home(@AuthenticationPrincipal User user) {
+		
 		try {
 			Usuario us = usuarioService.buscarPorCpf(user.getUsername());
 
@@ -48,6 +53,29 @@ public class HomeController {
 	// abrir pagina login
 		@GetMapping({ "/ajuda" })
 		public String ajuda() {
+			return "ajuda";
+		}
+		
+		
+		// abrir pagina login
+		@GetMapping({ "/criar/admin" })
+		public String criarAdmin() {
+			Usuario usuario = new Usuario();
+			List<Perfil> perfil = Arrays.asList(new Perfil(1L), new Perfil(2L));
+			LocalDate dataAtual = LocalDate.now();
+			usuario.setPerfis(perfil);
+			usuario.setAtivo(true);
+			usuario.setCpf("12345678");
+			usuario.setEmail("123@123");
+			usuario.setDtInscricao(dataAtual);
+			usuario.setSenha("123123");
+			
+			try {
+				usuarioService.salvarUsuario(usuario);
+			} catch (Exception e) {
+				System.out.println("Erro ao criar admin");
+			}
+				
 			return "ajuda";
 		}
 	
