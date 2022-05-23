@@ -107,7 +107,7 @@ public class UsuarioService implements UserDetailsService {
 
 	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
 		byte[] decoded = Base64.decodeBase64(senhaArmazenada.getBytes());
-		String senha = Arrays.toString(decoded);
+		String senha = new String(decoded);
 		if(senha == senhaDigitada) {
 			return true;
 		} else {
