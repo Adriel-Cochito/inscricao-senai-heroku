@@ -171,7 +171,7 @@ public class InscricaoController {
 		Curso curso= cursoService.buscarPorTitulos(new String[] { titulo }).stream()
 				.findFirst().get();
 		inscricao.setCurso(curso);
-		inscricao.setSituacao(0);
+		inscricao.setSituacao(0); 
 		inscricao.setCandidato(candidato);
 		
 		try {
