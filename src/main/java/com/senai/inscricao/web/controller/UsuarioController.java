@@ -3,6 +3,7 @@ package com.senai.inscricao.web.controller;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -222,9 +223,44 @@ public class UsuarioController {
 	@GetMapping("/editar/senha")
 	public String abrirEditarSenha() {
 
-		return "usuario/editar-senha";
+		return "usuario/resetar-senha";
 	}
 
+	// Confirmar a senha
+	@PostMapping("/senha/resetar")
+	public String resetarSenha(@RequestParam("cpf") String cpf, @RequestParam("email") String email,
+			RedirectAttributes attr) {
+		
+		System.out.println("email: "+email);
+		System.out.println("cpf: "+cpf);
+		
+		try {
+			Usuario usuario = service.buscarPorCpf(cpf);
+			System.out.println("Usuario: " + usuario);
+			
+			System.out.println("email cadastrado: " + usuario.getEmail());
+			System.out.println("email digitado: " + email);
+			
+			String emailCadastrado = new String(usuario.getEmail());
+			String emailDigitado= new String(email);
+			
+			if (Objects.equals(emailCadastrado, emailDigitado)) {
+				usuario.setSenha(cpf);
+				service.salvarUsuario(usuario);
+				System.out.println("Senha alterada");
+				attr.addFlashAttribute("sucesso", "Senha resetada! Nova senha será o seu CPF");
+			} else {
+				System.out.println("Email nao cadastrado");
+				attr.addFlashAttribute("falha", "Email não cadastrado neste CPF");
+			}
+		} catch (Exception e) {
+			System.out.println("CPF nao encontrado");
+			attr.addFlashAttribute("falha", "Erro ao buscar CPF, ou CPF Inválido!");
+		}
+		
+		
+		return "redirect:/recuperar-senha";
+	}
 	// Confirmar a senha
 	@PostMapping("/confirmar/senha")
 	public String editarSenha(@RequestParam("senha1") String s1, @RequestParam("senha2") String s2,

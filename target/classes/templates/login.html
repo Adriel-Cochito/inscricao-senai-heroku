@@ -48,7 +48,8 @@
 
 			<p class="font-weight-lighter">Seja bem-vindo.</p>
 			<p class="text-muted">Realize seu login ou um novo cadastro para continuar</p>	
-			<p style="color: green;">DEVIDO A ALTA DEMANDA, O SISTEMA PODE FICAR INDISPONIVEL, E ACUSAR DADOS CADASTRAIS INCORRETOS</p>				
+			<p style="color: green;">DEVIDO A ALTA DEMANDA, O SISTEMA PODE FICAR INDISPONIVEL, E ACUSAR DADOS CADASTRAIS INCORRETOS</p>	
+			<p style="color: green;">Se não conseguir realizar seu login, tente fazer um novo cadastro</p>				
 			<div th:if="${alerta != null}" th:class="${alerta == 'erro'} ? 'alert alert-danger' : 'alert alert-success'"
 				 role="alert">
 			  <h4 th:text="${titulo}" class="alert-heading">Credenciais...</h4>
@@ -66,7 +67,7 @@
 		</div>
 
 		<div class="form-label-group" style="width: 90%;margin:auto;">
-			<input type="password" id="inputPassword" class="form-control" minlength="4" maxlength="8"
+			<input type="password" id="inputPassword" class="form-control" minlength="3" maxlength="8"
 				placeholder="Password" name="password" required> 
 			<label for="inputPassword">Senha</label>
 			<div class="invalid-feedback">Digite sua senha.</div>	
