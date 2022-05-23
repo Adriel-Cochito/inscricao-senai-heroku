@@ -170,13 +170,13 @@ public class InscricaoController {
 		String titulo = inscricao.getCurso().getTitulo();
 		Curso curso= cursoService.buscarPorTitulos(new String[] { titulo }).stream()
 				.findFirst().get();
-		inscricao.setCurso(curso);
-		inscricao.setSituacao(0);
+		inscricao.setCurso(curso); 
+		inscricao.setSituacao(0); 
 		inscricao.setCandidato(candidato);
 		
 		try {
 			service.salvar(inscricao);
-			attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso.");
+			attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso!");
 		} catch (DataIntegrityViolationException ex) {
 			attr.addFlashAttribute("falha", "Você já possui uma inscrição, tente editar ou excluir para criar uma nova inscrição");
 		}
