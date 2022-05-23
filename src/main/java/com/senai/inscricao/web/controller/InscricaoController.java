@@ -47,14 +47,34 @@ public class InscricaoController {
 	@GetMapping({ "/inscrever" })
 	public String abrirInscricao(Inscricao inscricao, Model model, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		
-		if (!(usuarioService.buscarPorCpf(user.getUsername()).isAtivo())) {
+//		if (!(usuarioService.buscarPorCpf(user.getUsername()).isAtivo()) || candidatoService.buscarPorUsuarioCpf(user.getUsername()).) {
+//			model.addAttribute("isAtivo", usuarioService.buscarPorCpf(user.getUsername()).isAtivo());
+//			attr.addFlashAttribute("sucesso", "Finalize o cadastro de dados pessoais para se inscrever nos cursos.");
+//			return "inscricao/cadastro";
+//		} else {
+//			model.addAttribute("cursos", cursoService.obterLista());
+//			return "inscricao/cadastro";
+//		}
+		
+		try {
+			Candidato candidato = candidatoService.buscarPorUsuarioCpf(user.getUsername());
+			if (candidato.getId() != null) {
+				model.addAttribute("cursos", cursoService.obterLista());
+				return "inscricao/cadastro";
+			} else {
+				model.addAttribute("isAtivo", usuarioService.buscarPorCpf(user.getUsername()).isAtivo());
+				attr.addFlashAttribute("sucesso", "Finalize o cadastro de dados pessoais para se inscrever nos cursos.");
+				return "inscricao/cadastro";
+			}
+			
+				
+		} catch (Exception e) {
 			model.addAttribute("isAtivo", usuarioService.buscarPorCpf(user.getUsername()).isAtivo());
 			attr.addFlashAttribute("sucesso", "Finalize o cadastro de dados pessoais para se inscrever nos cursos.");
 			return "inscricao/cadastro";
-		} else {
-			model.addAttribute("cursos", cursoService.obterLista());
-			return "inscricao/cadastro";
 		}
+		
+		
 		
 		
 	}
