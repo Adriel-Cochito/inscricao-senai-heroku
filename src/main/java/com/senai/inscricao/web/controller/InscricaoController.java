@@ -176,7 +176,7 @@ public class InscricaoController {
 		
 		try {
 			service.salvar(inscricao);
-			attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso.");
+			attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso!");
 		} catch (DataIntegrityViolationException ex) {
 			attr.addFlashAttribute("falha", "Você já possui uma inscrição, tente editar ou excluir para criar uma nova inscrição");
 		}
