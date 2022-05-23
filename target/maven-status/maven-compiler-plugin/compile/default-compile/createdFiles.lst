@@ -1,5 +1,4 @@
 com\senai\inscricao\web\exception\ExceptionController.class
-com\senai\inscricao\config\TesteAlgoritmo.class
 com\senai\inscricao\services\UsuarioService.class
 com\senai\inscricao\domains\Assistente.class
 com\senai\inscricao\web\conversor\PerfisConverter.class
@@ -31,6 +30,7 @@ com\senai\inscricao\domains\Inscricao.class
 com\senai\inscricao\web\controller\CursoController.class
 com\senai\inscricao\domains\Candidato.class
 com\senai\inscricao\domains\Horario.class
+com\senai\inscricao\exception\SQLIntegrityConstraintViolationException.class
 com\senai\inscricao\domains\Perfil.class
 com\senai\inscricao\repositories\AssistenteRepository.class
 com\senai\inscricao\services\InscricaoService.class
