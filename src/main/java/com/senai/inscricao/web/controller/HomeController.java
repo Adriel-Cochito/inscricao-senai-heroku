@@ -82,7 +82,7 @@ public class HomeController {
 //	// abrir pagina recuperação de senha
 //		@GetMapping({ "/recuperar-senha" })
 //		public String recuperarSenha() {
-//			return "/usuario/resetar-senha";
+//			return "/resetar-senha";
 //		}
 
 	// abrir pagina cadastro
