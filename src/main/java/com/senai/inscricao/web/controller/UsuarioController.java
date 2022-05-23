@@ -54,7 +54,7 @@ public class UsuarioController {
 	@GetMapping("/lista")
 	public String listarUsuarios(RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		Usuario us = service.buscarPorCpf(user.getUsername());
-
+ 
 		if (us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
 			attr.addFlashAttribute("isAdmin", "true");
 			return "usuario/lista";
