@@ -60,7 +60,7 @@ public class UsuarioController {
 			return "usuario/lista";
 		} else {
 			return "usuario/lista-simples";
-		}
+		} 
 
 	}
 
