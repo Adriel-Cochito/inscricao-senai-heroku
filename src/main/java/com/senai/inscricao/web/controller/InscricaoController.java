@@ -170,7 +170,7 @@ public class InscricaoController {
 		String titulo = inscricao.getCurso().getTitulo();
 		Curso curso= cursoService.buscarPorTitulos(new String[] { titulo }).stream()
 				.findFirst().get();
-		inscricao.setCurso(curso);
+		inscricao.setCurso(curso); 
 		inscricao.setSituacao(0); 
 		inscricao.setCandidato(candidato);
 		
