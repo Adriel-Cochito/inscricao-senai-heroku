@@ -229,7 +229,7 @@ public class UsuarioController {
 	// abrir pagina recuperação de senha
 	@GetMapping({ "/recuperar-senha" })
 			public String recuperarSenha() {
-				return "/usuario/resetar-senha";
+				return "/resetar-senha";
 	}
 
 	// Confirmar a senha
