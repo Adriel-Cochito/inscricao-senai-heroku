@@ -42,7 +42,7 @@ public class Usuario extends AbstractEntity {
         joinColumns = { @JoinColumn(name = "usuario_id", referencedColumnName = "id") }, 
         inverseJoinColumns = { @JoinColumn(name = "perfil_id", referencedColumnName = "id") }
 	)
-	private List<Perfil> perfis;
+	private List<Perfil> perfis; 
 	
 	@Column(name = "codigo_verificador", length = 6)
 	private String codigoVerificador;
