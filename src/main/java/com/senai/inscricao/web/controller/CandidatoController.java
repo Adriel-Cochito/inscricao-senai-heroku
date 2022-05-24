@@ -94,14 +94,6 @@ public class CandidatoController {
 	@PostMapping({ "/editar" })
 	public String editar(Candidato candidato, RedirectAttributes attr) {
 		service.editar(candidato);
-		try {
-			Usuario u = usuarioService.buscarPorId(candidato.getUsuario().getId());
-			u.setAtivo(true);
-			usuarioService.salvarEdicaoUsuario(u);
-		} catch (Exception e) {
-		}
-		
-		
 		
 		attr.addFlashAttribute("sucesso", "Candidato editado com sucesso");
 		attr.addFlashAttribute("candidato", candidato);
