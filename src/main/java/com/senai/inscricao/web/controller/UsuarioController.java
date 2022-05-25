@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -117,7 +118,7 @@ public class UsuarioController {
 
 	}
 	
-	// Salvar cadastro ussuarios por administrador
+	// Salvar usuario ADMIN padrão
 		@PostMapping("/cadastro/salvar/admin")
 		public String salvarUsuarioAdmin(RedirectAttributes attr) {
 			Usuario usuario = new Usuario();
@@ -155,6 +156,22 @@ public class UsuarioController {
 
 			
 			try {
+				
+				Usuario u = service.buscarPorId(usuario.getId());
+				byte[] decoded = Base64.decodeBase64(u.getSenha().getBytes());
+				String decodedString = new String(decoded);
+				
+				System.out.println("Senha digitada: " + usuario.getSenha());
+				System.out.println("Senha Coded: " + u.getSenha());
+				System.out.println("Imprimindo senha DB Decoded: " + decodedString);
+				
+				if (usuario.getSenha() == null  || usuario.getSenha() == "") {
+					System.out.println("Senha nao digitada, NULA!");
+					usuario.setSenha(decodedString);
+					
+				} else {
+					System.out.println("Senha inserida!");
+				}
 				
 				service.salvarUsuario(usuario);
 
