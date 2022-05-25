@@ -79,12 +79,20 @@ public class CandidatoController {
 			candidato.setUsuario(us);
 		}
 		
-		service.salvar(candidato);
-		us.setAtivo(true);		
-		usuarioService.salvarEdicaoUsuario(us);
+		try {
+			service.salvar(candidato);
+			us.setAtivo(true);		
+			usuarioService.salvarEdicaoUsuario(us);
+			attr.addFlashAttribute("sucesso", "Candidato salvo com sucesso");
+			attr.addFlashAttribute("candidato", candidato);
+		} catch (Exception e) {
+			attr.addFlashAttribute("falha", "Dados inválidos! Leia e preencha corretamente todos os campos."
+					+ " Principalmente o nome e renda de cada familiar, mesmo que seja R$0,00");
+			return "redirect:/candidatos/dados";
+		}
 		
-		attr.addFlashAttribute("sucesso", "Candidato salvo com sucesso");
-		attr.addFlashAttribute("candidato", candidato);
+		
+		
 		
 		return "redirect:/home";
 	}
