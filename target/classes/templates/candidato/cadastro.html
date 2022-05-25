@@ -36,6 +36,14 @@
 						</div>
 
 						<h3>Dados Pessoais</h3>
+						<br>
+						<div class="border border-danger rounded" style="background-color: #f8f9fa;padding: 10px;">
+							<p>Todos os dados pessoais serão verificados na matrícula.</p>
+							<p>A divergência de informações
+							poderá ser motivo de desqualificação do candidato, conforme o Edital. </p>
+						</div>
+						<hr>
+						<br>
 
 						<form
 							th:action="${candidato.id == null} ? @{/candidatos/salvar} : @{/candidatos/editar}"
