@@ -214,32 +214,10 @@ public class InscricaoController {
 			attr.addFlashAttribute("falha", "Você já possui uma inscrição, tente editar ou excluir para criar uma nova inscrição");
 		}
 		
-		List<Inscricao> listaInscricao = service.obterLista();
-		
-		for (Inscricao in : listaInscricao) {
-			in.setDtInscricao(in.getCandidato().getUsuario().getDtInscricao());
-			service.salvar(in);
-		}
 		
 		return "redirect:/home";
 	}
 	
-	// salvar um consulta agendada
-	@PostMapping({ "/salvar/data" })
-	public String salvarDataInscricao() {
-		
-		List<Inscricao> listaInscricao = service.obterLista();
-		
-		for (Inscricao inscricao : listaInscricao) {
-			inscricao.setDtInscricao(inscricao.getCandidato().getUsuario().getDtInscricao());
-			service.salvar(inscricao);
-		}
-
-		
-		
-
-		return "redirect:/home";
-	}
 	
 	// localizar agendamento pelo id e envia-lo para a pagina de cadastro
 	@GetMapping("/editar/inscricao/{id}") 
