@@ -4,7 +4,7 @@ $(document).ready(function() {
 	moment.locale('pt-BR');
 	var table = $('#table-usuarios').DataTable({
 		searching : true,
-		lengthMenu : [ 10, 20, 30 ],
+		lengthMenu : [ 30, 40, 50 ],
 		processing : true,
 		serverSide : true,
 		responsive : true,

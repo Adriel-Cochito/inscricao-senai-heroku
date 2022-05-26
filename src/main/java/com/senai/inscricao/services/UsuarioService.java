@@ -45,17 +45,17 @@ public class UsuarioService implements UserDetailsService {
 		
 		String decodedString = new String(decoded);
 		
-		System.out.println("            ==================================================");
-		System.out.println("            ==================================================");
-		System.out.println("loadUserByUsername: ");
-		System.out.print("senha criptografada: ");
-		System.out.println(usuario.getSenha());
-		System.out.print("Senha descriptografgada: ");
-		System.out.println(decodedString);
-		
-		
-		System.out.println("            ==================================================");
-		System.out.println("            ==================================================");
+//		System.out.println("            ==================================================");
+//		System.out.println("            ==================================================");
+//		System.out.println("loadUserByUsername: ");
+//		System.out.print("senha criptografada: ");
+//		System.out.println(usuario.getSenha());
+//		System.out.print("Senha descriptografgada: ");
+//		System.out.println(decodedString);
+//		
+//		
+//		System.out.println("            ==================================================");
+//		System.out.println("            ==================================================");
 		
 		return new User(usuario.getCpf(), decodedString,
 				AuthorityUtils.createAuthorityList(getAtuthorities(usuario.getPerfis())));

@@ -173,6 +173,7 @@
     
     var lerInscricoes = function() {
     	var classificacao = new Array();
+    	
     	let i = 0
     	[# th:each="curso : ${cursos}"]  
     		var num = 0;
@@ -181,6 +182,7 @@
 				var str2 = [[${inscricao.curso.titulo}]];
 				if (str2 == str) {
 					num += 1;
+					
 				}
 			[/]
 			classificacao[i] = [str, num];
