@@ -1,5 +1,7 @@
 package com.senai.inscricao.web.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.convert.JodaTimeConverters.DateToLocalDateTimeConverter;
+import org.springframework.data.convert.JodaTimeConverters.LocalDateToDateConverter;
+import org.springframework.data.convert.Jsr310Converters.LocalDateTimeToDateConverter;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateTimeConverter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -133,6 +139,7 @@ public class InscricaoController {
 		    
 		}
 		
+		
 		model.addAttribute("tamanho", tamanho.size());
 		model.addAttribute("quantidadeInscricao", listaInscricao.size());
 		model.addAttribute("quantidadeCursos", listaCursos.size());
@@ -186,6 +193,8 @@ public class InscricaoController {
 	// salvar um consulta agendada
 	@PostMapping({ "/salvar" })
 	public String salvar(Inscricao inscricao, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+		
+		LocalDate dataAtual = LocalDate.now();
 		Candidato candidato = candidatoService.buscarPorUsuarioCpf(user.getUsername());
 		String titulo = inscricao.getCurso().getTitulo();
 		Curso curso= cursoService.buscarPorTitulos(new String[] { titulo }).stream()
@@ -193,6 +202,10 @@ public class InscricaoController {
 		inscricao.setCurso(curso); 
 		inscricao.setSituacao(0); 
 		inscricao.setCandidato(candidato);
+		inscricao.setDtInscricao(dataAtual);
+		
+
+
 		
 		try {
 			service.salvar(inscricao);
@@ -201,8 +214,30 @@ public class InscricaoController {
 			attr.addFlashAttribute("falha", "Você já possui uma inscrição, tente editar ou excluir para criar uma nova inscrição");
 		}
 		
+		List<Inscricao> listaInscricao = service.obterLista();
+		
+		for (Inscricao in : listaInscricao) {
+			in.setDtInscricao(in.getCandidato().getUsuario().getDtInscricao());
+			service.salvar(in);
+		}
+		
+		return "redirect:/home";
+	}
+	
+	// salvar um consulta agendada
+	@PostMapping({ "/salvar/data" })
+	public String salvarDataInscricao() {
+		
+		List<Inscricao> listaInscricao = service.obterLista();
+		
+		for (Inscricao inscricao : listaInscricao) {
+			inscricao.setDtInscricao(inscricao.getCandidato().getUsuario().getDtInscricao());
+			service.salvar(inscricao);
+		}
+
 		
 		
+
 		return "redirect:/home";
 	}
 	
