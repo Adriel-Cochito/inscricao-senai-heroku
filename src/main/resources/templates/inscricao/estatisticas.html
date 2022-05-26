@@ -129,6 +129,24 @@
 
 					</div>
 				</div>
+				
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-md-12">
+
+						<div class="shadow p-3 mb-5 bg-white rounded card card-statistics"
+							style="background-color: white; border-radius: 20px;">
+							<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições por Data (Em desenvolvimento):</h4>
+							<hr style="width: 95%;" />
+							<br>
+							<div style="margin-left: 20px;">
+								<p id="inscricao_por_data"></p>
+							</div>
+							
+						</div>
+
+
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -174,22 +192,76 @@
     
     var lerInscricoes = function() {
     	var classificacao = new Array();
+    	var datas = new Array();
+    	var listaDatas = new Array();
+    	var qtdInscricaoPorData = new Array();
+    	var qtdInscricaoPorData_html = new Array();
     	
+    	[# th:each="inscricao : ${inscricoes}"]   
+		
+			var dtInscricao = [[${inscricao.dtInscricao}]];
+			
+			console.log("dtinscricao: " + dtInscricao);
+			console.log("find: " + datas.includes(dtInscricao));
+			if (datas.includes(dtInscricao)) {
+				console.log
+				console.log("Data já registrada: " + dtInscricao);
+			} else {
+				console.log("Não possui esta data em registro: "+dtInscricao);
+				datas.push(dtInscricao)
+			}
+			listaDatas.push(dtInscricao)
+		[/]
+		
+			console.log("datas: "+datas);
+			console.log("Tamanho datas: "+datas.length);
+			console.log("listaDatas: "+listaDatas);
+			
+			var quantidadeElementos = listaDatas.filter(x => x === "2022-05-26").length;
+			console.log("O array possui " + quantidadeElementos + " elementos iguais a '2022-05-26'")
+			
+			
+			for (let i = 0; i < datas.length; i++) {
+				var quantidadeElementos = listaDatas.filter(x => x === datas[i]).length;
+				
+				qtdInscricaoPorData[i] = [datas[i], quantidadeElementos];
+			}
+			qtdInscricaoPorData = qtdInscricaoPorData.sort()
+			console.log("qtdInscricaoPorData: "+qtdInscricaoPorData)
+			console.log("qtdInscricaoPorData index 0: "+qtdInscricaoPorData[0])
+			
+			for (let i = 0; i < qtdInscricaoPorData.length; i++) {
+				qtdInscricaoPorData_html.push( '<p><b>Dia '+ qtdInscricaoPorData[i][0] +'</b>: '+ qtdInscricaoPorData[i][1] +' Inscrições</p>'
+				);
+			}
+			
+			document.getElementById("inscricao_por_data").innerHTML = qtdInscricaoPorData_html.join('');
+			datas = [];
+    	
+			
+			
     	let i = 0
     	[# th:each="curso : ${cursos}"]  
     		var num = 0;
   			var str = [[${curso.titulo}]];
     		[# th:each="inscricao : ${inscricoes}"]   
+    		
 				var str2 = [[${inscricao.curso.titulo}]];
+    			var dtInscricao = [[${inscricao.dtInscricao}]];
 				if (str2 == str) {
 					num += 1;
-					
 				}
+				
 			[/]
+			
 			classificacao[i] = [str, num];
 			console.log(i)
 			i++;
 		[/]
+		
+		
+		
+		
 		return classificacao;
     };
     
