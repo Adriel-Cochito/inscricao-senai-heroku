@@ -135,6 +135,25 @@
 
 						<div class="shadow p-3 mb-5 bg-white rounded card card-statistics"
 							style="background-color: white; border-radius: 20px;">
+							<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições por Dia:</h4>
+							<hr style="width: 95%;" />
+							<div id="grafico-data"
+								style="display: flex; flex-direction: row; justify-content: center; align-items: center; background-color: white; border-radius: 20px;">
+
+								<div id="columnchart_values"
+									style="width: auto; min-width: 50%; min-height: 300px;"></div>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+				
+				<div class="row" style="margin-top: 30px;">
+					<div class="col-md-12">
+
+						<div class="shadow p-3 mb-5 bg-white rounded card card-statistics"
+							style="background-color: white; border-radius: 20px;">
 							<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições por Data (Em desenvolvimento):</h4>
 							<hr style="width: 95%;" />
 							<br>
@@ -158,7 +177,8 @@
 	
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
-    
+    var qtdInscricaoPorData_html = new Array();
+    var qtdInscricaoPorData = new Array();
     
     function drawChart() {
     	var classificacao = new Array();
@@ -171,7 +191,7 @@
       	[# th:each="curso : ${cursos}"]  
 
       		var str = [[${curso.titulo}]];
-      		console.log(str);
+//       		console.log(str);
       		data.addRows([
             	[classificacao[i][0],classificacao[i][1] ],
           	]);
@@ -194,31 +214,31 @@
     	var classificacao = new Array();
     	var datas = new Array();
     	var listaDatas = new Array();
-    	var qtdInscricaoPorData = new Array();
-    	var qtdInscricaoPorData_html = new Array();
+    	
+    	
     	
     	[# th:each="inscricao : ${inscricoes}"]   
 		
 			var dtInscricao = [[${inscricao.dtInscricao}]];
 			
-			console.log("dtinscricao: " + dtInscricao);
-			console.log("find: " + datas.includes(dtInscricao));
+// 			console.log("dtinscricao: " + dtInscricao);
+// 			console.log("find: " + datas.includes(dtInscricao));
 			if (datas.includes(dtInscricao)) {
-				console.log
-				console.log("Data já registrada: " + dtInscricao);
+// 				console.log
+// 				console.log("Data já registrada: " + dtInscricao);
 			} else {
-				console.log("Não possui esta data em registro: "+dtInscricao);
+// 				console.log("Não possui esta data em registro: "+dtInscricao);
 				datas.push(dtInscricao)
 			}
 			listaDatas.push(dtInscricao)
 		[/]
 		
-			console.log("datas: "+datas);
-			console.log("Tamanho datas: "+datas.length);
-			console.log("listaDatas: "+listaDatas);
+// 			console.log("datas: "+datas);
+// 			console.log("Tamanho datas: "+datas.length);
+// 			console.log("listaDatas: "+listaDatas);
 			
-			var quantidadeElementos = listaDatas.filter(x => x === "2022-05-26").length;
-			console.log("O array possui " + quantidadeElementos + " elementos iguais a '2022-05-26'")
+// 			var quantidadeElementos = listaDatas.filter(x => x === "2022-05-26").length;
+// 			console.log("O array possui " + quantidadeElementos + " elementos iguais a '2022-05-26'")
 			
 			
 			for (let i = 0; i < datas.length; i++) {
@@ -227,11 +247,11 @@
 				qtdInscricaoPorData[i] = [datas[i], quantidadeElementos];
 			}
 			qtdInscricaoPorData = qtdInscricaoPorData.sort()
-			console.log("qtdInscricaoPorData: "+qtdInscricaoPorData)
-			console.log("qtdInscricaoPorData index 0: "+qtdInscricaoPorData[0])
+// 			console.log("qtdInscricaoPorData: "+qtdInscricaoPorData)
+// 			console.log("qtdInscricaoPorData index 0: "+qtdInscricaoPorData[0])
 			
 			for (let i = 0; i < qtdInscricaoPorData.length; i++) {
-				qtdInscricaoPorData_html.push( '<p><b>Dia '+ qtdInscricaoPorData[i][0] +'</b>: '+ qtdInscricaoPorData[i][1] +' Inscrições</p>'
+				qtdInscricaoPorData_html.push( '<p><b>Dia '+ qtdInscricaoPorData[i][0] +'</b>: <u>'+ qtdInscricaoPorData[i][1] +'</u> Inscrições</p>'
 				);
 			}
 			
@@ -255,7 +275,6 @@
 			[/]
 			
 			classificacao[i] = [str, num];
-			console.log(i)
 			i++;
 		[/]
 		
@@ -265,6 +284,54 @@
 		return classificacao;
     };
     
+    
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChartData);
+    
+    function drawChartData() {
+      var data = new google.visualization.DataTable();
+      
+      data.addColumn('string', 'Data');
+      data.addColumn('number', 'Inscrições');
+      
+//       data.addRows([
+//         ["Copper", 8.94],
+//         ["Silver", 10.4],
+//         ["Gold", 19.30],
+//         ["Platinum", 21.45]
+//       ]);
+      
+      
+      data.addRows([
+      	[qtdInscricaoPorData[1][0],qtdInscricaoPorData[1][1] ],
+    	]);
+      
+    for (let i = 0; i < qtdInscricaoPorData.length; i++) {
+    	 data.addRows([
+    	 	[qtdInscricaoPorData[i][0],qtdInscricaoPorData[i][1] ],
+    	 ]);
+	};
+      
+
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" }
+                       ]);
+
+      var options = {
+        title: "Quantidade de inscrições por dia",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
     
 	</script>
 </body>
