@@ -63,9 +63,10 @@ public class UsuarioController {
 	@GetMapping("/lista")
 	public String listarUsuarios(Model model, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		Usuario us = service.buscarPorCpf(user.getUsername());
- 
 		
+		List<Usuario> userNaoInscrito = service.obterListaNaoInscrito();
 		
+		model.addAttribute("listaUsuariosData", userNaoInscrito);
 		
 		if (us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
 			attr.addFlashAttribute("isAdmin", "true");
@@ -139,6 +140,7 @@ public class UsuarioController {
 			usuario.setCpf("12345678");
 			usuario.setEmail("123@123");
 			usuario.setDtInscricao(dataAtual);
+			usuario.setInscricao("nao-inscrito");
 			service.salvarUsuario(usuario);
 				try {
 					service.salvarUsuario(usuario);

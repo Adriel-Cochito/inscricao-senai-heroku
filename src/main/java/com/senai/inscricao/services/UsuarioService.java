@@ -126,4 +126,9 @@ public class UsuarioService implements UserDetailsService {
 		return (List<Usuario>)repository.findAll(); 
 	}
 
+	
+	public List<Usuario> obterListaNaoInscrito() {
+		return (List<Usuario>)repository.findListaNaoInscritos("nao-inscrito");
+	}
+
 }

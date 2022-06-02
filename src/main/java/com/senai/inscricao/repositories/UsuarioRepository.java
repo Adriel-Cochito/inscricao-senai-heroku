@@ -1,5 +1,6 @@
 package com.senai.inscricao.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -25,4 +26,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 			" join u.perfis p "+
 			"where u.id = :usuarioId AND p.id IN :perfisId")
 	Optional<Usuario> findByIdAndPerfis(Long usuarioId, Long[] perfisId);
+
+	@Query("select u from Usuario u where u.inscricao like :inscricao")
+	List<Usuario> findListaNaoInscritos(String inscricao);
 }
