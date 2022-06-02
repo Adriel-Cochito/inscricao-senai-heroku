@@ -3,12 +3,9 @@ $(document).ready(function() {
 	
 	moment.locale('pt-BR');
 	var table = $('#table-usuarios').DataTable({
-		dom: 'Bfrtip',
-      "buttons": [
-       'excel'
-      ],
 		searching : true,
 		lengthMenu : [ 10, 20, 30 ],
+		processing : true,
 		serverSide : true,
 		responsive : true,
 		ajax : {
@@ -73,6 +70,16 @@ $(document).ready(function() {
 		
     } );
     
+    // Compara as senhas se são iguais pra liberar senha atual
+    $('.pass').keyup(function(){
+    	if($('#senha1').val() == "" || $('#senha1').val() == ""){
+    		$('#senha3').attr('readonly', 'readonly');
+    	}else{
+    		$('#senha1').val() === $('#senha2').val()
+    			? $('#senha3').removeAttr('readonly')
+    			: $('#senha3').attr('readonly', 'readonly'); //bloqueia o campo
+    	}
 
+   	});
     
 });	

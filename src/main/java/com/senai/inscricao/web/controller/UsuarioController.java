@@ -1,11 +1,5 @@
 package com.senai.inscricao.web.controller;
 
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -28,10 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
-import com.opencsv.exceptions.CsvDataTypeMismatchException;
-import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import com.senai.inscricao.domains.Assistente;
 import com.senai.inscricao.domains.Perfil;
 import com.senai.inscricao.domains.PerfilTipo;
@@ -64,23 +54,8 @@ public class UsuarioController {
 
 	// Abrir lista de usuarios
 	@GetMapping("/lista")
-	public String listarUsuarios(RedirectAttributes attr, @AuthenticationPrincipal User user) throws IOException, CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
+	public String listarUsuarios(RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		Usuario us = service.buscarPorCpf(user.getUsername());
-		
-		
-		List<Usuario> listaUsuarios = service.obterLista();
-        
-        Writer writer1 = new FileWriter("yourfile.csv");
-        StatefulBeanToCsv<Usuario> beanToCsv = new StatefulBeanToCsvBuilder<Usuario>(writer1).build();
-        beanToCsv.write(listaUsuarios);
-        writer1.close();
-        
-
-        FileOutputStream fos = new FileOutputStream("yourfile.csv");
-
-        fos.close();
-        
-        System.out.println("lista: " + writer1);
  
 		if (us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
 			attr.addFlashAttribute("isAdmin", "true");
@@ -88,7 +63,6 @@ public class UsuarioController {
 		} else {
 			return "usuario/lista-simples";
 		} 
-		
 
 	}
 
