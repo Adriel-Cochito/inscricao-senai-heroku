@@ -56,5 +56,13 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 			+ "	(i.id = :id AND i.candidato.usuario.cpf like :cpf) ")
 	Optional<Inscricao> findByIdAndCandidato(Long id, String cpf);
 
+	@Query("select a.id as id,"
+			+ "a.candidato as candidato,"
+			+ "a.curso as curso, "
+			+ "a.situacao as situacao "
+		+ "from Inscricao a "
+		+ "where a.candidato.usuario.cpf like :cpf")
+	Inscricao buscarInscricoescpf(String cpf);
+
 
 }

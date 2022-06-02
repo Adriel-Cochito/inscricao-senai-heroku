@@ -40,12 +40,16 @@
 									<th scope="col">Cadastro Ativo</th>
 									<th scope="col">Perfis</th>
 									<th scope="col">Email</th>
+									<th scope="col">Inscricao</th>
 									<th scope="col" >Credenciais</th>
 									<th scope="col" >Dados Pessoais</th>
 								</tr>
 							</thead>
 						</table>
+						
+					<button onclick="generateCSV()">Download CSV</button> 
 					</div>
+					
 				</div>
 			</div>
 		</div>
@@ -56,7 +60,36 @@
 	<script	th:src="@{/js/usuario-admin.js(v=${version})}" th:fragment="js" sec:authorize="hasAuthority('ADMIN')"></script>
 	<script	th:src="@{/js/usuario.js(v=${version})}" th:fragment="js" th:if="${isAdmin} == false"></script>
 	<script th:inline="javascript" th:fragment="inlinescript">
+	
+		var listaUsuarios = new Array();
+	//     console.log("listaUsuarios: " + listaUsuariosData);
+	    
+	     function generateCSV() {
+	    	
+	    		
+	         var csv = 'cpf, email\n';
+	        
+	         var i = 0;
+	       	[# th:each="usuario : ${listaUsuariosData}"]
 
+	       		var cpf = [[${usuario.cpf}]];
+	       		var email = [[${usuario.email}]];
+	      		
+	       		listaUsuarios[i] = [cpf, email];
+	       		i++;
+	     	[/]
+	        
+	     		listaUsuarios.forEach(function(row) {
+	             csv += row.join(',');
+	             csv += "\n";
+	         });
+
+	         var hiddenElement = document.createElement('a');
+	         hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+	         hiddenElement.target = '_blank';
+	         hiddenElement.download = 'data.csv';
+	         hiddenElement.click();
+	     }
 	</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.senai.inscricao.web.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,10 +25,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.Assistente;
+import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.Perfil;
 import com.senai.inscricao.domains.PerfilTipo;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.services.AssistenteService;
+import com.senai.inscricao.services.InscricaoService;
 import com.senai.inscricao.services.UsuarioService;
 
 @Controller
@@ -35,6 +39,9 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService service;
+	
+	@Autowired
+	private InscricaoService inscricaoService;
 
 	@Autowired
 	private AssistenteService assistenteService;
@@ -54,9 +61,12 @@ public class UsuarioController {
 
 	// Abrir lista de usuarios
 	@GetMapping("/lista")
-	public String listarUsuarios(RedirectAttributes attr, @AuthenticationPrincipal User user) {
+	public String listarUsuarios(Model model, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		Usuario us = service.buscarPorCpf(user.getUsername());
  
+		
+		
+		
 		if (us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
 			attr.addFlashAttribute("isAdmin", "true");
 			return "usuario/lista";

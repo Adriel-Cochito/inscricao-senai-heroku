@@ -32,6 +32,9 @@ public class Usuario extends AbstractEntity {
 	@Column(name = "senha", nullable = false)
 	private String senha;
 	
+	@Column(name = "inscricao", unique = false, nullable = true)
+	private String inscricao;
+	
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "data_inscricao", nullable = false)
 	private LocalDate dtInscricao;
@@ -125,6 +128,14 @@ public class Usuario extends AbstractEntity {
 
 	public void setDtInscricao(LocalDate dtInscricao) {
 		this.dtInscricao = dtInscricao;
+	}
+
+	public String getInscricao() {
+		return inscricao;
+	}
+
+	public void setInscricao(String inscricao) {
+		this.inscricao = inscricao;
 	}
 	
 	

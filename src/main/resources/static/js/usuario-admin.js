@@ -31,6 +31,7 @@ $(document).ready(function() {
 					orderable : false,
 				},
 				{data : 'email'},
+				{data : 'inscricao'},
 				{	data : 'id',	
 					render : function(id) {
 						return ''.concat('<a class="btn btn-success btn-sm btn-block" ', ' ')

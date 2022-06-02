@@ -17,7 +17,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
 	@Query("select distinct u from Usuario u "+
 			" join u.perfis p "+
-			"where u.cpf like :search% OR p.desc like :search%")
+			"where u.cpf like :search% OR p.desc like :search% OR u.email like :search% OR u.inscricao like :search%")
 	public Page<Usuario> findByCpfOrPerfil(@Param("search") String search, Pageable pageable);
 
 	

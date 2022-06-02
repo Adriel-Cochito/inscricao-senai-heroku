@@ -10,6 +10,6 @@ public class DatatablesColunas {
 	
 	public static final String[] INSCRICOES = {"id","curso.titulo","curso.turno", "candidato.nome", "candidato.rendaPercapta", "candidato.bairro", "curso.cargaHoraria", "situacao" };
 
-	public static final String[] USUARIOS = {"id", "cpf","email","dtInscricao", "ativo", "perfis"};	
+	public static final String[] USUARIOS = {"id", "cpf","email","dtInscricao","inscricao", "ativo", "perfis"};	
 }
   

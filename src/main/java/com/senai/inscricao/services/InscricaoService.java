@@ -87,5 +87,11 @@ public class InscricaoService {
 		return repository.findInscricoesPorCursoSituacao(id);
 	}
 
+	@Transactional(readOnly = true)
+	public Inscricao buscarInscricoescpf(String cpf) {
+
+		return repository.buscarInscricoescpf(cpf);
+	}
+
 
 }

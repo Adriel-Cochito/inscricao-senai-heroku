@@ -139,6 +139,25 @@ public class InscricaoController {
 		    
 		}
 		
+		List<Usuario> userNaoInscrito = new ArrayList<Usuario>();
+		
+		
+		for (Usuario usuario : listaUsuarios) {
+			try {
+				Inscricao inscricao = service.buscarInscricoescpf(usuario.getCpf());
+				System.out.println("Candidato já INSCRITO");
+				userNaoInscrito.add(usuario);
+				usuario.setInscricao("nao-inscrito");
+				usuarioService.salvarEdicaoUsuario(usuario);
+			} catch (Exception e) {
+				usuario.setInscricao("inscrito");
+				usuarioService.salvarEdicaoUsuario(usuario);
+					System.out.println("Candidato sem inscricao");
+			}
+			
+		}
+		
+		model.addAttribute("listaUsuariosData", userNaoInscrito);
 		
 		model.addAttribute("tamanho", tamanho.size());
 		model.addAttribute("quantidadeInscricao", listaInscricao.size());
