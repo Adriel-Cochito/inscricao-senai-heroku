@@ -133,6 +133,7 @@ public class InscricaoController {
 		List<Usuario> listaUsuarios = usuarioService.obterLista();
 		
 		List<String> tamanho = new ArrayList<String>();
+		List<String> cursoJson = new ArrayList<String>();
 		
 		for (Curso curso : listaCursos) {
 		    tamanho.add(curso.getTitulo());

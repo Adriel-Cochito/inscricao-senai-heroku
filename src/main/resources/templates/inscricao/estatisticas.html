@@ -166,6 +166,7 @@
 
 <!-- 					</div> -->
 <!-- 				</div> -->
+				<button onclick="generateCSV()">Download</button> 
 			</div>
 		</div>
 
@@ -179,9 +180,24 @@
     google.charts.setOnLoadCallback(drawChart);
     var qtdInscricaoPorData_html = new Array();
     var qtdInscricaoPorData = new Array();
+    var classificacao = new Array();
+    
+    function generateCSV() {
+        var csv = 'Name, Value1\n';
+        classificacao.forEach(function(row) {
+            csv += row.join(',');
+            csv += "\n";
+        });
+
+        var hiddenElement = document.createElement('a');
+        hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+        hiddenElement.target = '_blank';
+        hiddenElement.download = 'data.csv';
+        hiddenElement.click();
+    }
     
     function drawChart() {
-    	var classificacao = new Array();
+    	
     	classificacao = lerInscricoes();
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Curso');
