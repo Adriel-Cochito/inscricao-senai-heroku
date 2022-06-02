@@ -25,11 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.Assistente;
+import com.senai.inscricao.domains.Candidato;
 import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.Perfil;
 import com.senai.inscricao.domains.PerfilTipo;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.services.AssistenteService;
+import com.senai.inscricao.services.CandidatoService;
 import com.senai.inscricao.services.InscricaoService;
 import com.senai.inscricao.services.UsuarioService;
 
@@ -42,6 +44,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private InscricaoService inscricaoService;
+	
+	@Autowired
+	private CandidatoService candidatoService;
 
 	@Autowired
 	private AssistenteService assistenteService;
@@ -65,8 +70,10 @@ public class UsuarioController {
 		Usuario us = service.buscarPorCpf(user.getUsername());
 		
 		List<Usuario> userNaoInscrito = service.obterListaNaoInscrito();
+		List<Candidato> listaCandidatos = candidatoService.obterLista();
 		
 		model.addAttribute("listaUsuariosData", userNaoInscrito);
+		model.addAttribute("listaCandidatos", listaCandidatos);
 		
 		if (us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
 			attr.addFlashAttribute("isAdmin", "true");

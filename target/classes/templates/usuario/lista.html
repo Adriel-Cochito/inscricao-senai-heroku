@@ -47,7 +47,7 @@
 							</thead>
 						</table>
 						
-					<button onclick="generateCSV()">Download CSV</button> 
+					<button onclick="generateCSV()">Download CSV - Candidatos nao-inscritos</button> 
 					</div>
 					
 				</div>
@@ -67,15 +67,28 @@
 	     function generateCSV() {
 	    	
 	    		
-	         var csv = 'cpf, email\n';
+	         var csv = 'cpf, email, nome, telefone\n';
 	        
 	         var i = 0;
 	       	[# th:each="usuario : ${listaUsuariosData}"]
-
+	       		
+	       		var nome;
+	       		var telefone;
+	       		var idUsuario = [[${usuario.id}]];
 	       		var cpf = [[${usuario.cpf}]];
 	       		var email = [[${usuario.email}]];
-	      		
-	       		listaUsuarios[i] = [cpf, email];
+	       		
+	       		[# th:each="candidato : ${listaCandidatos}"]
+	       			var idUsuarioCandidato = [[${candidato.usuario.id}]];
+	       		
+	       			if(idUsuarioCandidato == idUsuario) {
+	       				console.log("Candidato encontrado")
+	       				nome = [[${candidato.nome}]];
+	       				telefone = [[${candidato.telefone}]];
+	       			}
+	       		[/]
+	       		
+	       		listaUsuarios[i] = [cpf, email, nome, telefone];
 	       		i++;
 	     	[/]
 	        
