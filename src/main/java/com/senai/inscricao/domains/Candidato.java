@@ -46,7 +46,7 @@ public class Candidato extends AbstractEntity {
 	private List<Inscricao> inscricao;
 	
 	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "id_usuario")
+	@JoinColumn(name = "id_usuario", unique = true)
 	private Usuario usuario;
 
 	public Candidato() {

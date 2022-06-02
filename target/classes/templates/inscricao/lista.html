@@ -127,6 +127,7 @@
 							</thead>
 						</table>
 					</div>
+					<button onclick="generateCSV()">Download CSV - Inscrições</button> 
 				</div>
 			</div>
 		</div>
@@ -139,6 +140,53 @@
 	<script th:src="@{/js/inscricao.js(v=${version})}" th:fragment="js"></script>
 	<script th:inline="javascript" th:fragment="inlinescript">
 	
+	var listaUsuarios = new Array();
+	//     console.log("listaUsuarios: " + listaUsuariosData);
+	
+
+	      
+	     function generateCSV() {
+	    	
+	    		
+	         var csv = 'cpf, email, dtCadastro, nome, telefone, dtNascimento, rendaPercapta, curso, dtInscricao, familiares\n';
+	        
+	         var i = 0;
+	       	[# th:each="inscricao : ${inscricoes}"]
+	       		
+	       		var nome;
+	       		var telefone;
+	       		
+	       		var cpf = [[${inscricao.candidato.usuario.cpf}]];
+	       		var email = [[${inscricao.candidato.usuario.email}]];
+	       		var dtCadastro = [[${inscricao.candidato.usuario.dtInscricao}]];
+	       		
+	       		var nome = [[${inscricao.candidato.nome}]];
+	       		var telefone = [[${inscricao.candidato.telefone}]];
+	       		var dtNascimento = [[${inscricao.candidato.dtNascimento}]];
+	       		var rendaPercapta = [[${inscricao.candidato.rendaPercapta}]];
+	       		
+	       		var curso = [[${inscricao.curso.titulo}]];
+	       		var dtInscricao = [[${inscricao.dtInscricao}]];
+	       		
+	       		var familiares = [[${inscricao.candidato.familiares}]];
+	       		
+
+	       		listaUsuarios[i] = [cpf, email, dtCadastro, nome, telefone, dtNascimento, rendaPercapta, curso, dtInscricao, familiares];
+	       		i++;
+	     	[/]
+	        
+	     		listaUsuarios.forEach(function(row) {
+	             csv += row.join(',');
+	             csv += "\n";
+	         });
+
+	         var hiddenElement = document.createElement('a');
+	         hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+	         hiddenElement.target = '_blank';
+	         hiddenElement.download = 'inscrições.csv';
+	         hiddenElement.click();
+	     }
+	     
  
 	//datatables - lista de inscrições
 	$(document).ready(function() {
@@ -147,10 +195,10 @@
 		var num = [[${idCurso}]];
 		var numUrl = "/inscricoes/datatables/server/lista/" + num;
 		
-		console.log("Numero de Id: ", num);
-		console.log(num);
+// 		console.log("Numero de Id: ", num);
+// 		console.log(num);
 		
-		console.log("numUrl: ", numUrl);
+// 		console.log("numUrl: ", numUrl);
 		
 		
 		var table = $('#table-inscricoes').DataTable({
@@ -183,8 +231,8 @@
 	            {data : 'candidato.bairro'},
 	            {data : 'situacao', 
 					render : function(situacao) {
-						console.log('Situação: ');
-						console.log(situacao);
+// 						console.log('Situação: ');
+// 						console.log(situacao);
 						if(situacao == '0'){
 							return 'Em analise';
 						} else if(situacao == '1') {

@@ -118,7 +118,7 @@ public class InscricaoController {
 		model.addAttribute("tamanho", tamanho.size());
 		model.addAttribute("quantidadeInscricao", listaInscricao.size());
 		model.addAttribute("cursos", listaCursos);
-		model.addAttribute("inscricoes", listaInscricao);
+		model.addAttribute("inscricoes", listaInscricao); 
 		return "inscricao/lista";
 	}
 	
