@@ -27,6 +27,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 			"where u.id = :usuarioId AND p.id IN :perfisId")
 	Optional<Usuario> findByIdAndPerfis(Long usuarioId, Long[] perfisId);
 
-	@Query("select u from Usuario u where u.inscricao like :inscricao")
+	@Query("select u from Usuario u where u.inscricao like :inscricao OR u.inscricao = null")
 	List<Usuario> findListaNaoInscritos(String inscricao);
 }

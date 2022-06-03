@@ -107,9 +107,21 @@ public class UsuarioController {
 			attr.addFlashAttribute("usuario", usuario);
 		} else {
 			try {
+				String inscricao = service.buscarPorCpf(user.getUsername()).getInscricao();
+				if (inscricao == null) {
+					System.out.println(inscricao);
+					usuario.setInscricao("nao-inscrito");
+					System.out.println("setando usuario inscrico para nao inscrito");
+				}
+			} catch (Exception e) {
+				usuario.setInscricao("nao-inscrito");
+				System.out.println("Erro na busca de inscricao");
+			}
+			try {
 //				if (usuario.getEmail() == null) {
 //					usuario.setEmail("");
 //				}
+				
 				service.salvarUsuario(usuario);
 				attr.addFlashAttribute("sucesso", "Cadastro realizado com sucesso! Agora entre com Login e Senha cadastrados");
 			} catch (DataIntegrityViolationException ex) {
