@@ -51,6 +51,12 @@ public class HomeController {
 	}
 	
 	// abrir pagina login
+	@GetMapping({ "/login/admin" })
+	public String loginAdmin() {
+		return "login-admin";
+	}
+	
+	// abrir pagina login
 		@GetMapping({ "/ajuda" })
 		public String ajuda() {
 			return "ajuda";

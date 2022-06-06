@@ -105,12 +105,18 @@ public class InscricaoController {
 		List<Curso> listaCursos = cursoService.obterLista();
 		List<Inscricao> listaInscricao = service.obterLista();
 		
+		
 		List<String> tamanho = new ArrayList<String>();
 		
 		for (Curso curso : listaCursos) {
 		    tamanho.add(curso.getTitulo());
 		    
 		}
+		
+//		if(id == 0) {
+//		} else {
+//			listaInscricao = service.buscarInscricoesPorCursoSituacao(id);
+//		}
 		
 		model.addAttribute("idCurso", id);
 		model.addAttribute("tituloCurso", cursoService.buscarPorId(id).getTitulo());

@@ -40,6 +40,13 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 		+ "where b.curso.id like :id")
 	public List<Inscricao> findInscricoesPorCursoSituacao(Long id);
 	
+//	@Query("select b.id as id,"
+//			+ "b.candidato as candidato,"
+//			+ "b.curso as curso, "
+//		+ "from Inscricao b "
+//		+ "where b.curso.id like :id")
+//	public List<Inscricao> findInscricoesPorCurso(Long id);
+	
 	
 //	@Query("select distinct u from Usuario u "+ 
 //			" join u.perfis p "+
