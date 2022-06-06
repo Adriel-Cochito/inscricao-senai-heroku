@@ -64,8 +64,6 @@ $(document).ready(function() {
 //						console.log(situacao);
 						if(situacao == '1') {
 							return 'Aprovado';
-						} else if(situacao == '2') {
-							return 'Selecionado';
 						} else if(situacao == '3') {
 							return 'Não aprovado';
 						} else {

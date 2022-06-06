@@ -89,8 +89,8 @@ public class InscricaoService {
 
 	@Transactional(readOnly = true)
 	public Inscricao buscarInscricoescpf(String cpf) {
-
-		return repository.buscarInscricoescpf(cpf);
+		Inscricao inscricao = repository.buscarInscricoescpf(cpf);
+		return inscricao;
 	}
 
 

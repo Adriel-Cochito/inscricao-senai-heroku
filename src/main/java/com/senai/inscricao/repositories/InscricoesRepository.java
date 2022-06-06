@@ -69,7 +69,7 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 			+ "a.situacao as situacao "
 		+ "from Inscricao a "
 		+ "where a.candidato.usuario.cpf like :cpf")
-	Inscricao buscarInscricoescpf(String cpf);
+	public Inscricao buscarInscricoescpf(String cpf);
 
 
 }

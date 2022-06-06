@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.Candidato;
@@ -48,6 +50,28 @@ public class InscricaoController {
 	private CandidatoService candidatoService;
 	@Autowired
 	private CursoService cursoService;
+	
+	
+	// Confirmar a senha
+	@PostMapping("/resultado") 
+	public String consultaResultado(@RequestParam("cpf") String cpf, 
+			RedirectAttributes attr) {
+		
+		System.out.println("cpf: "+cpf);
+		
+		try {
+			Inscricao inscricao = service.buscarInscricoescpf(cpf);
+//			System.out.println("Nome: "+inscricao.getCandidato().getNome());
+//			System.out.println("CPF: "+inscricao.getCandidato().getUsuario().getCpf());
+//			System.out.println("Situacao: "+inscricao.getSituacao());
+		} catch (Exception e) {
+			System.out.println("CPF nao encontrado");
+			System.out.println(e);
+		}
+		
+		
+		return "redirect:/inscricoes/resultado";
+	}
 	
 	// abre a pagina de inscricoes de consultas
 	@GetMapping({ "/inscrever" })
@@ -199,7 +223,7 @@ public class InscricaoController {
 	@GetMapping("/datatables/server/historico")
 	public ResponseEntity<?> historicoInscricoesPorCandidato(HttpServletRequest request, @AuthenticationPrincipal User user) {
 		if (user.getAuthorities().contains(new SimpleGrantedAuthority(PerfilTipo.CANDIDATO.getDesc()))) {
-			
+			System.out.println("Historico  ");
 			return ResponseEntity.ok(service.buscarHistoricoPorCandidatoCpf(user.getUsername(), request));
 		}	
 		
@@ -209,7 +233,7 @@ public class InscricaoController {
 	// localizar o historico de inscricoes por usuario logado
 	@GetMapping("/datatables/server/historicos")
 	public ResponseEntity<?> historicoInscricoes(HttpServletRequest request, @AuthenticationPrincipal User user) {
-			
+			System.out.println("HistoricoS S ");
 		return ResponseEntity.ok(service.buscarHistoricoPorCandidatoCpf(user.getUsername(), request));
 	}
 	
@@ -246,7 +270,7 @@ public class InscricaoController {
 		
 		return "redirect:/home";
 	}
-	
+
 	
 	// localizar agendamento pelo id e envia-lo para a pagina de cadastro
 	@GetMapping("/editar/inscricao/{id}") 

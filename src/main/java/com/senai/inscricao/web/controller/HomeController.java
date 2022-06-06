@@ -12,10 +12,15 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.Perfil;
 import com.senai.inscricao.domains.PerfilTipo;
 import com.senai.inscricao.domains.Usuario;
+import com.senai.inscricao.services.InscricaoService;
 import com.senai.inscricao.services.UsuarioService;
 
 @Controller
@@ -23,6 +28,8 @@ public class HomeController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	@Autowired
+	private InscricaoService inscricaoService;
 
 	// abrir pagina home
 	@GetMapping({ "/", "/home" })
@@ -55,6 +62,8 @@ public class HomeController {
 	public String loginAdmin() {
 		return "login-admin";
 	}
+	
+
 	
 	// abrir pagina login
 		@GetMapping({ "/ajuda" })
