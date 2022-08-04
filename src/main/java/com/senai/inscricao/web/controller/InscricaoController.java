@@ -254,7 +254,7 @@ public class InscricaoController {
 		inscricao.setDtInscricao(dataAtual);
 		
 		Usuario usuario = usuarioService.buscarPorCpf(user.getUsername());
-		usuario.setInscricao("inscrito");
+		usuario.setInscricao("inscrito"); 
 		usuario.setStatusCadastro(2);
 		usuarioService.salvarEdicaoUsuario(usuario);
 		
