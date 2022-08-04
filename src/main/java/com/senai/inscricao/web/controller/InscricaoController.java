@@ -255,6 +255,7 @@ public class InscricaoController {
 		
 		Usuario usuario = usuarioService.buscarPorCpf(user.getUsername());
 		usuario.setInscricao("inscrito");
+		usuario.setStatusCadastro(2);
 		usuarioService.salvarEdicaoUsuario(usuario);
 		
 

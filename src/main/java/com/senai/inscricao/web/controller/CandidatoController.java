@@ -81,7 +81,8 @@ public class CandidatoController {
 		
 		try {
 			service.salvar(candidato);
-			us.setAtivo(true);		
+			us.setAtivo(true);	
+			us.setStatusCadastro(1);
 			usuarioService.salvarEdicaoUsuario(us);
 			attr.addFlashAttribute("sucesso", "Candidato salvo com sucesso");
 			attr.addFlashAttribute("candidato", candidato);

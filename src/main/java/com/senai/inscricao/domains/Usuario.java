@@ -52,6 +52,9 @@ public class Usuario extends AbstractEntity {
 	
 	@Column(name = "ativo", nullable = false, columnDefinition = "TINYINT(1)")
 	private boolean ativo;
+	
+	@Column(name = "statusCadastro", nullable = false)
+	private Integer statusCadastro; 
 
 
 	public Usuario() {
@@ -136,6 +139,14 @@ public class Usuario extends AbstractEntity {
 
 	public void setInscricao(String inscricao) {
 		this.inscricao = inscricao;
+	}
+
+	public Integer getStatusCadastro() {
+		return statusCadastro;
+	}
+
+	public void setStatusCadastro(Integer statusCadastro) {
+		this.statusCadastro = statusCadastro;
 	}
 	
 	

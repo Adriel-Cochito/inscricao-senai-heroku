@@ -92,61 +92,64 @@ public class UsuarioController {
 	}
 
 	// Salvar cadastro ussuarios por administrador
-	@PostMapping("/cadastro/salvar")
-	public String salvarUsuarios(Usuario usuario, RedirectAttributes attr, @AuthenticationPrincipal User user) {
-		List<Perfil> perfis = usuario.getPerfis();
-		LocalDate dataAtual = LocalDate.now();
+		@PostMapping("/cadastro/salvar")
+		public String salvarUsuarios(Usuario usuario, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+			List<Perfil> perfis = usuario.getPerfis();
+			LocalDate dataAtual = LocalDate.now();
 
-		if (usuario.getDtInscricao() == null) {
-			usuario.setDtInscricao(dataAtual);
-		}
+			if (usuario.getDtInscricao() == null) {
+				usuario.setDtInscricao(dataAtual);
+			}
 
-		if (perfis.size() > 2 || perfis.containsAll(Arrays.asList(new Perfil(1L), new Perfil(3L)))
-				|| perfis.containsAll(Arrays.asList(new Perfil(2L), new Perfil(3L)))) {
-			attr.addFlashAttribute("falha", "Candidato não pode ser Admin e/ou Assistente");
-			attr.addFlashAttribute("usuario", usuario);
-		} else {
-			try {
-				String inscricao = service.buscarPorCpf(user.getUsername()).getInscricao();
-				if (inscricao == null) {
-					System.out.println(inscricao);
+			if (perfis.size() > 2 || perfis.containsAll(Arrays.asList(new Perfil(1L), new Perfil(3L)))
+					|| perfis.containsAll(Arrays.asList(new Perfil(2L), new Perfil(3L)))) {
+				attr.addFlashAttribute("falha", "Candidato não pode ser Admin e/ou Assistente");
+				attr.addFlashAttribute("usuario", usuario);
+			} else {
+				try {
+					String inscricao = service.buscarPorCpf(user.getUsername()).getInscricao();
+					if (inscricao == null) {
+						System.out.println(inscricao);
+						usuario.setInscricao("nao-inscrito");
+						System.out.println("setando usuario inscrico para nao inscrito");
+					}
+				} catch (Exception e) {
 					usuario.setInscricao("nao-inscrito");
-					System.out.println("setando usuario inscrico para nao inscrito");
+					System.out.println("Erro na busca de inscricao");
+				}
+				try {
+//					if (usuario.getEmail() == null) {
+//						usuario.setEmail("");
+//					}
+					if (usuario.getStatusCadastro() == null) {
+						usuario.setStatusCadastro(0);
+					}
+					
+					service.salvarUsuario(usuario);
+					attr.addFlashAttribute("sucesso", "Cadastro realizado! Agora entre com Login e Senha para se increver");
+				} catch (DataIntegrityViolationException ex) {
+					attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
+				}
+			}
+
+			try {
+				if (user.isAccountNonExpired()) {
+
+					Usuario us = service.buscarPorCpf(user.getUsername());
+
+					if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
+						return "redirect:/home";
+					} else {
+						return "redirect:/assistentes/dados";
+					}
+
 				}
 			} catch (Exception e) {
-				usuario.setInscricao("nao-inscrito");
-				System.out.println("Erro na busca de inscricao");
+				return "redirect:/login";
 			}
-			try {
-//				if (usuario.getEmail() == null) {
-//					usuario.setEmail("");
-//				}
-				
-				service.salvarUsuario(usuario);
-				attr.addFlashAttribute("sucesso", "Cadastro realizado com sucesso! Agora entre com Login e Senha cadastrados");
-			} catch (DataIntegrityViolationException ex) {
-				attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
-			}
+			return null;
+
 		}
-
-		try {
-			if (user.isAccountNonExpired()) {
-
-				Usuario us = service.buscarPorCpf(user.getUsername());
-
-				if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
-					return "redirect:/home";
-				} else {
-					return "redirect:/assistentes/dados";
-				}
-
-			}
-		} catch (Exception e) {
-			return "redirect:/login";
-		}
-		return null;
-
-	}
 	
 	// Salvar usuario ADMIN padrão
 		@PostMapping("/cadastro/salvar/admin")
@@ -169,53 +172,56 @@ public class UsuarioController {
 				return "redirect:/login";
 		}
 
-	// Salvar cadastro ussuarios por administrador
-	@PostMapping("/admin/cadastro/salvar")
-	public String salvarUsuariosPorAdmin(Usuario usuario, RedirectAttributes attr, @AuthenticationPrincipal User user) {
-		List<Perfil> perfis = usuario.getPerfis();
-		LocalDate dataAtual = LocalDate.now();
+		// Salvar cadastro ussuarios por administrador
+		@PostMapping("/admin/cadastro/salvar")
+		public String salvarUsuariosPorAdmin(Usuario usuario, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+			List<Perfil> perfis = usuario.getPerfis();
+			LocalDate dataAtual = LocalDate.now();
 
-		if (usuario.getDtInscricao() == null) {
-			usuario.setDtInscricao(dataAtual);
-		}
-
-		if (perfis.size() > 2 || perfis.containsAll(Arrays.asList(new Perfil(1L), new Perfil(3L)))
-				|| perfis.containsAll(Arrays.asList(new Perfil(2L), new Perfil(3L)))) {
-			attr.addFlashAttribute("falha", "Candidato não pode ser Admin e/ou Assistente");
-			attr.addFlashAttribute("usuario", usuario);
-		} else {
-
-			
-			try {
-				
-				Usuario u = service.buscarPorId(usuario.getId());
-				byte[] decoded = Base64.decodeBase64(u.getSenha().getBytes());
-				String decodedString = new String(decoded);
-				
-				System.out.println("Senha digitada: " + usuario.getSenha());
-				System.out.println("Senha Coded: " + u.getSenha());
-				System.out.println("Imprimindo senha DB Decoded: " + decodedString);
-				
-				if (usuario.getSenha() == null  || usuario.getSenha() == "") {
-					System.out.println("Senha nao digitada, NULA!");
-					usuario.setSenha(decodedString);
-					
-				} else {
-					System.out.println("Senha inserida!");
-				}
-				
-				service.salvarUsuario(usuario);
-
-				attr.addFlashAttribute("sucesso", "Operação realizada com sucesso!");
-			} catch (Exception e) {
-				attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
-				return "redirect:/u/admin/novo/cadastro/usuario";
+			if (usuario.getDtInscricao() == null) {
+				usuario.setDtInscricao(dataAtual);
 			}
+
+			if (perfis.size() > 2 || perfis.containsAll(Arrays.asList(new Perfil(1L), new Perfil(3L)))
+					|| perfis.containsAll(Arrays.asList(new Perfil(2L), new Perfil(3L)))) {
+				attr.addFlashAttribute("falha", "Candidato não pode ser Admin e/ou Assistente");
+				attr.addFlashAttribute("usuario", usuario);
+			} else {
+
+				
+				try {
+					
+					Usuario u = service.buscarPorId(usuario.getId());
+					byte[] decoded = Base64.decodeBase64(u.getSenha().getBytes());
+					String decodedString = new String(decoded);
+					
+					System.out.println("Senha digitada: " + usuario.getSenha());
+					System.out.println("Senha Coded: " + u.getSenha());
+					System.out.println("Imprimindo senha DB Decoded: " + decodedString);
+					
+					if (usuario.getSenha() == null  || usuario.getSenha() == "") {
+						System.out.println("Senha nao digitada, NULA!");
+						usuario.setSenha(decodedString);
+						service.salvarUsuario(usuario);
+						
+					} else {
+						System.out.println("Senha inserida!");
+						u.setSenha(usuario.getSenha());
+						service.salvarUsuario(u);
+					}
+					
+					
+
+					attr.addFlashAttribute("sucesso", "Operação realizada com sucesso!");
+				} catch (Exception e) {
+					attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
+					return "redirect:/u/admin/novo/cadastro/usuario";
+				}
+			}
+
+			return "redirect:/u/lista";
+
 		}
-
-		return "redirect:/u/lista";
-
-	}
 
 	// Pre edição de credenciais de usuarios
 	@GetMapping("/editar/credenciais/usuario/{id}")

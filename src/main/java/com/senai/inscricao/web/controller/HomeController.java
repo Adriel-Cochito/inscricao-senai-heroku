@@ -32,24 +32,34 @@ public class HomeController {
 	private InscricaoService inscricaoService;
 
 	// abrir pagina home
-	@GetMapping({ "/", "/home" })
-	public String home(@AuthenticationPrincipal User user) {
-		
-		try {
-			Usuario us = usuarioService.buscarPorCpf(user.getUsername());
+		@GetMapping({ "/", "/home" })
+		public String home(@AuthenticationPrincipal User user) {
+			
+			try {
+				Usuario us = usuarioService.buscarPorCpf(user.getUsername());
 
-			if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
-				return "home-candidato";
-			} else if (us.getPerfis().contains(new Perfil(PerfilTipo.ASSISTENTE.getCod())) || us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
-				return "redirect:/inscricoes/estatisticas";
-			} else {
+				if (us.getPerfis().contains(new Perfil(PerfilTipo.CANDIDATO.getCod()))) {
+					Integer status = us.getStatusCadastro();
+					if (status == 0) {
+						return "redirect:/candidatos/dados";
+					} else if (status == 1) {
+						return "redirect:/inscricoes/inscrever";
+					} else if (status == 2) {
+						return "redirect:/inscricoes/historico/candidato";
+					} else {
+						return "home-candidato";
+					}
+					
+				} else if (us.getPerfis().contains(new Perfil(PerfilTipo.ASSISTENTE.getCod())) || us.getPerfis().contains(new Perfil(PerfilTipo.ADMIN.getCod()))) {
+					return "redirect:/inscricoes/estatisticas";
+				} else {
+					return "login";
+				}
+			} catch (Exception e) {
 				return "login";
 			}
-		} catch (Exception e) {
-			return "login";
+			
 		}
-		
-	}
 
 	// abrir pagina login
 	@GetMapping({ "/login" })
@@ -73,26 +83,26 @@ public class HomeController {
 		
 		
 		// abrir pagina login
-		@GetMapping({ "/criar/admin" })
-		public String criarAdmin() {
-			Usuario usuario = new Usuario();
-			List<Perfil> perfil = Arrays.asList(new Perfil(1L), new Perfil(2L));
-			LocalDate dataAtual = LocalDate.now();
-			usuario.setPerfis(perfil);
-			usuario.setAtivo(true);
-			usuario.setCpf("12345678");
-			usuario.setEmail("123@123");
-			usuario.setDtInscricao(dataAtual);
-			usuario.setSenha("123123");
-			
-			try {
-				usuarioService.salvarUsuario(usuario);
-			} catch (Exception e) {
-				System.out.println("Erro ao criar admin");
-			}
-				
-			return "ajuda";
-		}
+				@GetMapping({ "/criar/admin" })
+				public String criarAdmin() {
+					Usuario usuario = new Usuario();
+					List<Perfil> perfil = Arrays.asList(new Perfil(1L), new Perfil(2L));
+					LocalDate dataAtual = LocalDate.now();
+					usuario.setPerfis(perfil);
+					usuario.setAtivo(true);
+					usuario.setCpf("12345678");
+					usuario.setEmail("123@123");
+					usuario.setDtInscricao(dataAtual);
+					usuario.setSenha("123123");
+					usuario.setStatusCadastro(0);	
+					try {
+						usuarioService.salvarUsuario(usuario);
+					} catch (Exception e) {
+						System.out.println("Erro ao criar admin");
+					}
+						
+					return "ajuda";
+				}
 	
 //	// abrir pagina recuperação de senha
 //		@GetMapping({ "/recuperar-senha" })
