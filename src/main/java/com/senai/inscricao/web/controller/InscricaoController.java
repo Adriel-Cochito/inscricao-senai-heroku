@@ -242,7 +242,7 @@ public class InscricaoController {
 	// salvar um consulta agendada
 	@PostMapping({ "/salvar" })
 	public String salvar(Inscricao inscricao, RedirectAttributes attr, @AuthenticationPrincipal User user) {
-		
+		try {
 		LocalDate dataAtual = LocalDate.now();
 		Candidato candidato = candidatoService.buscarPorUsuarioCpf(user.getUsername());
 		String titulo = inscricao.getCurso().getTitulo();
@@ -258,15 +258,20 @@ public class InscricaoController {
 		usuario.setStatusCadastro(2);
 		usuarioService.salvarEdicaoUsuario(usuario);
 		
-
-
+		} catch (Exception ex) {
+			attr.addFlashAttribute("falha", "Selecione o curso desejado para finalizar sua inscrição");
+			return "redirect:/inscricoes/inscrever";
+		}
 		
 		try {
 			service.salvar(inscricao);
 			attr.addFlashAttribute("sucesso", "Sua Inscrição foi realizada com sucesso!");
 		} catch (DataIntegrityViolationException ex) {
 			attr.addFlashAttribute("falha", "Você já possui uma inscrição, tente editar ou excluir para criar uma nova inscrição");
+			return "redirect:/inscricoes/inscrever";
 		}
+		
+		
 		
 		
 		return "redirect:/home";
