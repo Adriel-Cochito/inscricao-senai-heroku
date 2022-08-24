@@ -148,7 +148,7 @@
 	     function generateCSV() {
 	    	
 	    		
-	         var csv = 'cpf, email, dtCadastro, nome, telefone, dtNascimento, rendaPercapta, curso, dtInscricao, familiares\n';
+	         var csv = 'cpf, email, dtCadastro, nome, telefone, bairro, dtNascimento, rendaPercapta, curso, dtInscricao, familiares\n';
 	        
 	         var i = 0;
 	       	[# th:each="inscricao : ${inscricoes}"]
@@ -163,6 +163,7 @@
 	       		var nome = [[${inscricao.candidato.nome}]];
 	       		var telefone = [[${inscricao.candidato.telefone}]];
 	       		var dtNascimento = [[${inscricao.candidato.dtNascimento}]];
+	       		var bairro = [[${inscricao.candidato.bairro}]];
 	       		var rendaPercapta = [[${inscricao.candidato.rendaPercapta}]];
 	       		
 	       		var curso = [[${inscricao.curso.titulo}]];
@@ -171,7 +172,7 @@
 	       		var familiares = [[${inscricao.candidato.familiares}]];
 	       		
 
-	       		listaUsuarios[i] = [cpf, email, dtCadastro, nome, telefone, dtNascimento, rendaPercapta, curso, dtInscricao, familiares];
+	       		listaUsuarios[i] = [cpf, email, dtCadastro, nome, telefone, bairro, dtNascimento, rendaPercapta, curso, dtInscricao, familiares];
 	       		i++;
 	     	[/]
 	        
