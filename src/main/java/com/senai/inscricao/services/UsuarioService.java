@@ -131,4 +131,24 @@ public class UsuarioService implements UserDetailsService {
 		return (List<Usuario>)repository.findListaNaoInscritos("nao-inscrito");
 	}
 
+	
+	public boolean validaCpf(String string) {
+		
+		String cpfUser = string;
+		Integer qtd_caracteres = cpfUser.length();
+		boolean cpfVerificado = cpfUser.matches("^\\d+$");  // <-- repare que seq está sem as aspas
+		
+		if (!cpfVerificado) {
+			return false;
+		}
+		 
+		if(qtd_caracteres != 11) {
+			return false;
+		} else {
+			return true;
+		}
+		 
+		
+	}
+
 }

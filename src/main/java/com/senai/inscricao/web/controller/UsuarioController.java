@@ -94,6 +94,15 @@ public class UsuarioController {
 	// Salvar cadastro ussuarios por administrador
 		@PostMapping("/cadastro/salvar")
 		public String salvarUsuarios(Usuario usuario, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+
+			service.validaCpf(usuario.getCpf());
+			
+			if (!service.validaCpf(usuario.getCpf())) {
+				attr.addFlashAttribute("falha", "CPF Inválido. Permitido apenas números com 11 caracteres!");
+				attr.addFlashAttribute("usuario", usuario);
+				return "redirect:/u/novo/cadastro/usuario";
+			} else {
+			
 			List<Perfil> perfis = usuario.getPerfis();
 			LocalDate dataAtual = LocalDate.now();
 
@@ -131,6 +140,7 @@ public class UsuarioController {
 					attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
 				}
 			}
+		}
 
 			try {
 				if (user.isAccountNonExpired()) {

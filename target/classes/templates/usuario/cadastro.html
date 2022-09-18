@@ -41,7 +41,7 @@
 								<div class="input-group">
 									<div class="input-group-prepend">
 									</div>
-									<input type="number" class="form-control" id="cpf" minlength="11" maxlength="11" onkeypress="return onlynumber();"  
+									<input type="text" class="form-control" id="cpf" minlength="10" maxlength="12" onkeypress="return onlynumber();"  
 										th:field="*{cpf}" placeholder="CPF" 
 										 required />
 									<div class="invalid-feedback">CPF é requerido sem pontos e traços.</div>
@@ -133,6 +133,19 @@
 					$('#perfis option[value="' + 3 + '"]').attr('selected',
 							'selected');
 				});
+		
+		function onlynumber(evt) {
+			   var theEvent = evt || window.event;
+			   var key = theEvent.keyCode || theEvent.which;
+			   key = String.fromCharCode( key );
+			   //var regex = /^[0-9.,]+$/;
+			   var regex = /^[0-9.]+$/;
+			   if( !regex.test(key) ) {
+			      theEvent.returnValue = false;
+			      if(theEvent.preventDefault) theEvent.preventDefault();
+			   }
+			}
+		
 	</script>
 </body>
 </html>

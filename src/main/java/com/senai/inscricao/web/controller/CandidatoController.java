@@ -33,8 +33,8 @@ public class CandidatoController {
 	// Abrir pagina de dados pessoais de medicos pelo CANDIDATO
 	@GetMapping({ "/dados" })
 	public String abrirPorCandidato(Candidato candidato, ModelMap model,RedirectAttributes attr, @AuthenticationPrincipal User user) {
+		
 		if (service.buscarPorUsuarioCpf(user.getUsername()).getId() == null) {
-			
 			
 		} else {
 			model.addAttribute("nomeFamiliar", "Nome");
