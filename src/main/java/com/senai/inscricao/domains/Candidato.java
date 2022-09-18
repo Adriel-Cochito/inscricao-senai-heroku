@@ -28,6 +28,9 @@ public class Candidato extends AbstractEntity {
 	@Column(name = "bairro", nullable = false)
 	private String bairro;
 	
+	@Column(name = "cidade", nullable = false)
+	private String cidade;
+	
 	@Column(name = "dtNascimento", nullable = false)
 	@DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dtNascimento;
@@ -124,6 +127,14 @@ public class Candidato extends AbstractEntity {
 
 	public void setFamiliares(String familiares) {
 		this.familiares = familiares;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
 	}
 	
 	

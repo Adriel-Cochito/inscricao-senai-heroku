@@ -120,6 +120,7 @@
 									<th scope="col">Nome de Usuário</th>
 									<th scope="col">Renda Percapta</th>
 									<th scope="col">Bairro</th>
+									<th scope="col">Cidade</th>
 									<th scope="col">Situação</th>
 									<th scope="col">Editar Situação</th>
 									<th scope="col">Ver Usuario</th>
@@ -148,7 +149,7 @@
 	     function generateCSV() {
 	    	
 	    		
-	         var csv = 'cpf, email, dtCadastro, nome, telefone, bairro, dtNascimento, rendaPercapta, curso, dtInscricao, familiares\n';
+	         var csv = 'cpf, email, dtCadastro, nome, telefone, bairro, cidade, dtNascimento, rendaPercapta, curso, dtInscricao, familiares\n';
 	        
 	         var i = 0;
 	       	[# th:each="inscricao : ${inscricoes}"]
@@ -164,6 +165,7 @@
 	       		var telefone = [[${inscricao.candidato.telefone}]];
 	       		var dtNascimento = [[${inscricao.candidato.dtNascimento}]];
 	       		var bairro = [[${inscricao.candidato.bairro}]];
+	       		var cidade = [[${inscricao.candidato.cidade}]];
 	       		var rendaPercapta = [[${inscricao.candidato.rendaPercapta}]];
 	       		
 	       		var curso = [[${inscricao.curso.titulo}]];
@@ -172,7 +174,7 @@
 	       		var familiares = [[${inscricao.candidato.familiares}]];
 	       		
 
-	       		listaUsuarios[i] = [cpf, email, dtCadastro, nome, telefone, bairro, dtNascimento, rendaPercapta, curso, dtInscricao, familiares];
+	       		listaUsuarios[i] = [cpf, email, dtCadastro, nome, telefone, bairro, cidade, dtNascimento, rendaPercapta, curso, dtInscricao, familiares];
 	       		i++;
 	     	[/]
 	        
@@ -230,6 +232,7 @@
 	            {data : 'candidato.nome'},
 	            {data : 'candidato.rendaPercapta'},
 	            {data : 'candidato.bairro'},
+	            {data : 'candidato.cidade'},
 	            {data : 'situacao', 
 					render : function(situacao) {
 // 						console.log('Situação: ');

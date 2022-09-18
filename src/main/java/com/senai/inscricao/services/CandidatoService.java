@@ -44,6 +44,7 @@ public class CandidatoService {
 		candidato1.setDtNascimento(candidato.getDtNascimento());
 		candidato1.setNome(candidato.getNome());
 		candidato1.setBairro(candidato.getBairro());
+		candidato1.setCidade(candidato.getCidade());
 		candidato1.setRendaPercapta(candidato.getRendaPercapta());
 		candidato1.setTelefone(candidato.getTelefone());
 		candidato1.setFamiliares(candidato.getFamiliares());
