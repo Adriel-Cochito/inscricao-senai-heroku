@@ -135,7 +135,7 @@ public class UsuarioController {
 					}
 					
 					service.salvarUsuario(usuario);
-					attr.addFlashAttribute("sucesso", "Cadastro realizado! Agora entre com Login e Senha para se increver");
+					attr.addFlashAttribute("sucesso", "Agora entre com Login e senha e finalize sua inscrição!");
 				} catch (DataIntegrityViolationException ex) {
 					attr.addFlashAttribute("falha", "Cadastro não realizado, CPF já existente ou dados inválidos");
 				}
