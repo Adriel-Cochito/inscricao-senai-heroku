@@ -104,9 +104,6 @@ public class InscricaoController {
 			return "inscricao/cadastro";
 		}
 		
-		
-		
-		
 	}
 
 	// abrir pagina de historico de agendamento do candidato
@@ -118,21 +115,21 @@ public class InscricaoController {
 			Curso curso = service.buscarCursoPorInscricaoCpf(cpf); 
 			
 			if (curso.isLiberaResultados()) {
-				System.out.println("Libera resultados true");
+//				System.out.println("Libera resultados true");
 				
-					System.out.println("msgAprovado");
+//					System.out.println("msgAprovado");
 					model.addAttribute("msgAprovado", curso.getMsgAprovado());
-					System.out.println("msgReprovado");
+//					System.out.println("msgReprovado");
 					model.addAttribute("msgReprovado", curso.getMsgReprovado());
 					model.addAttribute("status", "true");
 				
 			} else {
-				System.out.println("Libera resultados FALSE");
+//				System.out.println("Libera resultados FALSE");
 				model.addAttribute("status", "false");
 			}
 			
-			System.out.println("getMsgAprovado: " + curso.getMsgAprovado());
-			System.out.println("getMsgReprovado: " + curso.getMsgReprovado());
+//			System.out.println("getMsgAprovado: " + curso.getMsgAprovado());
+//			System.out.println("getMsgReprovado: " + curso.getMsgReprovado());
 			
 			
 		} catch (Exception e) {
