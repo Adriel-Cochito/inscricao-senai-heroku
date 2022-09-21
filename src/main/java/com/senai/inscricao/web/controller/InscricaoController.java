@@ -111,7 +111,35 @@ public class InscricaoController {
 
 	// abrir pagina de historico de agendamento do candidato
 	@GetMapping({"/historico/candidato"})
-	public String historicoCandidato() {
+	public String historicoCandidato(Model model, @AuthenticationPrincipal User user) {
+		try {
+			System.out.println("getUsername: "  + user.getUsername());
+			String cpf = user.getUsername();
+			Curso curso = service.buscarCursoPorInscricaoCpf(cpf); 
+			
+			if (curso.isLiberaResultados()) {
+				System.out.println("Libera resultados true");
+				
+					System.out.println("msgAprovado");
+					model.addAttribute("msgAprovado", curso.getMsgAprovado());
+					System.out.println("msgReprovado");
+					model.addAttribute("msgReprovado", curso.getMsgReprovado());
+					model.addAttribute("status", "true");
+				
+			} else {
+				System.out.println("Libera resultados FALSE");
+				model.addAttribute("status", "false");
+			}
+			
+			System.out.println("getMsgAprovado: " + curso.getMsgAprovado());
+			System.out.println("getMsgReprovado: " + curso.getMsgReprovado());
+			
+			
+		} catch (Exception e) {
+			System.out.println("Throw error");
+		}
+		
+		
 		return "inscricao/historico-candidato";
 	}
 	
@@ -296,12 +324,16 @@ public class InscricaoController {
 		
 	}
 	
-	@GetMapping("/aprovar/{id}") 
+	@GetMapping("/aprovar/{id}")
 	public String aprovarCandidato(@PathVariable("id") Long id, RedirectAttributes attr, 
 										    ModelMap model, @AuthenticationPrincipal User user) {
 		Inscricao inscricao = service.buscarPorId(id);
 		inscricao.setSituacao(2);
 		service.salvar(inscricao);
+		
+		Curso curso = inscricao.getCurso();
+		curso.setQtdSelecionados(curso.getQtdSelecionados() + 1);
+		cursoService.salvar(curso);
 		
 		attr.addFlashAttribute("sucesso", "Usuario aprovado com sucesso.");
 		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();
@@ -313,6 +345,10 @@ public class InscricaoController {
 		Inscricao inscricao = service.buscarPorId(id);
 		inscricao.setSituacao(0);
 		service.salvar(inscricao);
+		
+		Curso curso = inscricao.getCurso();
+		curso.setQtdSelecionados(curso.getQtdSelecionados() - 1);
+		cursoService.salvar(curso);
 		
 		attr.addFlashAttribute("sucesso", "Aprovação removida com sucesso.");
 		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();

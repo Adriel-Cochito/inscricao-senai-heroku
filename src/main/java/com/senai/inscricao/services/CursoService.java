@@ -31,8 +31,20 @@ public class CursoService {
 
 	@Transactional(readOnly = false)
 	public void salvar(Curso curso) {
+		String teste = null;
+		try {
+			if (curso.getQtdSelecionados().equals(teste)) {
+				System.out.println("Quantidade nula!!! ");
+				curso.setQtdSelecionados(0);
+			} else {
+				System.out.println("Quantidade NÃO nula!!! ");
+			}
+		} catch (Exception e) {
+			System.out.println("Erro. Qtd  nula!!! ");
+			curso.setQtdSelecionados(0);
+		}
+		
 		repository.save(curso);
-
 	}
 
 	@Transactional(readOnly = false)
@@ -40,6 +52,7 @@ public class CursoService {
 		Curso curso1 = repository.findById(curso.getId()).get();
 		curso1.setTitulo(curso1.getTitulo());
 		curso1.setTurno(curso1.getTurno());
+		curso1.setQtdSelecionados(curso1.getQtdSelecionados());
 	}
 
 	@Transactional(readOnly = true)

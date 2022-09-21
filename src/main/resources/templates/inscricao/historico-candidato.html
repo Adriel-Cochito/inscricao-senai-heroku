@@ -27,7 +27,7 @@
 				<div class="d-flex justify-content-center">
 					<div class="col-md-10">
 
-						<h2>Cursos Inscritos</h2>
+						<h2>Inscrição realizada</h2>
 <!-- 						<h4 style="color: green;">Resultados online hoje 06/06 a partir das 14h</h4> -->
 
 						<table id="table-candidato-historico"
@@ -46,9 +46,17 @@
 								</tr>
 							</thead>
 						</table>
-						<div class="border border-danger rounded" style="background-color: #f8f9fa;color: gray;padding: 10px;">
-							<p>Caso não tenha sido aprovado, fique atento a 2º Chamada.</p>
-							<p>Confira as datas conforme o Edital. </p>
+						
+						
+						<div th:if="*{status}" class="border border-danger rounded" style="background-color: #f8f9fa;color: gray;padding: 10px;">
+							<h5>Resultados liberados!</h5>
+							<p></p>
+							<h6>Para candidatos aprovados: </h6>
+							<p> - [(${msgAprovado})] </p>
+							<h6>Para candidatos não aprovados:</h6>
+							<p> - [(${msgReprovado})] </p>
+							
+
 						</div>
 					</div>
 				</div>

@@ -6,7 +6,7 @@ public class DatatablesColunas {
 
 	public static final String[] ASSISTENTES = {"id", "nome", "re"};
 
-	public static final String[] CURSOS = {"id", "titulo", "turno", "ativo", "cargaHoraria", "vagas", "liberaResultados"};
+	public static final String[] CURSOS = {"id", "titulo", "turno", "ativo", "cargaHoraria", "vagas", "qtdSelecionados", "liberaResultados"};
 	
 	public static final String[] INSCRICOES = {"id","curso.titulo","curso.turno", "candidato.nome", "candidato.rendaPercapta", "candidato.bairro", "candidato.cidade", "curso.cargaHoraria", "situacao" };
 

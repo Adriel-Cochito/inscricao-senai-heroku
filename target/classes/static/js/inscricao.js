@@ -139,6 +139,7 @@ $(document).ready(function() {
 				},
 				{	data : 'cargaHoraria'},
 				{	data : 'vagas'},
+				{	data : 'qtdSelecionados'},
 				{	data : 'liberaResultados', 
 					render : function(liberaResultados) {
 						return liberaResultados == true ? 'Liberado' : 'Não Liberado';

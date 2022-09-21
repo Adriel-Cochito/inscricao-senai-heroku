@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.senai.inscricao.domains.Curso;
 import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.repositories.projection.HistoricoCandidato;
 import com.senai.inscricao.repositories.projection.HistoricoInscricoes;
@@ -70,6 +71,10 @@ public interface InscricoesRepository extends JpaRepository<Inscricao, Long>{
 		+ "from Inscricao a "
 		+ "where a.candidato.usuario.cpf like :cpf")
 	public Inscricao buscarInscricoescpf(String cpf);
+	
+	@Query("select curso from Inscricao i "
+			+ "where i.candidato.usuario.cpf like :cpf ")
+	public Curso findCursoPorInscricaoCpf(String cpf);
 
 
 }

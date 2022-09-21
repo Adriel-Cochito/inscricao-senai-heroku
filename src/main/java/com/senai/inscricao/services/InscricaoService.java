@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.senai.inscricao.datatables.Datatables;
 import com.senai.inscricao.datatables.DatatablesColunas;
+import com.senai.inscricao.domains.Curso;
 import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.exception.AcessoNegadoException;
 import com.senai.inscricao.repositories.InscricoesRepository;
@@ -91,6 +92,11 @@ public class InscricaoService {
 	public Inscricao buscarInscricoescpf(String cpf) {
 		Inscricao inscricao = repository.buscarInscricoescpf(cpf);
 		return inscricao;
+	}
+
+	public Curso buscarCursoPorInscricaoCpf(String cpf) {
+		Curso curso = repository.findCursoPorInscricaoCpf(cpf);
+		return curso;
 	}
 
 

@@ -70,6 +70,31 @@
 								<div class="invalid-feedback">Um turno é requerido.</div>
 							</div>
 							
+								<div class="mb-3">
+								<label for="msgAprovado">Mensagem para candidatos aprovados</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+									</div>
+									<input type="text" class="form-control" id="msgAprovado"
+										    th:field="*{msgAprovado}" placeholder="Ex: Procure a secretaria para levar documentos..."
+										     required />
+									<div class="invalid-feedback">Mensagem é requerida.</div>
+								</div> 
+							</div>
+							
+							<div class="mb-3">
+								<label for="msgReprovado">Mensagem para candidatos NÃO Aprovados</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+									</div>
+									<input type="text" class="form-control" id="msgReprovado"
+										    th:field="*{msgReprovado}" placeholder="Ex: Aguarde a segunda chamada em..."
+										     required />
+									<div class="invalid-feedback">Mensagem é requerida.</div>
+								</div> 
+							</div>
+							
+							
 							<div class="mb-3">
 								<div class="custom-control custom-switch">
 								  <input type="checkbox" class="custom-control-input" 
@@ -93,6 +118,12 @@
 								</div>
 							</div>
 							
+							<div class="mb-3">
+								<label for="qtdSelecionados">Quantidade selecionados</label> 
+								<input type="number" class="form-control" id="qtdSelecionados"  readonly="readonly"
+										th:field="*{qtdSelecionados}" placeholder="" required />
+								<div class="invalid-feedback">Quantidade selecionados</div>
+							</div>
 
 							<input type="hidden" th:field="*{id}"> 
 							<div class="form-group row">

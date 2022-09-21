@@ -28,6 +28,15 @@ public class Curso extends AbstractEntity {
 	@Column(name = "vagas", nullable = false)
 	private Integer vagas;
 	
+	@Column(name = "qtdSelecionados", nullable = true)
+	private Integer qtdSelecionados;
+	
+	@Column(name = "msgAprovado", nullable = false)
+	private String msgAprovado;
+	
+	@Column(name = "msgReprovado", nullable = false)
+	private String msgReprovado;
+	
 	
 	
 //	public Curso() {
@@ -85,6 +94,30 @@ public class Curso extends AbstractEntity {
 
 	public void setVagas(Integer vagas) {
 		this.vagas = vagas;
+	}
+
+	public Integer getQtdSelecionados() {
+		return qtdSelecionados;
+	}
+
+	public void setQtdSelecionados(Integer qtdSelecionados) {
+		this.qtdSelecionados = qtdSelecionados;
+	}
+
+	public String getMsgAprovado() {
+		return msgAprovado;
+	}
+
+	public void setMsgAprovado(String msgAprovado) {
+		this.msgAprovado = msgAprovado;
+	}
+
+	public String getMsgReprovado() {
+		return msgReprovado;
+	}
+
+	public void setMsgReprovado(String msgReprovado) {
+		this.msgReprovado = msgReprovado;
 	}
 	
 	
