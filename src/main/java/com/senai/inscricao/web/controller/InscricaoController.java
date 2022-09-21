@@ -300,9 +300,7 @@ public class InscricaoController {
 		}
 		
 		
-		
-		
-		return "redirect:/home";
+		return "redirect:/inscricoes/historico/candidato";
 	}
 
 	
