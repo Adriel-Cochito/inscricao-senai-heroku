@@ -1,5 +1,8 @@
 package com.senai.inscricao.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +17,7 @@ import com.senai.inscricao.datatables.Datatables;
 import com.senai.inscricao.datatables.DatatablesColunas;
 import com.senai.inscricao.domains.Curso;
 import com.senai.inscricao.domains.Inscricao;
+import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.exception.AcessoNegadoException;
 import com.senai.inscricao.repositories.InscricoesRepository;
 import com.senai.inscricao.repositories.projection.HistoricoCandidato;
@@ -97,6 +101,33 @@ public class InscricaoService {
 	public Curso buscarCursoPorInscricaoCpf(String cpf) {
 		Curso curso = repository.findCursoPorInscricaoCpf(cpf);
 		return curso;
+	}
+
+	public List<String> buscarBairrosDistintos(List<Inscricao> listaInscricao) {
+		List<String> todosBairros = new ArrayList<String>();
+		List<String> mapBairros = new ArrayList<String>();
+		Map<String, Integer> hm = new HashMap<String, Integer>();
+		
+		for (Inscricao inscricao : listaInscricao) {
+			String br = inscricao.getCandidato().getBairro();
+			todosBairros.add(br);
+		}
+		
+		// hashmap to store the frequency of element
+       
+  
+        for (String i : todosBairros) {
+            Integer j = hm.get(i);
+            hm.put(i, (j == null) ? 1 : j + 1);
+        }
+  
+        // displaying the occurrence of elements in the arraylist
+        for (Map.Entry<String, Integer> val : hm.entrySet()) {
+            mapBairros.add( val.getKey()
+                    + ": " + val.getValue() + " inscrições");
+        }
+        
+		return mapBairros;
 	}
 
 

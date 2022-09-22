@@ -186,8 +186,11 @@ public class InscricaoController {
 		List<Inscricao> listaInscricao = service.obterLista();
 		List<Candidato> listaCandidatos = candidatoService.obterLista();
 		List<Usuario> listaUsuarios = usuarioService.obterLista();
-		
 		List<String> tamanho = new ArrayList<String>();
+		
+		List<String> bairros = new ArrayList<String>();
+		
+		bairros = service.buscarBairrosDistintos(listaInscricao);
 		
 		for (Curso curso : listaCursos) {
 		    tamanho.add(curso.getTitulo());
@@ -213,6 +216,8 @@ public class InscricaoController {
 //		}
 //		
 //		model.addAttribute("listaUsuariosData", userNaoInscrito);
+		
+		model.addAttribute("bairros", bairros);
 		
 		model.addAttribute("tamanho", tamanho.size());
 		model.addAttribute("quantidadeInscricao", listaInscricao.size());

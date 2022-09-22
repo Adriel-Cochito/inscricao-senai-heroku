@@ -9,7 +9,8 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <link th:href="@{/css/style.css(v=${version})}" rel="stylesheet" />
-<link th:href="@{/css/style-estatisticas.css(v=${version})}" rel="stylesheet" />
+<link th:href="@{/css/style-estatisticas.css(v=${version})}"
+	rel="stylesheet" />
 
 </head>
 <body>
@@ -17,157 +18,204 @@
 	<section class="layout-content" layout:fragment="corpo">
 		<main role="main">
 
-		<section class="jumbotron text-center">
-			<div class="container">
-				<h1 class="jumbotron-heading">Estatísticas de Inscrições</h1>
-			</div>
-		</section>
+			<section class="jumbotron text-center">
+				<div class="container">
+					<h1 class="jumbotron-heading">Estatísticas de Inscrições</h1>
+				</div>
+			</section>
 
-		<div class="album py-5 bg-light">
-			<div class="container">
-			
-			
-<div class="row" >
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card ">
-            <div class="card card-statistics shadow p-3 " style="height: 100%">
-                <div class="card-body">
-                    <div class="clearfix">
-                        <div class="float-left">
-                            <i class="mdi mdi-cube text-danger icon-lg"></i>
-                            <i class="bi bi-check-circle-fill text-success icon-lg"></i>
-                        </div>
-                        <div class="float-right">
-                            <p class="mb-0 text-right ">Inscrições</p>
-                            <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0" >[(${quantidadeInscricao})]</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                        <i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i> Todas as inscrições realizadas
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-            <div class="card card-statistics shadow p-3" style="height: 100%">
-                <div class="card-body">
-                    <div class="clearfix">
-                        <div class="float-left">
-                            <i class="bi bi-bank2 icon-lg" style="height: auto;width: 50px;color:blue;"></i>
-                        </div>
-                        <div class="float-right">
-                            <p class="mb-0 text-right">Cursos</p>
-                            <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0">[(${quantidadeCursos})]</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                        <i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i> Cursos cadastrados
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-            <div class="card card-statistics shadow p-3" style="height: 100%">
-                <div class="card-body">
-                    <div class="clearfix">
-                        <div class="float-left">
-                            <i class="bi bi-person-fill text-success icon-lg"></i>
-                        </div>
-                        <div class="float-right">
-                            <p class="mb-0 text-right">Candidatos</p>
-                            <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0">[(${quantidadeCandidatos})]</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                        <i class="mdi mdi-calendar mr-1" aria-hidden="true"></i> Candidatos cadastrados
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
-            <div class="card card-statistics shadow p-3" style="height: 100%">
-                <div class="card-body">
-                    <div class="clearfix">
-                        <div class="float-left">
-                            <i class="bi bi-person-workspace text-warning" ></i>
-                        </div>
-                        <div class="float-right">
-                            <p class="mb-0 text-right">Usuarios</p>
-                            <div class="fluid-container">
-                                <h3 class="font-weight-medium text-right mb-0">[(${quantidadeUsuarios})]</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <p class="text-muted mt-3 mb-0">
-                        <i class="mdi mdi-reload mr-1" aria-hidden="true"></i> Usuarios cadastrados
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-				
-				<div class="row" style="margin-top: 30px;">
-					<div class="col-md-12">
+			<div class="album py-5 bg-light">
+				<div class="container">
 
-						<div class="shadow p-3 mb-5 bg-white rounded card card-statistics"
-							style="background-color: white; border-radius: 20px;">
-							<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições por curso cadastrado:</h4>
-							<hr style="width: 95%;" />
-							<div id="grafico"
-								style="display: flex; flex-direction: row; justify-content: center; align-items: center; background-color: white; border-radius: 20px;">
 
-								<div id="chart_div"
-									style="width: 100%; min-height: 300px;"></div>
+					<div class="row">
+						<div
+							class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card ">
+							<div class="card card-statistics shadow p-3 "
+								style="height: 100%">
+								<div class="card-body">
+									<div class="clearfix">
+										<div class="float-left">
+											<i class="mdi mdi-cube text-danger icon-lg"></i> <i
+												class="bi bi-check-circle-fill text-success icon-lg"></i>
+										</div>
+										<div class="float-right">
+											<p class="mb-0 text-right ">Inscrições</p>
+											<div class="fluid-container">
+												<h3 class="font-weight-medium text-right mb-0">[(${quantidadeInscricao})]</h3>
+											</div>
+										</div>
+									</div>
+									<p class="text-muted mt-3 mb-0">
+										<i class="mdi mdi-alert-octagon mr-1" aria-hidden="true"></i>
+										Todas as inscrições realizadas
+									</p>
+								</div>
 							</div>
 						</div>
-
-
-					</div>
-				</div>
-				
-				<div class="row" >
-					<div class="col-md-12">
-
-						<div class="shadow p-3 mb-5 bg-white rounded card card-statistics"
-							style="background-color: white; border-radius: 20px;">
-							<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições por Dia:</h4>
-							<hr style="width: 95%;" />
-							<div id="grafico-data"
-								style="display: flex; flex-direction: row; justify-content: center; align-items: center; background-color: white; border-radius: 20px;">
-
-								<div id="columnchart_values"
-									style="width: 100%; min-height: 400px;"></div>
+						<div
+							class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+							<div class="card card-statistics shadow p-3" style="height: 100%">
+								<div class="card-body">
+									<div class="clearfix">
+										<div class="float-left">
+											<i class="bi bi-bank2 icon-lg"
+												style="height: auto; width: 50px; color: blue;"></i>
+										</div>
+										<div class="float-right">
+											<p class="mb-0 text-right">Cursos</p>
+											<div class="fluid-container">
+												<h3 class="font-weight-medium text-right mb-0">[(${quantidadeCursos})]</h3>
+											</div>
+										</div>
+									</div>
+									<p class="text-muted mt-3 mb-0">
+										<i class="mdi mdi-bookmark-outline mr-1" aria-hidden="true"></i>
+										Cursos cadastrados
+									</p>
+								</div>
 							</div>
 						</div>
-
-
+						<div
+							class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+							<div class="card card-statistics shadow p-3" style="height: 100%">
+								<div class="card-body">
+									<div class="clearfix">
+										<div class="float-left">
+											<i class="bi bi-person-fill text-success icon-lg"></i>
+										</div>
+										<div class="float-right">
+											<p class="mb-0 text-right">Candidatos</p>
+											<div class="fluid-container">
+												<h3 class="font-weight-medium text-right mb-0">[(${quantidadeCandidatos})]</h3>
+											</div>
+										</div>
+									</div>
+									<p class="text-muted mt-3 mb-0">
+										<i class="mdi mdi-calendar mr-1" aria-hidden="true"></i>
+										Candidatos cadastrados
+									</p>
+								</div>
+							</div>
+						</div>
+						<div
+							class="col-xl-3 col-lg-3 col-md-3 col-sm-6 grid-margin stretch-card">
+							<div class="card card-statistics shadow p-3" style="height: 100%">
+								<div class="card-body">
+									<div class="clearfix">
+										<div class="float-left">
+											<i class="bi bi-person-workspace text-warning"></i>
+										</div>
+										<div class="float-right">
+											<p class="mb-0 text-right">Usuarios</p>
+											<div class="fluid-container">
+												<h3 class="font-weight-medium text-right mb-0">[(${quantidadeUsuarios})]</h3>
+											</div>
+										</div>
+									</div>
+									<p class="text-muted mt-3 mb-0">
+										<i class="mdi mdi-reload mr-1" aria-hidden="true"></i>
+										Usuarios cadastrados
+									</p>
+								</div>
+							</div>
+						</div>
 					</div>
+
+					<div class="row" style="margin-top: 30px;">
+						<div class="col-md-12">
+
+							<div
+								class="shadow p-3 mb-5 bg-white rounded card card-statistics"
+								style="background-color: white; border-radius: 20px;">
+								<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições
+									por curso cadastrado:</h4>
+								<hr style="width: 95%;" />
+								<div id="grafico"
+									style="display: flex; flex-direction: row; justify-content: center; align-items: center; background-color: white; border-radius: 20px;">
+
+									<div id="chart_div" style="width: 100%; min-height: 300px;"></div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12">
+
+							<div
+								class="shadow p-3 mb-5 bg-white rounded card card-statistics"
+								style="background-color: white; border-radius: 20px;">
+								<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições
+									por Dia:</h4>
+								<hr style="width: 95%;" />
+								<div id="grafico-data"
+									style="display: flex; flex-direction: row; justify-content: center; align-items: center; background-color: white; border-radius: 20px;">
+
+									<div id="columnchart_values"
+										style="width: 100%; min-height: 400px;"></div>
+								</div>
+							</div>
+
+
+						</div>
+					</div>
+
+					<div class="row" style="">
+						<div class="col-md-12">
+
+							<div
+								class="shadow p-3 mb-5 bg-white rounded card card-statistics"
+								style="background-color: white; border-radius: 20px;">
+								<h4 style="padding-top: 25px; padding-left: 25px;">Inscritos por Bairro:</h4>
+								<hr style="width: 95%;" />
+								
+								<ul class="list-group">
+									<li class="list-group-item" th:each="bairro : ${bairros}" th:value="${bairro}"
+									th:text="${bairro}"></li>
+								</ul>
+							</div>
+
+
+						</div>
+					</div>
+
+					<!-- 				<div class="form-row col-lg-12" style="width: 100%;"> -->
+					<!-- 								<div class="form-group col-lg-12" style="width: 100%;"> -->
+					<!-- 									<label for="curso">Cursos Disponíveis</label> <select id="curso" style="width: 100%;" size="5" -->
+					<!-- 										class="form-control col-lg-12" th:field="*{curso}" -->
+					<!-- 										th:classappend="${#fields.hasErrors('curso')} ? 'is-invalid'"> -->
+					<!-- 										<option th:each="c : ${cursos}" th:value="${c.id}" th:if="${c.ativo} == true" -->
+					<!-- 											th:text="${c.titulo}+ ' - ' + ${c.cargaHoraria}+' horas' + -->
+					<!-- 											 ' - ' + (${c.turno} == 1 ? 'Manhã' -->
+					<!-- 											  : (${c.turno} == 2 ? 'Tarde': 'Noite') ) "></option> -->
+					<!-- 									</select> -->
+					<!-- 									<div class="invalid-feedback"> -->
+					<!-- 										<span th:errors="*{curso}"></span> -->
+					<!-- 									</div> -->
+					<!-- 								</div> -->
+					<!-- 							</div> -->
+					<!-- 				<div class="row" > -->
+					<!-- 					<div class="col-md-12"> -->
+
+					<!-- 						<div class="shadow p-3 mb-5 bg-white rounded card card-statistics" -->
+					<!-- 							style="background-color: white; border-radius: 20px;"> -->
+					<!-- 							<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições por Data (Em desenvolvimento):</h4> -->
+					<!-- 							<hr style="width: 95%;" /> -->
+					<!-- 							<br> -->
+					<!-- 							<div style="margin-left: 20px;"> -->
+					<!-- 								<p id="inscricao_por_data"></p> -->
+					<!-- 							</div> -->
+
+					<!-- 						</div> -->
+
+
+					<!-- 					</div> -->
+					<!-- 				</div> -->
 				</div>
-				
-<!-- 				<div class="row" > -->
-<!-- 					<div class="col-md-12"> -->
-
-<!-- 						<div class="shadow p-3 mb-5 bg-white rounded card card-statistics" -->
-<!-- 							style="background-color: white; border-radius: 20px;"> -->
-<!-- 							<h4 style="padding-top: 25px; padding-left: 25px;">Inscrições por Data (Em desenvolvimento):</h4> -->
-<!-- 							<hr style="width: 95%;" /> -->
-<!-- 							<br> -->
-<!-- 							<div style="margin-left: 20px;"> -->
-<!-- 								<p id="inscricao_por_data"></p> -->
-<!-- 							</div> -->
-							
-<!-- 						</div> -->
-
-
-<!-- 					</div> -->
-<!-- 				</div> -->
 			</div>
-		</div>
 
 		</main>
 
