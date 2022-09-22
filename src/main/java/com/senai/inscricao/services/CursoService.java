@@ -34,13 +34,13 @@ public class CursoService {
 		String teste = null;
 		try {
 			if (curso.getQtdSelecionados().equals(teste)) {
-				System.out.println("Quantidade nula!!! ");
+//				System.out.println("Quantidade nula!!! ");
 				curso.setQtdSelecionados(0);
 			} else {
-				System.out.println("Quantidade NÃO nula!!! ");
+//				System.out.println("Quantidade NÃO nula!!! ");
 			}
 		} catch (Exception e) {
-			System.out.println("Erro. Qtd  nula!!! ");
+//			System.out.println("Erro. Qtd  nula!!! ");
 			curso.setQtdSelecionados(0);
 		}
 		
