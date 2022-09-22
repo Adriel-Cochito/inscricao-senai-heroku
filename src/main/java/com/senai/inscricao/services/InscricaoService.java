@@ -109,18 +109,15 @@ public class InscricaoService {
 		Map<String, Integer> hm = new HashMap<String, Integer>();
 		
 		for (Inscricao inscricao : listaInscricao) {
-			String br = inscricao.getCandidato().getBairro();
+			String br = inscricao.getCandidato().getBairro().toUpperCase();
 			todosBairros.add(br);
 		}
 		
 		// hashmap to store the frequency of element
-       
-  
         for (String i : todosBairros) {
             Integer j = hm.get(i);
             hm.put(i, (j == null) ? 1 : j + 1);
         }
-  
         // displaying the occurrence of elements in the arraylist
         for (Map.Entry<String, Integer> val : hm.entrySet()) {
             mapBairros.add( val.getKey()
