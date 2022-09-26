@@ -12,16 +12,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.Perfil;
 import com.senai.inscricao.domains.PerfilTipo;
 import com.senai.inscricao.domains.Usuario;
+import com.senai.inscricao.services.EmailService;
 import com.senai.inscricao.services.InscricaoService;
 import com.senai.inscricao.services.UsuarioService;
+
+
 
 @Controller
 public class HomeController {
@@ -30,10 +28,16 @@ public class HomeController {
 	private UsuarioService usuarioService;
 	@Autowired
 	private InscricaoService inscricaoService;
+	
+	@Autowired
+	private EmailService emailService;
+	
 
 	// abrir pagina home
 		@GetMapping({ "/", "/home" })
 		public String home(@AuthenticationPrincipal User user) {
+			
+//			new EmailService().enviar(nome, emailDestinatario);
 			
 			try {
 				Usuario us = usuarioService.buscarPorCpf(user.getUsername());
@@ -66,6 +70,7 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
+	
 	
 	// abrir pagina login
 	@GetMapping({ "/login/admin" })

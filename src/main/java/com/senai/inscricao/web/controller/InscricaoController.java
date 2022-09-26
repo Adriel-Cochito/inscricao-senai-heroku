@@ -1,19 +1,13 @@
 package com.senai.inscricao.web.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.convert.JodaTimeConverters.DateToLocalDateTimeConverter;
-import org.springframework.data.convert.JodaTimeConverters.LocalDateToDateConverter;
-import org.springframework.data.convert.Jsr310Converters.LocalDateTimeToDateConverter;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateTimeConverter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,6 +31,7 @@ import com.senai.inscricao.services.CandidatoService;
 import com.senai.inscricao.services.CursoService;
 import com.senai.inscricao.services.InscricaoService;
 import com.senai.inscricao.services.UsuarioService;
+
 
 @Controller
 @RequestMapping("inscricoes")
