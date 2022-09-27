@@ -1,5 +1,7 @@
 package com.senai.inscricao.domains;
 
+import java.util.ArrayList;
+
 import com.sendgrid.helpers.mail.objects.Content;
 
 
@@ -23,8 +25,8 @@ public class EmailRequest {
 	public String getBody() {
 		return body;
 	}
-	public void setBody(String body) {
-		this.body = body;
+	public void setBody(String string) {
+		this.body = string;
 	}
 	public EmailRequest(String to, String subject, String body) {
 		super();
