@@ -3,11 +3,13 @@ package com.senai.inscricao.web.controller;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +33,8 @@ public class AssistenteController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	// Abrir pagina de dados pessoais de medicos pelo MEDICO
+
+	// Abrir pagina de dados pessoais
 	@GetMapping({ "/dados" })
 	public String abrirPorAssistente(Assistente assistente, ModelMap model, @AuthenticationPrincipal User user) {
 		if (assistente.hasNotId()) {
@@ -76,7 +79,17 @@ public class AssistenteController {
 		attr.addFlashAttribute("assistente", assistente);
 		return "redirect:/assistentes/dados";
 	}
+	
+	// Abrir pagina de notificação de candidatos
+	@GetMapping({ "/notifica/candidatos/pagina" })
+	public String paginaNotificaCandidatos(Model model) {
+		
+		List<Usuario> usersNaoInscritos = usuarioService.obterListaNaoInscrito();
+		Integer quantidadeNaoInscritos = usersNaoInscritos.size();
 
+		model.addAttribute("quantidadeNaoInscritos", quantidadeNaoInscritos);
+		return "assistente/notifica-candidatos"; 
+	}
 
 }
 

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.EmailRequest;
 import com.senai.inscricao.domains.Usuario;
@@ -40,19 +42,23 @@ public class EmailController {
 		
 		
 		emailservice.sendemail(novoEmail);
-		return "/home";
+		return "redirect:/assistentes/notifica/candidatos/pagina";
 			    
 	}
 	
-	
-	
-	@GetMapping("/sendemail/nao-inscritos")
-	public String sendemailNaoInscritos()
+	@PostMapping("/sendemail/nao-inscritos")
+	public String sendemailNaoInscritos(@RequestParam("titulo") String titulo, @RequestParam("mensagem") String mensagem,
+			RedirectAttributes attr)
 	{
 		EmailRequest novoEmail = new EmailRequest(null, null, null);
 		
-		String subject = "Inscrições Online";
-		String body = "Mensagem do body de email. Acesse: www.eletrica3d.tech ";
+//		String subject = "Inscrições Online";
+//		String body = "Mensagem do body de email. Acesse: www.eletrica3d.tech ";
+		
+		String subject = titulo;
+		String body = mensagem;
+		
+		
 		
 		novoEmail.setSubject(subject);
 		novoEmail.setBody(body);
@@ -63,8 +69,33 @@ public class EmailController {
 			novoEmail.setTo(usuario.getEmail());
 			emailservice.sendemail(novoEmail);
 		}
-		return "/home";
+		
+		attr.addFlashAttribute("sucesso", "Email enviado para candidatos não inscritos!");
+//		attr.addFlashAttribute("falha", "Email não enviado!");
+		
+		return "redirect:/assistentes/notifica/candidatos/pagina";
 			    
 	}
+	
+//	@GetMapping("/sendemail/nao-inscritos")
+//	public String sendemailNaoInscritos()
+//	{
+//		EmailRequest novoEmail = new EmailRequest(null, null, null);
+//		
+//		String subject = "Inscrições Online";
+//		String body = "Mensagem do body de email. Acesse: www.eletrica3d.tech ";
+//		
+//		novoEmail.setSubject(subject);
+//		novoEmail.setBody(body);
+//		
+//		List<Usuario> usersNaoInscritos = usuarioService.obterListaNaoInscrito();
+//		
+//		for (Usuario usuario : usersNaoInscritos) {
+//			novoEmail.setTo(usuario.getEmail());
+//			emailservice.sendemail(novoEmail);
+//		}
+//		return "/home";
+//			    
+//	}
 
 }

@@ -35,23 +35,15 @@ public class EmailService {
 		Mail mail = new Mail(new Email("adrielcochito.dev@gmail.com"), novoEmail.getSubject(), new Email(novoEmail.getTo()),new Content("text/plain", novoEmail.getBody()));
 		mail.setReplyTo(new Email(novoEmail.getTo()));
 		Request request = new Request();
-
 		Response response = null;
 
 		try {
-
 			request.setMethod(Method.POST);
-
 			request.setEndpoint("mail/send");
-
 			request.setBody(mail.build());
-
 			response=this.sendGrid.api(request);
-
 		} catch (IOException ex) {
-
 			System.out.println(ex.getMessage());
-
 		}
 
 		System.out.println("Email finalizado ");
