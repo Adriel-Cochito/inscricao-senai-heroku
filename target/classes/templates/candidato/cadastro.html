@@ -139,8 +139,9 @@
 												<span class="input-group-text">R$</span>
 											</div>
 												<input type="number" class="form-control" id="valorRenda1"
-													th:value="${valor}" 
-													placeholder="1000,00" required />
+													th:value="${valor}" onkeypress="return onlynumber();"
+													placeholder="1000" required />
+													<span class="input-group-text">.00</span>
 												</div>
 											</div>
 										</div>
@@ -419,6 +420,19 @@
 			$('#perfis option[value="'+ v.id +'"]').attr('selected', 'selected');
 		})
 	});
+	
+	function onlynumber(evt) {
+		console.log("onlynumber executado!!!")
+		   var theEvent = evt || window.event;
+		   var key = theEvent.keyCode || theEvent.which;
+		   key = String.fromCharCode( key );
+		   //var regex = /^[0-9.,]+$/;
+		   var regex = /^[0-9]+$/;
+		   if( !regex.test(key) ) {
+		      theEvent.returnValue = false;
+		      if(theEvent.preventDefault) theEvent.preventDefault();
+		   }
+		}
 	
 	console.log("Script executado!!!")
 	
