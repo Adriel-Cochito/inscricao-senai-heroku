@@ -34,7 +34,7 @@
 						<br>
 						<div th:replace="fragments/alert :: alerta-sucesso"></div>
 
-						<form th:action="@{/sendemail/nao-inscritos}"
+						<form th:action="@{/email/sendemail/nao-inscritos}"
 								 method="POST" class="was-validated">
 							<h5>Notificar usuários por email</h5>
 							<p>Quantidade de usuários não inscritos: [(${quantidadeNaoInscritos})] usuários</p>

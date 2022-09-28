@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -97,6 +98,7 @@ public class InscricaoService {
 		Inscricao inscricao = repository.buscarInscricoescpf(cpf);
 		return inscricao;
 	}
+	
 
 	public Curso buscarCursoPorInscricaoCpf(String cpf) {
 		Curso curso = repository.findCursoPorInscricaoCpf(cpf);

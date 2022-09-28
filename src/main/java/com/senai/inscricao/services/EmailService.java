@@ -32,8 +32,8 @@ public class EmailService {
 		System.out.println("Email mensagem: " + mensagem);
 		System.out.println("Email email: " + email);
 
-		Mail mail = new Mail(new Email("adrielcochito.dev@gmail.com"), novoEmail.getSubject(), new Email(novoEmail.getTo()),new Content("text/plain", novoEmail.getBody()));
-		mail.setReplyTo(new Email(novoEmail.getTo()));
+		Mail mail = new Mail(new Email("inscricoesonline.net@gmail.com"), novoEmail.getSubject(), new Email(novoEmail.getTo()),new Content("text/plain", novoEmail.getBody()));
+		mail.setReplyTo(new Email("sesisenaiaraxa@fiemg.com.br"));
 		Request request = new Request();
 		Response response = null;
 

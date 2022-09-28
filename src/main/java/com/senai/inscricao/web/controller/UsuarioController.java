@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -197,9 +198,27 @@ public class UsuarioController {
 				attr.addFlashAttribute("falha", "Candidato não pode ser Admin e/ou Assistente");
 				attr.addFlashAttribute("usuario", usuario);
 			} else {
+				try {
+					Inscricao inscricao = inscricaoService.buscarInscricoescpf(usuario.getCpf());
+					System.out.println("INscrição: " + inscricao);
+					if (inscricao == null ) {
+						System.out.println("Inscricao null ");
+						usuario.setInscricao("nao-inscrito");
+						System.out.println("setando usuario inscrico para nao inscrito");
+					} else {
+						usuario.setInscricao(service.buscarPorCpf(usuario.getCpf()).getInscricao());
+						System.out.println("Inscricao ok");
+					}
+				} catch (Exception e) {
+					usuario.setInscricao("nao-inscrito");
+					System.out.println("Erro na busca de inscricao");
+				}
 
 				
 				try {
+					if (usuario.getStatusCadastro() == null) {
+						usuario.setStatusCadastro(0);
+					}
 					
 					Usuario u = service.buscarPorId(usuario.getId());
 					byte[] decoded = Base64.decodeBase64(u.getSenha().getBytes());
