@@ -1,5 +1,7 @@
 package com.senai.inscricao.web.controller;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -73,7 +75,10 @@ public class CandidatoController {
 	public String salvar(Candidato candidato, RedirectAttributes attr,@AuthenticationPrincipal User user) {
 		
 		Usuario us = usuarioService.buscarPorCpf(user.getUsername());
-		
+		if (!candidato.getDtNascimento().isBefore(LocalDate.now().plusYears(-18))) {
+			attr.addFlashAttribute("falha", "Usuario menor de 18 anos! Este processo seletivo é exclusivo para maiores de 18 anos.");
+			return "redirect:/candidatos/dados";
+		}
 		
 		if (candidato.hasNotId() && candidato.getUsuario().hasNotId()) {
 			candidato.setUsuario(us);
@@ -92,9 +97,6 @@ public class CandidatoController {
 			return "redirect:/candidatos/dados";
 		}
 		
-		
-		
-		
 		return "redirect:/home";
 	}
 	
@@ -102,6 +104,12 @@ public class CandidatoController {
 	// Editar Assistente
 	@PostMapping({ "/editar" })
 	public String editar(Candidato candidato, RedirectAttributes attr) {
+		
+		if (!candidato.getDtNascimento().isBefore(LocalDate.now().plusYears(-18))) {
+			attr.addFlashAttribute("falha", "Usuario menor de 18 anos! Este processo seletivo é exclusivo para maiores de 18 anos.");
+			return "redirect:/candidatos/dados";
+		}
+		
 		service.editar(candidato);
 		
 		attr.addFlashAttribute("sucesso", "Candidato editado com sucesso");
