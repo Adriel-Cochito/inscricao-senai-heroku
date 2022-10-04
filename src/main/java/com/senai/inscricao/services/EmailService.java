@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.senai.inscricao.domains.EmailRequest;
+import com.senai.inscricao.domains.Registro;
 import com.senai.inscricao.domains.Usuario;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
@@ -21,13 +22,16 @@ public class EmailService {
 
 	@Autowired
 	SendGrid sendGrid;
+	
+	@Autowired
+	RegistroService registroService;
 
 	public Response sendemail(EmailRequest novoEmail) {
-
+		
 		String email = novoEmail.getTo();
 		String titulo = novoEmail.getSubject();
 		String mensagem = novoEmail.getBody();
-
+		
 		System.out.println("Email titulo: " + titulo);
 		System.out.println("Email mensagem: " + mensagem);
 		System.out.println("Email email: " + email);

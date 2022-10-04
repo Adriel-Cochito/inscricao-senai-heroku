@@ -21,6 +21,7 @@ C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\m
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\datatables\Datatables.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\exception\SQLIntegrityConstraintViolationException.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\repositories\CandidatoRepository.java
+C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\services\RegistroService.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\web\exception\ExceptionController.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\datatables\DatatablesColunas.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\repositories\AssistenteRepository.java
@@ -33,8 +34,10 @@ C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\m
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\web\controller\HomeController.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\web\controller\InscricaoController.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\domains\Inscricao.java
+C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\domains\Registro.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\repositories\UsuarioRepository.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\domains\Usuario.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\web\controller\EmailController.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\web\controller\UsuarioController.java
 C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\web\controller\CandidatoController.java
+C:\Users\Cochito Desktop\Documents\GitHub\workspace\inscricao-senai-heroku\src\main\java\com\senai\inscricao\repositories\RegistroRepository.java

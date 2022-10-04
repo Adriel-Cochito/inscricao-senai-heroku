@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.EmailRequest;
+import com.senai.inscricao.domains.Registro;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.services.EmailService;
+import com.senai.inscricao.services.RegistroService;
 import com.senai.inscricao.services.UsuarioService;
 import com.sendgrid.Response;
 
@@ -28,6 +32,9 @@ public class EmailController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private RegistroService registroService;
 
 	@GetMapping("/sendemail")
 	public String sendemail() {
@@ -42,9 +49,10 @@ public class EmailController {
 
 	@PostMapping("/sendemail/nao-inscritos")
 	public String sendemailNaoInscritos(@RequestParam("titulo") String titulo,
-			@RequestParam("mensagem") String mensagem, RedirectAttributes attr) {
+			@RequestParam("mensagem") String mensagem, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		
 		List<Usuario> usersNaoInscritos = usuarioService.obterListaNaoInscrito();
+		Registro registro = new Registro();
 		
 		if (usersNaoInscritos.size() > 0) {
 			EmailRequest novoEmail = new EmailRequest(null, null, null);
@@ -56,11 +64,22 @@ public class EmailController {
 			novoEmail.setBody(body);
 
 			for (Usuario usuario : usersNaoInscritos) {
-				novoEmail.setTo(usuario.getEmail());
+				String email = usuario.getEmail();
+				novoEmail.setTo(email);
 				emailservice.sendemail(novoEmail);
+				
+				registro.setTitulo("Email Enviado");
+				registro.setDescricao("Enviado para: '" + email + "', com o título de: '" + titulo + "' ");
+				registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
+				
+				registroService.salvar(registro);
 			}
+			
+			
+			
 
 			attr.addFlashAttribute("sucesso", "Email enviado para candidatos não inscritos!");
+			
 		} else {
 			attr.addFlashAttribute("falha", "Não há candidatos não inscritos. Email não enviado.");
 		}

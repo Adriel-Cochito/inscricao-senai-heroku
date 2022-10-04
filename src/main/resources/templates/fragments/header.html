@@ -27,6 +27,8 @@
 							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Lista de Usuários</a>
 							<a class="dropdown-item" th:href="@{/assistentes/notifica/candidatos/pagina}"
 							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Notificar Candidatos</a>
+							<a class="dropdown-item" th:href="@{/registros/lista}"
+							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Registro de Atividades</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )"><a

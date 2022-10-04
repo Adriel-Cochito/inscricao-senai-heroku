@@ -19,6 +19,7 @@ com\senai\inscricao\services\InscricaoService.class
 com\senai\inscricao\services\UsuarioService.class
 com\senai\inscricao\domains\EmailRequest.class
 com\senai\inscricao\domains\Assistente.class
+com\senai\inscricao\services\RegistroService.class
 com\senai\inscricao\domains\AbstractEntity.class
 com\senai\inscricao\datatables\DatatablesColunas.class
 com\senai\inscricao\web\controller\CandidatoController.class
@@ -29,8 +30,10 @@ com\senai\inscricao\services\AssistenteService.class
 com\senai\inscricao\repositories\CursoRepository.class
 com\senai\inscricao\web\controller\EmailController.class
 com\senai\inscricao\services\CursoService.class
+com\senai\inscricao\repositories\RegistroRepository.class
 com\senai\inscricao\repositories\projection\HistoricoCandidato.class
 com\senai\inscricao\web\controller\InscricaoController.class
+com\senai\inscricao\domains\Registro.class
 com\senai\inscricao\domains\Inscricao.class
 com\senai\inscricao\web\controller\CursoController.class
 com\senai\inscricao\services\EmailService.class
