@@ -30,6 +30,8 @@ public class UsuarioService implements UserDetailsService {
 	private UsuarioRepository repository;
 	@Autowired
 	private Datatables datatables;
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorCpf(String cpf) {
@@ -105,12 +107,22 @@ public class UsuarioService implements UserDetailsService {
 				.orElseThrow(() -> new UsernameNotFoundException("Usuario inexistente!"));
 	}
 
-	public static boolean isSenhaCorreta(String senhaDigitada, String senhaArmazenada) {
-		byte[] decoded = Base64.decodeBase64(senhaArmazenada.getBytes());
-		String senha = new String(decoded);
-		if(senha == senhaDigitada) {
+	@Transactional(readOnly = true)
+	public static boolean isSenhaCorreta(String senhaDigitada, Usuario usuario) {
+
+		
+		byte[] decoded = Base64.decodeBase64(usuario.getSenha().getBytes());
+		String decodedString = new String(decoded);
+		
+		System.out.println("isSenhaCorreta - senhaArmazenada: " + usuario.getSenha() );
+		System.out.println("isSenhaCorreta - Senha decoded: " + decodedString );
+		System.out.println("isSenhaCorreta - senhaDigitada: " + senhaDigitada );
+		
+		if(decodedString.equals(senhaDigitada)) {
+			System.out.println("Senha: true");
 			return true;
 		} else {
+			System.out.println("Senha: false");
 			return false;
 		}
 	}
@@ -118,7 +130,10 @@ public class UsuarioService implements UserDetailsService {
 
 	@Transactional(readOnly = false)
 	public void alterarSenha(Usuario usuario, String senha) {
-		usuario.setSenha(Base64.encodeBase64String(usuario.getSenha().getBytes()));
+		
+		String crypt = Base64.encodeBase64String(senha.getBytes());
+		usuario.setSenha(crypt);
+		
 		repository.save(usuario);
 	}
 

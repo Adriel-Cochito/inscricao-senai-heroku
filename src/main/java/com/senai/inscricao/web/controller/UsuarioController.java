@@ -304,8 +304,15 @@ public class UsuarioController {
 
 	// Editar a senha de usuario
 	@GetMapping("/editar/senha")
-	public String abrirEditarSenha() {
-
+	public String abrirEditarSenha(Model model, @AuthenticationPrincipal User user) {
+		
+		model.addAttribute("cpf", user.getUsername());
+		return "usuario/editar-senha";
+	}
+	
+	// Editar a senha de usuario
+	@GetMapping("/resetar/senha")
+	public String abrirResetarSenha(Model model) {
 		return "usuario/resetar-senha";
 	}
 	
@@ -320,15 +327,15 @@ public class UsuarioController {
 	public String resetarSenha(@RequestParam("cpf") String cpf, @RequestParam("email") String email,
 			RedirectAttributes attr) {
 		
-		System.out.println("email: "+email);
-		System.out.println("cpf: "+cpf);
+//		System.out.println("email: "+email);
+//		System.out.println("cpf: "+cpf);
 		
 		try {
 			Usuario usuario = service.buscarPorCpf(cpf);
-			System.out.println("Usuario: " + usuario);
-			
-			System.out.println("email cadastrado: " + usuario.getEmail());
-			System.out.println("email digitado: " + email);
+//			System.out.println("Usuario: " + usuario);
+//			
+//			System.out.println("email cadastrado: " + usuario.getEmail());
+//			System.out.println("email digitado: " + email);
 			
 			String emailCadastrado = new String(usuario.getEmail());
 			String emailDigitado= new String(email);
@@ -336,39 +343,49 @@ public class UsuarioController {
 			if (Objects.equals(emailCadastrado, emailDigitado)) {
 				usuario.setSenha(cpf);
 				service.salvarUsuario(usuario);
-				System.out.println("Senha alterada");
+				System.out.println("Senha resetada");
 				attr.addFlashAttribute("sucesso", "Senha resetada! Nova senha será o seu CPF");
 			} else {
-				System.out.println("Email nao cadastrado");
+//				System.out.println("Email nao cadastrado");
 				attr.addFlashAttribute("falha", "Email não cadastrado neste CPF");
 			}
 		} catch (Exception e) {
-			System.out.println("CPF nao encontrado");
+//			System.out.println("CPF nao encontrado");
 			attr.addFlashAttribute("falha", "Erro ao buscar CPF, ou CPF Inválido!");
 		}
 		
 		
-		return "redirect:/u/editar/senha";
+		return "redirect:/u/resetar/senha";
 	}
 	// Confirmar a senha
 	@PostMapping("/confirmar/senha")
 	public String editarSenha(@RequestParam("senha1") String s1, @RequestParam("senha2") String s2,
 			@RequestParam("senha3") String s3, @AuthenticationPrincipal User user, RedirectAttributes attr) {
+		
+//		System.out.println("Confirmando senha...");
+//		
+//		System.out.println("Senha 1: " + s1);
+//		System.out.println("Senha 2: " + s2);
+//		System.out.println("Senha 3: " + s3);
 
 		if (!s1.equals(s2)) {
+//			System.out.println("Senhas não conferem");
 			attr.addFlashAttribute("falha", "Senhas não conferem, tente novamente");
 			return "redirect:/u/editar/senha";
 		}
 
 		Usuario u = service.buscarPorCpf(user.getUsername());
-		if (!UsuarioService.isSenhaCorreta(s3, u.getSenha())) {
+		
+		if (UsuarioService.isSenhaCorreta(s3, u)) {
+			service.alterarSenha(u, s1);
+			attr.addFlashAttribute("sucesso", "Senha alterada com sucesso.");
+			return "redirect:/u/editar/senha";
+		} else {
+//			System.out.println("Senha atual não confere");
 			attr.addFlashAttribute("falha", "Senha atual não confere, tente novamente");
 			return "redirect:/u/editar/senha";
 		}
-
-		service.alterarSenha(u, s1);
-		attr.addFlashAttribute("sucesso", "Senha alterada com sucesso.");
-		return "redirect:/u/editar/senha";
+		
 	}
 
 }
