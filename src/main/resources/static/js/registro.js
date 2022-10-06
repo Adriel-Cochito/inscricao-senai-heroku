@@ -3,7 +3,7 @@ $(document).ready(function() {
 	moment.locale('pt-BR');
 	var table = $('#table-registros').DataTable({
 		searching : true,
-		lengthMenu : [ 10, 20 ],
+		lengthMenu : [ 30, 40, 50 ],
 		processing : true,
 		serverSide : true,
 		responsive : true,
@@ -14,9 +14,10 @@ $(document).ready(function() {
 		columns : [
 				{data : 'id'},
 				{data : 'titulo'},
-				{data : 'descricao'},
 				{data : 'usuario.cpf'},
-				{data : 'dataRegistro'}
+				{data : 'dataRegistro'},
+				{data : 'descricao'},
+				{data : 'horarioRegistro'}
 		]
 	});
 	

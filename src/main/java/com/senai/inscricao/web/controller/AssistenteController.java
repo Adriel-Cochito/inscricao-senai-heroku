@@ -2,6 +2,9 @@ package com.senai.inscricao.web.controller;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -19,8 +22,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.Assistente;
+import com.senai.inscricao.domains.Registro;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.services.AssistenteService;
+import com.senai.inscricao.services.RegistroService;
 import com.senai.inscricao.services.UsuarioService;
 
 @Controller
@@ -32,6 +37,9 @@ public class AssistenteController {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private RegistroService registroService;
 
 
 	// Abrir pagina de dados pessoais
@@ -42,7 +50,6 @@ public class AssistenteController {
 			model.addAttribute("assistente", assistente);
 		}
 
-		
 		Usuario usuario = usuarioService.buscarPorCpf(user.getUsername());
 		
 		
@@ -84,10 +91,31 @@ public class AssistenteController {
 	@GetMapping({ "/notifica/candidatos/pagina" })
 	public String paginaNotificaCandidatos(Model model) {
 		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+		
+		LocalDateTime dataTimeAtual = LocalDateTime.now();
+		LocalTime localTime = LocalTime.now();
+//		LocalDateTime timeAtual = LocalDateTime.parse("", DateTimeFormatter.ofPattern("HH-mm-ss"));
+		
+		String hojeFormatado = localTime.format(formatter);
+		
+		System.out.println("dataTimeAtual: " + dataTimeAtual);
+		System.out.println("localTime: " + localTime);
+		
+		System.out.println("hora: " + hojeFormatado);
+		
 		List<Usuario> usersNaoInscritos = usuarioService.obterListaNaoInscrito();
 		Integer quantidadeNaoInscritos = usersNaoInscritos.size();
+		
+//		List<Registro> emailsEnviados = registroService.buscarRegistrosPeloTitulo("Email Enviado");
+		
+		List<Registro> emailsEnviados = registroService.buscarRegistrosPeloTituloEData("Email Enviado");
+		
+		Integer qtdEmailsEnviados = emailsEnviados.size();
 
+		model.addAttribute("qtdEmailsEnviados", qtdEmailsEnviados);
 		model.addAttribute("quantidadeNaoInscritos", quantidadeNaoInscritos);
+		model.addAttribute("emailsEnviados", emailsEnviados);
 		return "assistente/notifica-candidatos"; 
 	}
 

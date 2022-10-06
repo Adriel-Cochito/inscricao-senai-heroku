@@ -1,6 +1,7 @@
 package com.senai.inscricao.domains;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +31,9 @@ public class Registro extends AbstractEntity {
 	@DateTimeFormat(iso = ISO.DATE)
 	@Column(name = "dataRegistro", nullable = true)
 	private LocalDate dataRegistro;
+	
+	@Column(name = "horarioRegistro", nullable = true)
+	private LocalTime horarioRegistro;
 	
 	
 
@@ -63,6 +67,14 @@ public class Registro extends AbstractEntity {
 
 	public void setDataRegistro(LocalDate dataRegistro) {
 		this.dataRegistro = dataRegistro;
+	}
+
+	public LocalTime getHorarioRegistro() {
+		return horarioRegistro;
+	}
+
+	public void setHorarioRegistro(LocalTime horarioRegistro) {
+		this.horarioRegistro = horarioRegistro;
 	}
 	
 	

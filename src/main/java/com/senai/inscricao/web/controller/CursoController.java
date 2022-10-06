@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.Curso;
 import com.senai.inscricao.domains.Inscricao;
+import com.senai.inscricao.domains.Registro;
 import com.senai.inscricao.services.CursoService;
 import com.senai.inscricao.services.InscricaoService;
+import com.senai.inscricao.services.RegistroService;
+import com.senai.inscricao.services.UsuarioService;
 
 @Controller
 @RequestMapping("cursos")
@@ -30,18 +35,50 @@ public class CursoController {
 	
 	@Autowired
 	private InscricaoService inscricaoService;
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private RegistroService registroService;
 
 	// Salvar curso
 	@PostMapping({ "/salvar" })
-	public String salvar(Curso curso, RedirectAttributes attr) {
+	public String salvar(Curso curso, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+		System.out.println("Iniciando Salve");
+		Registro registro = new Registro();
+		registro.setTitulo("Curso criado/editado");
+		registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
+		
+		
+		try {
+			if (service.buscarPorId(curso.getId()).getId() == null ) {
+				registro.setTitulo("Curso criado");
+				registro.setDescricao("Curso criado com o nome: (" + curso.getTitulo() + ") ");
+				System.out.println("Curso criado com o nome: (" + curso.getTitulo() + ") ");
+			} else {
+				registro.setTitulo("Curso editado");
+				registro.setDescricao("Curso editado com o nome: (" + curso.getTitulo() + ") ");
+				System.out.println("Curso editado com o nome: (" + curso.getTitulo() + ") ");
+			}
+		} catch (Exception e) {
+			registro.setTitulo("Curso editado");
+			registro.setDescricao("Curso editado com o nome: (" + curso.getTitulo() + ") ");
+			System.out.println("Error - Curso editado com o nome: (" + curso.getTitulo() + ") ");
+		}
+		
 		service.salvar(curso);
+		registroService.salvar(registro);
+		
+		
 		attr.addFlashAttribute("sucesso", "Operação realizada com sucesso");
 		attr.addFlashAttribute("curso", curso);
 		return "redirect:/cursos/lista";
 	}
 	
 	@GetMapping({ "/resultado/liberar/{id}" })
-	public String liberaResultado(@PathVariable("id") Long id, RedirectAttributes attr, HttpServletRequest request) {
+	public String liberaResultado(@PathVariable("id") Long id, RedirectAttributes attr, HttpServletRequest request,
+			@AuthenticationPrincipal User user) {
 		
 		Curso curso = service.buscarPorId(id);
 		curso.setLiberaResultados(true);
@@ -64,13 +101,20 @@ public class CursoController {
 		    	
 			}
 		}
+		
+		Registro registro = new Registro();
+		registro.setTitulo("Resultado liberado");
+		registro.setDescricao("Resultados liberados para o curso: (" + service.buscarPorId(id).getTitulo() + ") ");
+		registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
+		registroService.salvar(registro);
 
 		attr.addFlashAttribute("sucesso", "Resultados liberados pra este curso! E inativado para inscrições ");
 		return "redirect:/cursos/lista";
 	}
 	
 	@GetMapping({ "/resultado/cancelar/{id}" })
-	public String cancelaResultado(@PathVariable("id") Long id, RedirectAttributes attr, HttpServletRequest request) {
+	public String cancelaResultado(@PathVariable("id") Long id, RedirectAttributes attr, HttpServletRequest request,
+			@AuthenticationPrincipal User user) {
 		
 		Curso curso = service.buscarPorId(id);
 		curso.setLiberaResultados(false);
@@ -92,6 +136,12 @@ public class CursoController {
 		    	
 			}
 		}
+		
+		Registro registro = new Registro();
+		registro.setTitulo("Resultado cancelado");
+		registro.setDescricao("Resultados cancelados para o curso: (" + service.buscarPorId(id).getTitulo() + ") ");
+		registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
+		registroService.salvar(registro);
 		
 		attr.addFlashAttribute("sucesso", "Liberação de Resultados cancelados para este curso! Curso permanece Inativo para inscrições");
 		return "redirect:/cursos/lista";
@@ -120,6 +170,7 @@ public class CursoController {
 	// Pre edição de credenciais de usuarios
 	@GetMapping("/editar/{id}")
 	public ModelAndView preEditarCredenciais(@PathVariable("id") Long id) {
+		
 		return new ModelAndView("curso/cadastro", "curso", service.buscarPorId(id));
 	} 
 	
@@ -130,7 +181,15 @@ public class CursoController {
 	}
 	
 	@GetMapping("/excluir/{id}")
-	public String abrir(@PathVariable("id") Long id, RedirectAttributes attr) {
+	public String abrir(@PathVariable("id") Long id, RedirectAttributes attr, @AuthenticationPrincipal User user) {
+		
+		
+		Registro registro = new Registro();
+		registro.setTitulo("Curso removido");
+		registro.setDescricao("Curso removido com o nome: (" + service.buscarPorId(id).getTitulo() + ") ");
+		registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
+		registroService.salvar(registro);
+		
 		service.remover(id);
 		attr.addFlashAttribute("sucesso", "Curso excluido com sucesso.");
 		return "redirect:/cursos/lista";

@@ -26,10 +26,12 @@ import com.senai.inscricao.domains.Candidato;
 import com.senai.inscricao.domains.Curso;
 import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.PerfilTipo;
+import com.senai.inscricao.domains.Registro;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.services.CandidatoService;
 import com.senai.inscricao.services.CursoService;
 import com.senai.inscricao.services.InscricaoService;
+import com.senai.inscricao.services.RegistroService;
 import com.senai.inscricao.services.UsuarioService;
 
 
@@ -45,6 +47,8 @@ public class InscricaoController {
 	private CandidatoService candidatoService;
 	@Autowired
 	private CursoService cursoService;
+	@Autowired
+	private RegistroService registroService;
 	
 	
 	// Confirmar a senha
@@ -330,6 +334,12 @@ public class InscricaoController {
 		curso.setQtdSelecionados(curso.getQtdSelecionados() + 1);
 		cursoService.salvar(curso);
 		
+		Registro registro = new Registro();
+		registro.setTitulo("Seleciona Candidato");
+		registro.setDescricao("CPF Candidato selecionado: (" + usuarioService.buscarPorId(id).getCpf() + ") ");
+		registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
+		registroService.salvar(registro);
+		
 		attr.addFlashAttribute("sucesso", "Usuario aprovado com sucesso.");
 		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();
 	} 
@@ -344,6 +354,12 @@ public class InscricaoController {
 		Curso curso = inscricao.getCurso();
 		curso.setQtdSelecionados(curso.getQtdSelecionados() - 1);
 		cursoService.salvar(curso);
+		
+		Registro registro = new Registro();
+		registro.setTitulo("Desseleciona Candidato");
+		registro.setDescricao("CPF Candidato Desselecionado: (" + usuarioService.buscarPorId(id).getCpf() + ") ");
+		registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
+		registroService.salvar(registro);
 		
 		attr.addFlashAttribute("sucesso", "Aprovação removida com sucesso.");
 		return "redirect:/inscricoes/lista/"+inscricao.getCurso().getId();

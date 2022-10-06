@@ -1,6 +1,8 @@
 package com.senai.inscricao.services;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +39,13 @@ public class RegistroService {
 	@Transactional(readOnly = false)
 	public void salvar(Registro registro) {
 		LocalDate dataAtual = LocalDate.now();
+		LocalTime localTime = LocalTime.now();
+		
 		registro.setDataRegistro(dataAtual);
+		registro.setHorarioRegistro(localTime);
 		
 		repository.save(registro);
+		System.out.println("Registro salvo! ");
 
 	}
 	
@@ -57,9 +63,21 @@ public class RegistroService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<String> buscarRegistrosPeloTermo(String termo) {
+	public List<Registro> buscarRegistrosPeloTitulo(String titulo) {
 		// TODO Auto-generated method stub
-		return repository.findRegistrosByTermo(termo);
+		return repository.findRegistrosByTitulo(titulo);
 	}
+	
+	@Transactional(readOnly = true)
+	public List<Registro> buscarRegistrosPeloTituloEData(String titulo) {
+
+		LocalDate dataAtual = LocalDate.now();
+//		dataAtual = LocalDate.parse("2022-09-23", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+//		LocalDate dataAtual = LocalDate.parse("2022-09-23", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		
+		return repository.findRegistrosByTituloAndDate(titulo, dataAtual);
+	}
+	
 	
 }

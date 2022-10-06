@@ -52,11 +52,13 @@ public class EmailController {
 			@RequestParam("mensagem") String mensagem, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		
 		List<Usuario> usersNaoInscritos = usuarioService.obterListaNaoInscrito();
-		Registro registro = new Registro();
+		
 		
 		if (usersNaoInscritos.size() > 0) {
 			EmailRequest novoEmail = new EmailRequest(null, null, null);
 
+			
+			
 			String subject = titulo;
 			String body = mensagem;
 
@@ -65,14 +67,17 @@ public class EmailController {
 
 			for (Usuario usuario : usersNaoInscritos) {
 				String email = usuario.getEmail();
+				System.out.println("Tentando enviar para: " + email);
 				novoEmail.setTo(email);
 				emailservice.sendemail(novoEmail);
 				
+				Registro registro = new Registro();
 				registro.setTitulo("Email Enviado");
-				registro.setDescricao("Enviado para: '" + email + "', com o título de: '" + titulo + "' ");
+				registro.setDescricao("Enviado para: (" + email + "), com o título de: (" + titulo + ") ");
 				registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
 				
 				registroService.salvar(registro);
+				
 			}
 			
 			
