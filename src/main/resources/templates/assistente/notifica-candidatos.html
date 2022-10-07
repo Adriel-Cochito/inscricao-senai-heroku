@@ -45,15 +45,19 @@
 							<div class="mb-3">
 								<label for="titulo">Titulo do Email para usuários não inscritos:</label> 
 								<input type="text" class="form-control pass" id="titulo" name="titulo" 
-									placeholder="Insira o Titulo do Email" value="" required />
+									placeholder="Insira o Titulo do Email" value="Inscrições SENAI" 
+									maxlength="45" required />
 								<div class="invalid-feedback">Digite o Titulo do Email.</div>
 							</div>	
 							
 							<div class="mb-3">
 								<label for="mensagem">Mensagem do email para Candidato não Inscrito:</label> 
-								<input type="mensagem" class="form-control pass" id="mensagem" name="mensagem" 
-								placeholder="Insira o corpo do Email" value="" required />
-								<div class="invalid-feedback">Digite o corpo do Email.</div>
+<!-- 								<input type="text" class="form-control pass" id="mensagem" name="mensagem" -->
+<!-- 								placeholder="Insira o corpo do Email" required size="2" /> -->
+								
+								<textarea class="form-control" aria-label="With textarea"placeholder="Insira o corpo do Email"
+								id="mensagem" name="mensagem" rows="3" maxlength="300" required ></textarea>
+								<div class="invalid-feedback">Digite o corpo do Email. Máximo 300 caracteres</div>
 							</div>	
 							
 													
@@ -79,6 +83,14 @@
 
 	</section>
 	<script	th:src="@{/js/usuario.js(v=${version})}" th:fragment="js"></script>
-	<script th:inline="javascript" th:fragment="inlinescript"></script>
+	<script th:inline="javascript" th:fragment="inlinescript">
+	var texto = ("Prezado candidato, favor acessar a sua plataforma de inscrição" +
+			"( www.senaiaraxa.com ) e finalize a inscrição do curso de seu interesse."+
+			"Favor atentar ao prazo limite de conclusão de sua inscrição. Em caso de dúvida,"+
+			"acesse o Edital ou ligue para o telefone (34)3662-4194");
+	
+	document.getElementById("mensagem").value = texto;
+	
+	</script>
 </body>
 </html>
