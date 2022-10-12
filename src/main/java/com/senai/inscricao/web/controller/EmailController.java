@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import com.sendgrid.Response;
 
 @Controller
 @RequestMapping("email")
+@EnableAsync
 public class EmailController {
 
 	@Autowired
@@ -52,35 +54,12 @@ public class EmailController {
 			@RequestParam("mensagem") String mensagem, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 		
 		List<Usuario> usersNaoInscritos = usuarioService.obterListaNaoInscrito();
+		Usuario usuario = usuarioService.buscarPorCpf(user.getUsername());
 		
 		
 		if (usersNaoInscritos.size() > 0) {
-			EmailRequest novoEmail = new EmailRequest(null, null, null);
-
 			
-			
-			String subject = titulo;
-			String body = mensagem;
-
-			novoEmail.setSubject(subject);
-			novoEmail.setBody(body);
-
-			for (Usuario usuario : usersNaoInscritos) {
-				String email = usuario.getEmail();
-				System.out.println("Tentando enviar para: " + email);
-				novoEmail.setTo(email);
-				emailservice.sendemail(novoEmail);
-				
-				Registro registro = new Registro();
-				registro.setTitulo("Email Enviado");
-				registro.setDescricao("Enviado para: (" + email + "), com o título de: (" + titulo + ") ");
-				registro.setUsuario(usuarioService.buscarPorCpf(user.getUsername()));
-				
-				registroService.salvar(registro);
-				
-			}
-			
-			
+			emailservice.sendemailNaoInscritos(titulo, mensagem, usuario, usersNaoInscritos);
 			
 
 			attr.addFlashAttribute("sucesso", "Email enviado para candidatos não inscritos!");
