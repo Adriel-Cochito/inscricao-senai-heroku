@@ -71,6 +71,12 @@ public class HomeController {
 		return "login";
 	}
 	
+	// abrir pagina login
+		@GetMapping({ "/cep" })
+		public String cep() {
+			return "testes/lista";
+		}
+	
 	
 	// abrir pagina login
 	@GetMapping({ "/login/admin" })

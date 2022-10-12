@@ -25,11 +25,17 @@ public class Candidato extends AbstractEntity {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 	
-	@Column(name = "bairro", nullable = false)
+	@Column(name = "cep", nullable = true)
+	private String cep;
+	
+	@Column(name = "bairro", nullable = true)
 	private String bairro;
 	
-	@Column(name = "cidade", nullable = false)
+	@Column(name = "cidade", nullable = true)
 	private String cidade;
+	
+	@Column(name = "zonaRural", nullable = true, columnDefinition = "TINYINT(1)")
+	private boolean zonaRural;
 	
 	@Column(name = "dtNascimento", nullable = false)
 	@DateTimeFormat(iso = ISO.DATE)
@@ -136,7 +142,23 @@ public class Candidato extends AbstractEntity {
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
-	
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public boolean isZonaRural() {
+		return zonaRural;
+	}
+
+	public void setZonaRural(boolean zonaRural) {
+		this.zonaRural = zonaRural;
+	}
+
 	
 	
 }

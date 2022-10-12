@@ -34,15 +34,19 @@ public class CandidatoService {
 	
 	@Transactional(readOnly = false)
 	public void salvar(Candidato candidato) {
+		System.out.println("Salvando Candidato");
 		repository.save(candidato);		
 	}
 	
 	@Transactional(readOnly = false)
 	public void editar(Candidato candidato) {
+		System.out.println("Editando Candidato");
 		Candidato candidato1 = repository.findById(candidato.getId()).get();
 		candidato1.setNome(candidato.getNome());
 		candidato1.setDtNascimento(candidato.getDtNascimento());
 		candidato1.setNome(candidato.getNome());
+		candidato1.setCep(candidato.getCep());
+		candidato1.setZonaRural(candidato.isZonaRural());
 		candidato1.setBairro(candidato.getBairro());
 		candidato1.setCidade(candidato.getCidade());
 		candidato1.setRendaPercapta(candidato.getRendaPercapta());

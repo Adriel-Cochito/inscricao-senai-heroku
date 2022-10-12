@@ -7,6 +7,7 @@ com\senai\inscricao\repositories\projection\HistoricoInscricoes.class
 com\senai\inscricao\domains\PerfilTipo.class
 com\senai\inscricao\repositories\InscricoesRepository.class
 com\senai\inscricao\web\controller\HomeController.class
+com\senai\inscricao\web\controller\RegistroController.class
 com\senai\inscricao\PaginaInscricaoSenaiApplication.class
 com\senai\inscricao\domains\Curso.class
 com\senai\inscricao\config\Sendgridconfig.class
