@@ -17,7 +17,10 @@ public class Assistente extends AbstractEntity {
 	private String nome;
 	
 	@Column(name = "re", unique = true, nullable = false)
-	private Integer re;
+	private String re;
+	
+	@Column(name = "telefone", nullable = false)
+	private String telefone;
 	
 	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "id_usuario")
@@ -43,11 +46,11 @@ public class Assistente extends AbstractEntity {
 		this.nome = nome;
 	}
 
-	public Integer getRe() {
+	public String getRe() {
 		return re;
 	}
 
-	public void setRe(Integer re) {
+	public void setRe(String re) {
 		this.re = re;
 	}
 
@@ -57,6 +60,14 @@ public class Assistente extends AbstractEntity {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 	
 	

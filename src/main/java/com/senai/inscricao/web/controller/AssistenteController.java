@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,9 +23,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.senai.inscricao.domains.Assistente;
+import com.senai.inscricao.domains.Candidato;
+import com.senai.inscricao.domains.Curso;
+import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.domains.Registro;
 import com.senai.inscricao.domains.Usuario;
 import com.senai.inscricao.services.AssistenteService;
+import com.senai.inscricao.services.CandidatoService;
+import com.senai.inscricao.services.CursoService;
+import com.senai.inscricao.services.InscricaoService;
 import com.senai.inscricao.services.RegistroService;
 import com.senai.inscricao.services.UsuarioService;
 
@@ -39,8 +46,21 @@ public class AssistenteController {
 	private UsuarioService usuarioService;
 	
 	@Autowired
+	private AssistenteService assistenteService;
+	
+	@Autowired
 	private RegistroService registroService;
+	
+	@Autowired
+	private CandidatoService candidatoService;
+	
+	@Autowired
+	private CursoService cursoService;
+	
+	@Autowired
+	private InscricaoService inscricaoService;
 
+	
 
 	// Abrir pagina de dados pessoais
 	@GetMapping({ "/dados" })
@@ -74,6 +94,7 @@ public class AssistenteController {
 		attr.addFlashAttribute("assistente", assistente);
 		return "redirect:/assistentes/dados";
 	}
+	
 
 	// Editar Assistente
 	@PostMapping({ "/editar" })
@@ -118,6 +139,30 @@ public class AssistenteController {
 		model.addAttribute("emailsEnviados", emailsEnviados);
 		return "assistente/notifica-candidatos"; 
 	}
+	
+	// Abrir lista de inscricoes
+		@GetMapping("/backup") 
+		public String verEstatisticas(Model model) {
+			
+			List<Curso> listaCursos = cursoService.obterLista();
+			List<Inscricao> listaInscricao = inscricaoService.obterLista();
+			List<Candidato> listaCandidatos = candidatoService.obterLista();
+			List<Assistente> listaAssistentes = assistenteService.obterLista();
+			List<Registro> listaRegistros = registroService.obterLista();
+			
+			LocalDateTime dataTimeAtual = LocalDateTime.now();
+			
+			
+			model.addAttribute("dataTimeAtual", dataTimeAtual);
+			
+			model.addAttribute("cursos", listaCursos);
+			model.addAttribute("assistentes", listaAssistentes);
+			model.addAttribute("candidatos", listaCandidatos);
+			model.addAttribute("inscricoes", listaInscricao);
+			model.addAttribute("registros", listaRegistros);
+			
+			return "assistente/backup";
+		}
 
 }
 

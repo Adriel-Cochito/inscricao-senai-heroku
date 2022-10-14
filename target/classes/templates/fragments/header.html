@@ -17,6 +17,20 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto">
+					
+					<li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )"><a
+						class="btn dropdown-toggle" href="#" id="dropdown01" style="color:white; background-color: #005caa;"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown01">
+							<a class="dropdown-item" th:href="@{/assistentes/notifica/candidatos/pagina}"
+							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Notificar Candidatos</a>
+							<a class="dropdown-item" th:href="@{/registros/lista}"
+							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Registro de Atividades</a>
+							<a class="dropdown-item" th:href="@{/assistentes/backup}"
+							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Backup</a>
+						</div>
+					</li>
+					
 					<li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )"><a
 						class="btn dropdown-toggle" href="#" id="dropdown01" style="color:white; background-color: #005caa;"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuarios</a>
@@ -25,10 +39,6 @@
 							sec:authorize="hasAuthority('ADMIN')">Cadastro de Usuários</a>
 							<a class="dropdown-item" th:href="@{/u/lista}"
 							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Lista de Usuários</a>
-							<a class="dropdown-item" th:href="@{/assistentes/notifica/candidatos/pagina}"
-							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Notificar Candidatos</a>
-							<a class="dropdown-item" th:href="@{/registros/lista}"
-							sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">Registro de Atividades</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown" sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )"><a

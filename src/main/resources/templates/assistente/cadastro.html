@@ -78,14 +78,14 @@
 								th:object="${usuario}" method="POST" class="was-validated">
 							
 							<div class="mb-3">
-								<label for="cpf">CPF</label>
+								<label for="cpf">Registro do empregado RE</label>
 								<div class="input-group">
 									<div class="input-group-prepend">
 									</div>
 									<input type="text" class="form-control" id="cpf"
-										    th:field="*{cpf}" placeholder="CPF"
+										    th:field="*{cpf}" placeholder="RE ou CPF"
 										    aria-describedby="validationTooltipUsernamePrepend" required />
-									<div class="invalid-feedback">CPF é requerido.</div>
+									<div class="invalid-feedback">RE ou CPF é requerido.</div>
 								</div>
 							</div>
 							

@@ -1,10 +1,13 @@
 package com.senai.inscricao.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.senai.inscricao.domains.Assistente;
+import com.senai.inscricao.domains.Candidato;
 import com.senai.inscricao.repositories.AssistenteRepository;
 
 @Service
@@ -35,6 +38,10 @@ public class AssistenteService {
 	@Transactional(readOnly = true)
 	public Assistente buscarPorUsuarioCpf(String cpf) {
 		return repository.findByUsuarioCpf(cpf).orElse(new Assistente());
+	}
+
+	public List<Assistente> obterLista() { 
+		return (List<Assistente>)repository.findAll(); 
 	}
 
 }

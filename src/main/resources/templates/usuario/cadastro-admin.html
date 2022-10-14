@@ -34,10 +34,10 @@
 								<div class="input-group">
 									<div class="input-group-prepend">
 									</div>
-									<input type="number" class="form-control" id="cpf"
-										    th:field="*{cpf}" placeholder="CPF" minlength="11" maxlength="11"
+									<input type="text" class="form-control" id="cpf" onkeypress="return onlynumber();" 
+										    th:field="*{cpf}" placeholder="CPF ou RE" minlength="6" maxlength="11"
 										    aria-describedby="validationTooltipUsernamePrepend" required />
-									<div class="invalid-feedback">CPF é requerido.</div>
+									<div class="invalid-feedback">CPF ou RE é requerido.</div>
 								</div>
 							</div>
 							
@@ -142,6 +142,18 @@
 				$('#perfis option[value="'+ v.id +'"]').attr('selected', 'selected');
 			})
 		});
+		
+		function onlynumber(evt) {
+			   var theEvent = evt || window.event;
+			   var key = theEvent.keyCode || theEvent.which;
+			   key = String.fromCharCode( key );
+			   //var regex = /^[0-9.,]+$/;
+			   var regex = /^[0-9]+$/;
+			   if( !regex.test(key) ) {
+			      theEvent.returnValue = false;
+			      if(theEvent.preventDefault) theEvent.preventDefault();
+			   }
+			}
 		
 		var mostraPerfil = function() {
 			console.log("iniciando mostraPerfil ")
