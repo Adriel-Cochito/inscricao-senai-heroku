@@ -1,6 +1,5 @@
 package com.senai.inscricao.services;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +29,6 @@ public class UsuarioService implements UserDetailsService {
 	private UsuarioRepository repository;
 	@Autowired
 	private Datatables datatables;
-	@Autowired
-	private UsuarioService usuarioService;
 
 	@Transactional(readOnly = true)
 	public Usuario buscarPorCpf(String cpf) {

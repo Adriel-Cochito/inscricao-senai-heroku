@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class Datatables {
 	
+	// Tabelas de dados
+	
 	private HttpServletRequest request;
 	private String[] colunas;	
 

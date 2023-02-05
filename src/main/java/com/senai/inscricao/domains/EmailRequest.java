@@ -1,10 +1,5 @@
 package com.senai.inscricao.domains;
 
-import java.util.ArrayList;
-
-import com.sendgrid.helpers.mail.objects.Content;
-
-
 public class EmailRequest {
 
 	private String to;

@@ -1,11 +1,9 @@
 package com.senai.inscricao.web.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -92,7 +90,7 @@ public class UsuarioController {
 		return ResponseEntity.ok(service.buscarTodos(request));
 	}
 
-	// Salvar cadastro ussuarios por administrador
+	// Salvar cadastro ussuarios
 		@PostMapping("/cadastro/salvar")
 		public String salvarUsuarios(Usuario usuario, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 
@@ -121,7 +119,7 @@ public class UsuarioController {
 					if (inscricao == null) {
 						System.out.println(inscricao);
 						usuario.setInscricao("nao-inscrito");
-						System.out.println("setando usuario inscrico para nao inscrito");
+						System.out.println("setando usuario inscrito para nao inscrito");
 					}
 				} catch (Exception e) {
 					usuario.setInscricao("nao-inscrito");
@@ -188,6 +186,7 @@ public class UsuarioController {
 		public String salvarUsuariosPorAdmin(Usuario usuario, RedirectAttributes attr, @AuthenticationPrincipal User user) {
 			List<Perfil> perfis = usuario.getPerfis();
 			LocalDate dataAtual = LocalDate.now();
+			Boolean novoCadastro;
 
 			if (usuario.getDtInscricao() == null) {
 				usuario.setDtInscricao(dataAtual);
@@ -216,30 +215,42 @@ public class UsuarioController {
 
 				
 				try {
+					Usuario u = service.buscarPorId(usuario.getId());
+					novoCadastro = false;
+				} catch (Exception e) {
+					novoCadastro = true;
+				}
+				
+				try {
 					if (usuario.getStatusCadastro() == null) {
 						usuario.setStatusCadastro(0);
 					}
 					
-					Usuario u = service.buscarPorId(usuario.getId());
-					byte[] decoded = Base64.decodeBase64(u.getSenha().getBytes());
-					String decodedString = new String(decoded);
+					if (novoCadastro == false) {
 					
-					System.out.println("Senha digitada: " + usuario.getSenha());
-					System.out.println("Senha Coded: " + u.getSenha());
-					System.out.println("Imprimindo senha DB Decoded: " + decodedString);
-					
-					if (usuario.getSenha() == null  || usuario.getSenha() == "") {
-						System.out.println("Senha nao digitada, NULA!");
-						usuario.setSenha(decodedString);
-						service.salvarUsuario(usuario);
+						Usuario u = service.buscarPorId(usuario.getId());
 						
+						byte[] decoded = Base64.decodeBase64(u.getSenha().getBytes());
+						String decodedString = new String(decoded);
+						
+//						System.out.println("Senha digitada: " + usuario.getSenha());
+//						System.out.println("Senha Coded: " + u.getSenha());
+//						System.out.println("Imprimindo senha DB Decoded: " + decodedString);
+						
+						if (usuario.getSenha() == null  || usuario.getSenha() == "") {
+							System.out.println("Senha nao digitada, NULA!");
+							usuario.setSenha(decodedString);
+							service.salvarUsuario(usuario);
+							
+						} else {
+							System.out.println("Senha inserida!");
+							u.setSenha(usuario.getSenha());
+							service.salvarUsuario(u);
+						}
+					
 					} else {
-						System.out.println("Senha inserida!");
-						u.setSenha(usuario.getSenha());
-						service.salvarUsuario(u);
+						service.salvarUsuario(usuario);
 					}
-					
-					
 
 					attr.addFlashAttribute("sucesso", "Operação realizada com sucesso!");
 				} catch (Exception e) {

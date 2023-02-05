@@ -9,6 +9,8 @@ import com.sendgrid.SendGrid;
 @Configuration
 public class Sendgridconfig {
 	
+	// Disparo de E-MAIL Config
+	
 	@Value("${sendgrid.key}")
 	private String key;
 	
