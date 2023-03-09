@@ -60,6 +60,24 @@
 										<div class="invalid-feedback">Nome completo é requerido.</div>
 									</div>
 								</div>
+								
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="rg" class="form-group">RG</label> <input
+											type="text" class="form-control" th:field="*{nome}" id="rg"
+											placeholder="Escreva seu rg completo" required />
+										<div class="invalid-feedback">RG é requerido.</div>
+									</div>
+								</div>
+								
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="naturalidade" class="form-group">Naturalidade</label> <input
+											type="text" class="form-control" th:field="*{nome}" id="naturalidade"
+											placeholder="Escreva o país onde nasceu" required />
+										<div class="invalid-feedback">Naturalidade é requerido.</div>
+									</div>
+								</div>
 
 								<!-- 								<div class="form-row"> -->
 								<!-- 									<div class="form-group col-md-6"> -->
@@ -89,6 +107,91 @@
 											requerida.</div>
 									</div>
 								</div>
+								
+								
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="filiacaoPai" class="form-group">Filiação Pai</label> <input
+											type="text" class="form-control" th:field="*{nome}" id="filiacaoPai"
+											placeholder="Escreva o nome do seu pai" required />
+										<div class="invalid-feedback">Nome completo do Pai é requerido.</div>
+									</div>
+								</div>
+								
+								<div class="form-row">
+									<div class="form-group col-md-6">
+										<label for="filiacaoMae" class="form-group">Filiação Mãe</label> <input
+											type="text" class="form-control" th:field="*{nome}" id="filiacaoMae"
+											placeholder="Escreva o nome da sua mãe" required />
+										<div class="invalid-feedback">Nome completo da Mãe é requerida.</div>
+									</div>
+								</div>
+								
+								
+								
+								<div class="mb-3" >
+									<label for="raca">Raça</label> <select id="raca"
+										class="custom-select" size="6" th:field="*{nome}" multiple
+										required>
+										<option value="SEM INFORMACAO">SEM INFORMACAO</option>
+										<option value="BRANCA">BRANCA</option>
+										<option value="PRETA">PRETA</option>
+										<option value="PARDA">PARDA</option>
+										<option value="AMARELA">AMARELA</option>
+										<option value="INDIGENA">INDIGENA</option>
+									</select> <input type="hidden" value="SEMINFORMACAO" name="raca">
+	
+									<div class="invalid-feedback">Pelo menos uma Raça/Cor é
+										requerida.</div>
+								</div>
+								
+								<div class="mb-3" >
+									<label for="escolaridade">Escolaridade</label> <select id="escolaridade"
+										class="custom-select" size="6" th:field="*{nome}" multiple
+										required>
+										<option value="Educação infantil">Educação infantil</option>
+										<option value="Ensino fundamental">Ensino fundamental</option>
+										<option value="Ensino médio">Ensino médio</option>
+										<option value="Ensino superior Incompleto">Ensino superior Incompleto</option>
+										<option value="Ensino superior Completo">Ensino superior Completo</option>
+										<option value="Pós Graduação">Pós Graduação</option>
+									</select> <input type="hidden" value="Educação infantil" name="escolaridade">
+	
+									<div class="invalid-feedback">Pelo menos uma escolaridade é
+										requerida.</div>
+								</div>
+								
+								
+								<div class="mb-3" >
+									<label for="escolaridade">Estudou em escola pública ou particular?</label> <select id="escolaridade"
+										class="custom-select" size="2" th:field="*{nome}" multiple
+										required>
+										<option value="Escola Publica">Escola Pública</option>
+										<option value="Escola Particular">Escola Particular</option>
+									</select> <input type="hidden" value="Escola Publica" name="escolaridade">
+	
+									<div class="invalid-feedback">Pelo menos uma opção é
+										requerida.</div>
+								</div>
+								
+								<div class="mb-3" >
+									<label for="estadoCivil">Estado Civil</label> <select id="estadoCivil"
+										class="custom-select" size="2" th:field="*{nome}" multiple
+										required>
+										<option value="casado(a)">Casado(a)</option>
+										<option value="solteiro(a)">Solteiro(a)</option>
+									</select> <input type="hidden" value="solteiro(a)" name="estadoCivil">
+	
+									<div class="invalid-feedback">Estado Civil é
+										requerido.</div>
+								</div>
+								
+
+								
+								
+								
+								
+								
 
 								<hr>
 								
@@ -130,6 +233,16 @@
 								
 								<div class="form-row">
 									<div class="form-group col-md-6">
+										<label id="label_endereco" for="endereco" class="form-group">Endereco (Nome da Rua)</label> <input
+											type="text" class="form-control" th:field="*{bairro}"
+											id="endereco" placeholder="Escreva seu endereco" required
+											readonly />
+										<div class="invalid-feedback">Endereco (Rua) é requerido.</div>
+									</div>
+								</div>
+								
+								<div class="form-row">
+									<div class="form-group col-md-6">
 										<label id="label_bairro" for="bairro" class="form-group">Bairro</label> <input
 											type="text" class="form-control" th:field="*{bairro}"
 											id="bairro" placeholder="Escreva seu Bairro" required
@@ -148,118 +261,128 @@
 										<div class="invalid-feedback">Cidade é requerida.</div>
 									</div>
 								</div>
-
 								
-								<hr>
-								<h4>Renda Per capta</h4>
-								<p>
-									<b>1 - Sua renda: </b>Escreva seu nome e renda, e clique em
-									adicionar.
-								</p>
-								<p>
-									<b>2 - Familiares: </b>Escreva o nome, a renda e o grau de
-									parentesco de cada pessoa que mora com você e clique em
-									"Adicionar" para incluir na lista.
-								</p>
-								<p>
-									<b>3 - Atenção: </b>Adicione todos que moram com você, <b>mesmo
-										que a renda seja R$0,00.</b>
-								</p>
-								<p>
-									<b>4 - Salvar: </b>Clique em "SALVAR" abaixo do resultado da
-									renda Percapta para salvar todos os seus dados pessoais.
-								</p>
-
-								<div class="" style="width: 100%; margin-left: 0;">
-									<h6>Adicionar um familiar e renda</h6>
-									<div class="input-group" style="width: 100%; margin-left: 0;">
-										<div class="form-row" style="width: 100%; margin-left: 0;">
-											<div class="form-group col-md-6"
-												style="width: 100%; margin-left: 0;">
-												<input type="text" class="form-control" id="nomeFamiliar"
-													th:value="${nomeFamiliar}" style="width: 100%;"
-													placeholder="Nome" required />
-											</div>
-										</div>
-
-										<div class="form-row" style="width: 100%; margin-left: 0;">
-											<div class="form-group col-md-6"
-												style="width: 100%; margin-left: 0;">
-												<div class="input-group mb-3">
-													<div class="input-group-prepend">
-														<span class="input-group-text">R$</span>
-													</div>
-													<input type="number" class="form-control" id="valorRenda1"
-														th:value="${valor}" onkeypress="return onlynumber();"
-														placeholder="1000" required /> <span
-														class="input-group-text">.00</span>
-												</div>
-											</div>
-										</div>
-
-										<div class="form-row" style="width: 100%; margin-left: 0;">
-											<div class="form-group col-md-6"
-												style="width: 100%; margin-left: 0;">
-												<select class="form-control" required id="grauParentesco"
-													aria-label="Default select example">
-													<option value="Candidato">Minha renda</option>
-													<option value="Irmão(ã)">Irmão ou irmã</option>
-													<option value="Pai/mãe">Pai ou mãe</option>
-													<option value="Filho(a)">Filho ou filha</option>
-													<option value="Cônjuge">Cônjuge (Marido ou esposa)</option>
-													<option value="Tio(a)">Tio ou tia</option>
-													<option value="Sobrinho(a)">Sobrinho ou sobrinha</option>
-													<option value="Neto(a)">Neto ou neta</option>
-													<option value="Avô(ó)">Avô ou avó</option>
-													<option value="Bisavô(ó)">Bisavô ou bisavó</option>
-												</select>
-											</div>
-										</div>
-										<div class="input-group-append">
-											<span class="input-group-text"
-												style="color: white; background-color: #007bff;"><a
-												type="button" id="incluirDependente">Adicionar</a></span>
-										</div>
-
-										<div class="invalid-feedback">Nome e Renda são
-											obrigatórios, mesmo que seja R$ 0,00.</div>
-
-
-										<input type="hidden" th:field="*{familiares}" id="familiares" />
-
-
-									</div>
-
-								</div>
-
-								<div class="p-3 mb-5 rounded card"
-									style="background-color: #ebeef2; padding: 20px;">
-									<div id="resultado" class="form-group col-md-6">
-										<h6>Familiares cadastrados:</h6>
-										[(${listaFamiliares})]
-									</div>
-								</div>
-
-
 								<div class="form-row">
 									<div class="form-group col-md-6">
-										<label for="rendaPercapta" class="form-group">Resultado
-											da sua Renda Per capita:</label>
-										<div class="input-group mb-3">
-											<div class="input-group-prepend">
-												<span class="input-group-text">R$</span>
-											</div>
-											<input type="number" step="1.00" min="0.00"
-												class="form-control" th:field="*{rendaPercapta}"
-												id="rendaPercapta" readonly placeholder="R$ 0,00" required />
-
-											<div class="input-group-prepend">
-												<span class="input-group-text">.00</span>
-											</div>
-											<div class="invalid-feedback">Renda é requerido.</div>
-										</div>
+										<label for="uf" id="label_uf" class="form-group">UF (Estado)</label> <input
+											type="text" class="form-control" th:field="*{cidade}"
+											id="uf" placeholder="Escreva seu estado" required
+											readonly />
+										<div class="invalid-feedback">Estado é requerido.</div>
 									</div>
 								</div>
+
+								
+<!-- 								<hr> -->
+<!-- 								<h4>Renda Per capta</h4> -->
+<!-- 								<p> -->
+<!-- 									<b>1 - Sua renda: </b>Escreva seu nome e renda, e clique em -->
+<!-- 									adicionar. -->
+<!-- 								</p> -->
+<!-- 								<p> -->
+<!-- 									<b>2 - Familiares: </b>Escreva o nome, a renda e o grau de -->
+<!-- 									parentesco de cada pessoa que mora com você e clique em -->
+<!-- 									"Adicionar" para incluir na lista. -->
+<!-- 								</p> -->
+<!-- 								<p> -->
+<!-- 									<b>3 - Atenção: </b>Adicione todos que moram com você, <b>mesmo -->
+<!-- 										que a renda seja R$0,00.</b> -->
+<!-- 								</p> -->
+<!-- 								<p> -->
+<!-- 									<b>4 - Salvar: </b>Clique em "SALVAR" abaixo do resultado da -->
+<!-- 									renda Percapta para salvar todos os seus dados pessoais. -->
+<!-- 								</p> -->
+
+<!-- 								<div class="" style="width: 100%; margin-left: 0;"> -->
+<!-- 									<h6>Adicionar um familiar e renda</h6> -->
+<!-- 									<div class="input-group" style="width: 100%; margin-left: 0;"> -->
+<!-- 										<div class="form-row" style="width: 100%; margin-left: 0;"> -->
+<!-- 											<div class="form-group col-md-6" -->
+<!-- 												style="width: 100%; margin-left: 0;"> -->
+<!-- 												<input type="text" class="form-control" id="nomeFamiliar" -->
+<!-- 													th:value="${nomeFamiliar}" style="width: 100%;" -->
+<!-- 													placeholder="Nome" required /> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+
+<!-- 										<div class="form-row" style="width: 100%; margin-left: 0;"> -->
+<!-- 											<div class="form-group col-md-6" -->
+<!-- 												style="width: 100%; margin-left: 0;"> -->
+<!-- 												<div class="input-group mb-3"> -->
+<!-- 													<div class="input-group-prepend"> -->
+<!-- 														<span class="input-group-text">R$</span> -->
+<!-- 													</div> -->
+<!-- 													<input type="number" class="form-control" id="valorRenda1" -->
+<!-- 														th:value="${valor}" onkeypress="return onlynumber();" -->
+<!-- 														placeholder="1000" required /> <span -->
+<!-- 														class="input-group-text">.00</span> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+
+<!-- 										<div class="form-row" style="width: 100%; margin-left: 0;"> -->
+<!-- 											<div class="form-group col-md-6" -->
+<!-- 												style="width: 100%; margin-left: 0;"> -->
+<!-- 												<select class="form-control" required id="grauParentesco" -->
+<!-- 													aria-label="Default select example"> -->
+<!-- 													<option value="Candidato">Minha renda</option> -->
+<!-- 													<option value="Irmão(ã)">Irmão ou irmã</option> -->
+<!-- 													<option value="Pai/mãe">Pai ou mãe</option> -->
+<!-- 													<option value="Filho(a)">Filho ou filha</option> -->
+<!-- 													<option value="Cônjuge">Cônjuge (Marido ou esposa)</option> -->
+<!-- 													<option value="Tio(a)">Tio ou tia</option> -->
+<!-- 													<option value="Sobrinho(a)">Sobrinho ou sobrinha</option> -->
+<!-- 													<option value="Neto(a)">Neto ou neta</option> -->
+<!-- 													<option value="Avô(ó)">Avô ou avó</option> -->
+<!-- 													<option value="Bisavô(ó)">Bisavô ou bisavó</option> -->
+<!-- 												</select> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 										<div class="input-group-append"> -->
+<!-- 											<span class="input-group-text" -->
+<!-- 												style="color: white; background-color: #007bff;"><a -->
+<!-- 												type="button" id="incluirDependente">Adicionar</a></span> -->
+<!-- 										</div> -->
+
+<!-- 										<div class="invalid-feedback">Nome e Renda são -->
+<!-- 											obrigatórios, mesmo que seja R$ 0,00.</div> -->
+
+
+<!-- 										<input type="hidden" th:field="*{familiares}" id="familiares" /> -->
+
+
+<!-- 									</div> -->
+
+<!-- 								</div> -->
+
+<!-- 								<div class="p-3 mb-5 rounded card" -->
+<!-- 									style="background-color: #ebeef2; padding: 20px;"> -->
+<!-- 									<div id="resultado" class="form-group col-md-6"> -->
+<!-- 										<h6>Familiares cadastrados:</h6> -->
+<!-- 										[(${listaFamiliares})] -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+
+
+<!-- 								<div class="form-row"> -->
+<!-- 									<div class="form-group col-md-6"> -->
+<!-- 										<label for="rendaPercapta" class="form-group">Resultado -->
+<!-- 											da sua Renda Per capita:</label> -->
+<!-- 										<div class="input-group mb-3"> -->
+<!-- 											<div class="input-group-prepend"> -->
+<!-- 												<span class="input-group-text">R$</span> -->
+<!-- 											</div> -->
+<!-- 											<input type="number" step="1.00" min="0.00" -->
+<!-- 												class="form-control" th:field="*{rendaPercapta}" -->
+<!-- 												id="rendaPercapta" readonly placeholder="R$ 0,00" required /> -->
+
+<!-- 											<div class="input-group-prepend"> -->
+<!-- 												<span class="input-group-text">.00</span> -->
+<!-- 											</div> -->
+<!-- 											<div class="invalid-feedback">Renda é requerido.</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 
 								<!-- 							<div class="form-group col-md-6"> -->
 								<!-- 									<label for="familiares" class="form-group">familiares</label> <input -->
@@ -486,10 +609,13 @@
 				
 				document.getElementById("cidade").removeAttribute("readOnly")
 				document.getElementById("bairro").removeAttribute("readOnly")
+				document.getElementById("endereco").removeAttribute("readOnly")
+				document.getElementById("uf").removeAttribute("readOnly")
 				
 				document.getElementById("label_bairro").innerHTML = "Zona Rural";
 				document.getElementById("label_zonaRural").innerHTML  = 'Marcado';
 				document.getElementById("label_cidade").innerHTML  = 'Cidade mais próxima';
+				document.getElementById("label_endereco").innerHTML  = 'Rua ou localização';
 				
 				document.getElementById("cep").value  = '00000000';
 				
@@ -501,12 +627,15 @@
 				  document.getElementById("label_zonaRural").innerHTML  = 'Desmarcado';
 				  document.getElementById("label_cidade").innerHTML  = 'Cidade';
 				  document.getElementById("label_bairro").innerHTML  = 'Bairro';
+				  document.getElementById("label_endereco").innerHTML  = 'Endereco (Nome da rua)';
 				  
 				  document.getElementById("cep").removeAttribute("readOnly")
 				  document.getElementById("cep").value  = '';
 				  
 				  document.getElementById("cidade").toggleAttribute("readOnly")
 				  document.getElementById("bairro").toggleAttribute("readOnly")
+				  document.getElementById("endereco").toggleAttribute("readOnly")
+				  document.getElementById("uf").toggleAttribute("readOnly")
 				  
 				  
 // 			    otherText.style.visibility = 'hidden';
@@ -524,15 +653,18 @@
 			 	document.getElementById("cep").toggleAttribute("readOnly")
 				document.getElementById("cidade").removeAttribute("readOnly")
 				document.getElementById("bairro").removeAttribute("readOnly")
+				document.getElementById("endereco").removeAttribute("readOnly")
+				document.getElementById("uf").removeAttribute("readOnly")
 			 	document.getElementById("label_cidade").innerHTML  = 'Cidade mais próxima';
 				 
 			  }
 
          function limpa_formulário_cep() {
              // Limpa valores do formulário de cep.
-             $("#rua").val("");
+             $("#endereco").val("");
              $("#bairro").val("");
              $("#cidade").val("");
+             $("#uf").val("");
          }
          
          //Quando o campo cep perde o foco.
@@ -553,18 +685,20 @@
                  if(validacep.test(cep)) {
 
                      //Preenche os campos com "..." enquanto consulta webservice.
-                     $("#rua").val("...");
+                     $("#endereco").val("...");
                      $("#bairro").val("...");
                      $("#cidade").val("...");
+                     $("#uf").val("...");
 
                      //Consulta o webservice viacep.com.br/
                      $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
                          if (!("erro" in dados)) {
                              //Atualiza os campos com os valores da consulta.
-                             $("#rua").val(dados.logradouro);
+                             $("#endereco").val(dados.logradouro);
                              $("#bairro").val(dados.bairro);
                              $("#cidade").val(dados.localidade);
+                             $("#uf").val(dados.uf);
                          } //end if.
                          else {
                              //CEP pesquisado não foi encontrado.
