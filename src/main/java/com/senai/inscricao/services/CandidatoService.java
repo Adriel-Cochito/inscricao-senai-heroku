@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.senai.inscricao.domains.Candidato;
-import com.senai.inscricao.domains.Inscricao;
 import com.senai.inscricao.repositories.CandidatoRepository;
 
 @Service
@@ -52,6 +51,17 @@ public class CandidatoService {
 		candidato1.setRendaPercapta(candidato.getRendaPercapta());
 		candidato1.setTelefone(candidato.getTelefone());
 		candidato1.setFamiliares(candidato.getFamiliares());
+		
+		candidato1.setEndereco(candidato.getFamiliares());
+		candidato1.setEscola(candidato.getFamiliares());
+		candidato1.setEscolaridade(candidato.getEscolaridade());
+		candidato1.setEstadoCivil(candidato.getEstadoCivil());
+		candidato1.setFiliacaoPai(candidato.getFiliacaoPai());
+		candidato1.setFiliacaoMae(candidato.getFiliacaoMae());
+		candidato1.setNaturalidade(candidato.getNaturalidade());
+		candidato1.setRaca(candidato.getRaca());
+		candidato1.setRg(candidato.getRg());
+		candidato1.setUf(candidato.getUf());
 
 	}
 
