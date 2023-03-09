@@ -114,7 +114,7 @@ public class CandidatoController {
 		
 		attr.addFlashAttribute("sucesso", "Candidato editado com sucesso");
 		attr.addFlashAttribute("candidato", candidato);
-		attr.addFlashAttribute("listaFamiliares", candidato.getFamiliares());
+//		attr.addFlashAttribute("listaFamiliares", candidato.getFamiliares());
 		return "redirect:/candidatos/dados";
 	}
 	

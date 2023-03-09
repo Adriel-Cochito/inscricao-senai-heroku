@@ -52,8 +52,8 @@ public class CandidatoService {
 		candidato1.setTelefone(candidato.getTelefone());
 		candidato1.setFamiliares(candidato.getFamiliares());
 		
-		candidato1.setEndereco(candidato.getFamiliares());
-		candidato1.setEscola(candidato.getFamiliares());
+		candidato1.setEndereco(candidato.getEndereco());
+		candidato1.setEscola(candidato.getEscola());
 		candidato1.setEscolaridade(candidato.getEscolaridade());
 		candidato1.setEstadoCivil(candidato.getEstadoCivil());
 		candidato1.setFiliacaoPai(candidato.getFiliacaoPai());
@@ -62,6 +62,8 @@ public class CandidatoService {
 		candidato1.setRaca(candidato.getRaca());
 		candidato1.setRg(candidato.getRg());
 		candidato1.setUf(candidato.getUf());
+		
+		System.out.println("getEstadoCivil: "+ candidato.getEstadoCivil());
 
 	}
 

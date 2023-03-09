@@ -129,25 +129,32 @@
 								
 								
 								
-								<div class="mb-3" >
+								
+								
+								
+								<div class="form-row">
+									<div class="form-group col-md-6">
 									<label for="raca">Raça</label> <select id="raca"
-										class="custom-select" size="6" th:field="*{raca}" multiple
+										class="custom-select" size="6" th:field="*{raca}" 
 										required>
-										<option value="SEM INFORMACAO">SEM INFORMACAO</option>
+										<option value="SEMINFORMACAO">SEM INFORMACAO</option>
 										<option value="BRANCA">BRANCA</option>
 										<option value="PRETA">PRETA</option>
 										<option value="PARDA">PARDA</option>
 										<option value="AMARELA">AMARELA</option>
 										<option value="INDIGENA">INDIGENA</option>
-									</select> <input type="hidden" value="SEMINFORMACAO" name="raca">
+									</select> 
+<!-- 									<input type="hidden" value="0" name="raca"> -->
 	
 									<div class="invalid-feedback">Pelo menos uma Raça/Cor é
 										requerida.</div>
 								</div>
+								</div>
 								
-								<div class="mb-3" >
+								<div class="form-row">
+									<div class="form-group col-md-6">
 									<label for="escolaridade">Escolaridade</label> <select id="escolaridade"
-										class="custom-select" size="6" th:field="*{escolaridade}" multiple
+										class="custom-select" size="6" th:field="*{escolaridade}" 
 										required>
 										<option value="Educação infantil">Educação infantil</option>
 										<option value="Ensino fundamental">Ensino fundamental</option>
@@ -155,39 +162,56 @@
 										<option value="Ensino superior Incompleto">Ensino superior Incompleto</option>
 										<option value="Ensino superior Completo">Ensino superior Completo</option>
 										<option value="Pós Graduação">Pós Graduação</option>
-									</select> <input type="hidden" value="Educação infantil" name="escolaridade">
+									</select> 
 	
 									<div class="invalid-feedback">Pelo menos uma escolaridade é
 										requerida.</div>
 								</div>
+								</div>
 								
 								
-								<div class="mb-3" >
-									<label for="escolaridade">Estudou em escola pública ou particular?</label> <select id="escolaridade"
-										class="custom-select" size="2" th:field="*{escolaridade}" multiple
+								<div class="form-row">
+									<div class="form-group col-md-6">
+									<label for="escola">Estudou em escola pública ou particular?</label> <select id="escola"
+										class="custom-select" size="2" th:field="*{escola}" 
 										required>
 										<option value="Escola Publica">Escola Pública</option>
 										<option value="Escola Particular">Escola Particular</option>
-									</select> <input type="hidden" value="Escola Publica" name="escolaridade">
+									</select> 
 	
 									<div class="invalid-feedback">Pelo menos uma opção é
 										requerida.</div>
 								</div>
+								</div>
 								
-								<div class="mb-3" >
+								<div class="form-row">
+									<div class="form-group col-md-6">
 									<label for="estadoCivil">Estado Civil</label> <select id="estadoCivil"
-										class="custom-select" size="2" th:field="*{estadoCivil}" multiple
+										class="custom-select" size="2" th:field="*{estadoCivil}" 
 										required>
-										<option value="casado(a)">Casado(a)</option>
-										<option value="solteiro(a)">Solteiro(a)</option>
-									</select> <input type="hidden" value="solteiro(a)" name="estadoCivil">
+										<option value="Casado(a)">Casado(a)</option>
+										<option value="Solteiro(a)">Solteiro(a)</option>
+									</select> 
+<!-- 									<input type="hidden" value="0" name="estadoCivil"> -->
 	
 									<div class="invalid-feedback">Estado Civil é
 										requerido.</div>
 								</div>
+								</div>
 								
 
-								
+<!-- 								<div class="mb-3"> -->
+<!-- 									<label for="perfis">Perfil</label> <select id="perfis" readonly -->
+<!-- 										class="custom-select" size="4" th:field="*{perfis}" multiple -->
+<!-- 										required> -->
+<!-- 										<option value="1" sec:authorize="hasAuthority('ADMIN')">Administrador</option> -->
+<!-- 										<option value="2" sec:authorize="hasAuthority('ASSISTENTE')">Assistente</option> -->
+<!-- 										<option value="3">Candidato</option> -->
+<!-- 									</select> <input type="hidden" value="0" name="perfis"> -->
+
+<!-- 									<div class="invalid-feedback">Pelo menos um perfil é -->
+<!-- 										requerido.</div> -->
+<!-- 								</div> -->
 								
 								
 								
@@ -730,6 +754,12 @@
 		})
 	});
 	
+	var candidato = [[${candidato}]];
+	console.log("Candidato: ", candidato)
+
+	
+
+	
 	function onlynumber(evt) {
 // 		console.log("onlynumber executado!!!")
 		   var theEvent = evt || window.event;
@@ -758,95 +788,95 @@
 // 	lista_resultado.push({ id: 2, nome: "nome 2", renda: 'renda 2'},);
 	
 	 
-	 var removeFamiliar = function(id) {
+// 	 var removeFamiliar = function(id) {
 		 
-		 var index = 0;
-		 var valor1 = 0;
-		 console.log("Removendo : ", id)
+// 		 var index = 0;
+// 		 var valor1 = 0;
+// 		 console.log("Removendo : ", id)
 		 
 		
-		  for(let i = 0; i < lista_resultado.length; i++ ) {
-	        	if(lista_resultado[i].id == id) {
-	        		lista_resultado.splice(i, 1);
-	        	}
-	    	};
-// 			resultado.splice(index, 1);
-// 			rendaDependentes.splice(index, 1);
-// 			nomesFamiliares.splice(index, 1);
+// 		  for(let i = 0; i < lista_resultado.length; i++ ) {
+// 	        	if(lista_resultado[i].id == id) {
+// 	        		lista_resultado.splice(i, 1);
+// 	        	}
+// 	    	};
+// // 			resultado.splice(index, 1);
+// // 			rendaDependentes.splice(index, 1);
+// // 			nomesFamiliares.splice(index, 1);
 		 
 	
-// 		  console.log(resultado)
-// 		  console.log("Removendo : ", valor)
-// 		  removidos += 1;
-		 chamaResultado();
+// // 		  console.log(resultado)
+// // 		  console.log("Removendo : ", valor)
+// // 		  removidos += 1;
+// 		 chamaResultado();
 		
-	 };
+// 	 };
 	
-	 var chamaResultado = function() {
-		 valor = 0;
+// 	 var chamaResultado = function() {
+// 		 valor = 0;
 		 
-		 for(let i = 0; i < lista_resultado.length; i++ ) {
-	        	valor = parseInt(valor) + parseInt(lista_resultado[i].valor);
-	    	};
-		 	valor = valor / lista_resultado.length
+// 		 for(let i = 0; i < lista_resultado.length; i++ ) {
+// 	        	valor = parseInt(valor) + parseInt(lista_resultado[i].valor);
+// 	    	};
+// 		 	valor = valor / lista_resultado.length
 		 	
 	    	
 	    	
-		 	resultado = [];
-	    	for(let i = 1; i <= lista_resultado.length; i++ ) {
-	    		var x = i-1;
-	    		resultado.push('<div class="form-row" style="width:100%;margin-left:0;">'+
-	        	        '<h7>Familiar '+i+':</h7>'+
-	        	        '<div class="input-group" style="width:100%;margin-left:0;">'+
-	        				'<input type="text" class="form-control" value="'+lista_resultado[x].nome+'" id="" style="width:100px;" '+
-	        					' placeholder=""  required  disabled />'+
-	        				'<input type="text" class="form-control" value="'+lista_resultado[x].valor+'" id=""  style="width:100px;"'+
-	        					' placeholder=""  required  disabled/>'+
-	        				'<input type="text" class="form-control" value="'+lista_resultado[x].grauParentesco+'" id="" style="width:100px;" '+
-	        					' placeholder=""  required  disabled />'+
-	        				'<div class="input-group-append">'+
-	        			    	'<span class="input-group-text" style="color:red;"><a type="button" onclick="removeFamiliar('+lista_resultado[x].id+')"">Remover</a></span></span>'+
-	        			  	'</div>'+
-	        			'<div class="invalid-feedback">Renda é requerida.</div>'+
-	        			'</div>');
-	    	};
+// 		 	resultado = [];
+// 	    	for(let i = 1; i <= lista_resultado.length; i++ ) {
+// 	    		var x = i-1;
+// 	    		resultado.push('<div class="form-row" style="width:100%;margin-left:0;">'+
+// 	        	        '<h7>Familiar '+i+':</h7>'+
+// 	        	        '<div class="input-group" style="width:100%;margin-left:0;">'+
+// 	        				'<input type="text" class="form-control" value="'+lista_resultado[x].nome+'" id="" style="width:100px;" '+
+// 	        					' placeholder=""  required  disabled />'+
+// 	        				'<input type="text" class="form-control" value="'+lista_resultado[x].valor+'" id=""  style="width:100px;"'+
+// 	        					' placeholder=""  required  disabled/>'+
+// 	        				'<input type="text" class="form-control" value="'+lista_resultado[x].grauParentesco+'" id="" style="width:100px;" '+
+// 	        					' placeholder=""  required  disabled />'+
+// 	        				'<div class="input-group-append">'+
+// 	        			    	'<span class="input-group-text" style="color:red;"><a type="button" onclick="removeFamiliar('+lista_resultado[x].id+')"">Remover</a></span></span>'+
+// 	        			  	'</div>'+
+// 	        			'<div class="invalid-feedback">Renda é requerida.</div>'+
+// 	        			'</div>');
+// 	    	};
 	    	
-	    	listaFamiliares = [];
-	    	for(let i = 1; i <= lista_resultado.length; i++ ) {
-	    		var x = i-1;
-	    		listaFamiliares.push('<p>'+lista_resultado[x].nome+' : R$'+lista_resultado[x].valor + ' - '+lista_resultado[x].grauParentesco+'</p>');
-	    	};
+// 	    	listaFamiliares = [];
+// 	    	for(let i = 1; i <= lista_resultado.length; i++ ) {
+// 	    		var x = i-1;
+// 	    		listaFamiliares.push('<p>'+lista_resultado[x].nome+' : R$'+lista_resultado[x].valor + ' - '+lista_resultado[x].grauParentesco+'</p>');
+// 	    	};
 	    	
-	    	valor = parseInt(valor);
-	    	document.getElementById("resultado").innerHTML = resultado.join('');
-	    	document.getElementById("rendaPercapta").value = valor;
+// 	    	valor = parseInt(valor);
+// 	    	document.getElementById("resultado").innerHTML = resultado.join('');
+// 	    	document.getElementById("rendaPercapta").value = valor;
 	    	
-	    	var familiares = listaFamiliares.join('').toString()
-	    	console.log(familiares);
-	    	document.getElementById("familiares").value = familiares;
-	    	document.getElementById("familiares-html").innerHTML = familiares;
+// 	    	var familiares = listaFamiliares.join('').toString()
+// 	    	console.log(familiares);
+// 	    	document.getElementById("familiares").value = familiares;
+// 	    	document.getElementById("familiares-html").innerHTML = familiares;
 	    	
-	 };
+// 	 };
 	 
-    $('#incluirDependente').on('click', function () {
-    	valor= 0 ;
-    	var inputRenda = document.querySelector("#valorRenda1");
-    	var nomeFamiliar= document.querySelector("#nomeFamiliar");
-    	var grauParentesco= document.querySelector("#grauParentesco");
+//     $('#incluirDependente').on('click', function () {
+//     	valor= 0 ;
+//     	var inputRenda = document.querySelector("#valorRenda1");
+//     	var nomeFamiliar= document.querySelector("#nomeFamiliar");
+//     	var grauParentesco= document.querySelector("#grauParentesco");
     	
-    	if (inputRenda.value != "" && nomeFamiliar.value != "") {
+//     	if (inputRenda.value != "" && nomeFamiliar.value != "") {
     		
-    		lista_resultado.push({ id: lista_resultado.length+1, nome: nomeFamiliar.value, valor: inputRenda.value, grauParentesco: grauParentesco.value},);
+//     		lista_resultado.push({ id: lista_resultado.length+1, nome: nomeFamiliar.value, valor: inputRenda.value, grauParentesco: grauParentesco.value},);
     		
-    	var x = rendaDependentes.length
+//     	var x = rendaDependentes.length
     	
     	
     	
     	
     	
-    	chamaResultado();
-    	}
-    } );
+//     	chamaResultado();
+//     	}
+//     } );
 	
 	</script>
 

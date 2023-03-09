@@ -73,10 +73,10 @@ public class Candidato extends AbstractEntity {
 	@Column(name = "telefone", nullable = false)
 	private String telefone;
 	
-	@Column(name = "rendaPercapta", nullable = false)
+	@Column(name = "rendaPercapta", nullable = true)
 	private Double rendaPercapta;
 	
-	@Column(name = "familiares", nullable = false)
+	@Column(name = "familiares", nullable = true)
 	private String familiares;
 	
 	@JsonIgnore
