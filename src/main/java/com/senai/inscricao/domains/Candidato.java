@@ -27,14 +27,44 @@ public class Candidato extends AbstractEntity {
 	@Column(name = "cep", nullable = true)
 	private String cep;
 	
+	@Column(name = "rg", nullable = true)
+	private String rg;
+	
+	@Column(name = "naturalidade", nullable = true)
+	private String naturalidade;
+	
+	@Column(name = "raca", nullable = true)
+	private String raca;
+	
+	@Column(name = "endereco", nullable = true)
+	private String endereco;
+	
 	@Column(name = "bairro", nullable = true)
 	private String bairro;
+	
+	@Column(name = "estadoCivil", nullable = true)
+	private String estadoCivil;
+	
+	@Column(name = "uf", nullable = true)
+	private String uf;
 	
 	@Column(name = "cidade", nullable = true)
 	private String cidade;
 	
 	@Column(name = "zonaRural", nullable = true, columnDefinition = "TINYINT(1)")
 	private boolean zonaRural;
+	
+	@Column(name = "escolaridade", nullable = true)
+	private String escolaridade;
+	
+	@Column(name = "escola", nullable = true)
+	private String escola;
+	
+	@Column(name = "filiacaPai", nullable = true)
+	private String filiacaPai;
+	
+	@Column(name = "filiacaoMae", nullable = true)
+	private String filiacaoMae;
 	
 	@Column(name = "dtNascimento", nullable = false)
 	@DateTimeFormat(iso = ISO.DATE)
@@ -156,6 +186,86 @@ public class Candidato extends AbstractEntity {
 
 	public void setZonaRural(boolean zonaRural) {
 		this.zonaRural = zonaRural;
+	}
+
+	public String getRg() {
+		return rg;
+	}
+
+	public void setRg(String rg) {
+		this.rg = rg;
+	}
+
+	public String getNaturalidade() {
+		return naturalidade;
+	}
+
+	public void setNaturalidade(String naturalidade) {
+		this.naturalidade = naturalidade;
+	}
+
+	public String getRaca() {
+		return raca;
+	}
+
+	public void setRaca(String raca) {
+		this.raca = raca;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+	public String getUf() {
+		return uf;
+	}
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+	public String getEscolaridade() {
+		return escolaridade;
+	}
+
+	public void setEscolaridade(String escolaridade) {
+		this.escolaridade = escolaridade;
+	}
+
+	public String getEscola() {
+		return escola;
+	}
+
+	public void setEscola(String escola) {
+		this.escola = escola;
+	}
+
+	public String getFiliacaPai() {
+		return filiacaPai;
+	}
+
+	public void setFiliacaPai(String filiacaPai) {
+		this.filiacaPai = filiacaPai;
+	}
+
+	public String getFiliacaoMae() {
+		return filiacaoMae;
+	}
+
+	public void setFiliacaoMae(String filiacaoMae) {
+		this.filiacaoMae = filiacaoMae;
 	}
 
 	
