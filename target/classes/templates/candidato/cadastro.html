@@ -64,7 +64,7 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="rg" class="form-group">RG</label> <input
-											type="text" class="form-control" th:field="*{nome}" id="rg"
+											type="text" class="form-control" th:field="*{rg}" id="rg"
 											placeholder="Escreva seu rg completo" required />
 										<div class="invalid-feedback">RG é requerido.</div>
 									</div>
@@ -73,7 +73,7 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="naturalidade" class="form-group">Naturalidade</label> <input
-											type="text" class="form-control" th:field="*{nome}" id="naturalidade"
+											type="text" class="form-control" th:field="*{naturalidade}" id="naturalidade"
 											placeholder="Escreva o país onde nasceu" required />
 										<div class="invalid-feedback">Naturalidade é requerido.</div>
 									</div>
@@ -112,7 +112,7 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="filiacaoPai" class="form-group">Filiação Pai</label> <input
-											type="text" class="form-control" th:field="*{nome}" id="filiacaoPai"
+											type="text" class="form-control" th:field="*{filiacaoPai}" id="filiacaoPai"
 											placeholder="Escreva o nome do seu pai" required />
 										<div class="invalid-feedback">Nome completo do Pai é requerido.</div>
 									</div>
@@ -121,7 +121,7 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="filiacaoMae" class="form-group">Filiação Mãe</label> <input
-											type="text" class="form-control" th:field="*{nome}" id="filiacaoMae"
+											type="text" class="form-control" th:field="*{filiacaoMae}" id="filiacaoMae"
 											placeholder="Escreva o nome da sua mãe" required />
 										<div class="invalid-feedback">Nome completo da Mãe é requerida.</div>
 									</div>
@@ -131,7 +131,7 @@
 								
 								<div class="mb-3" >
 									<label for="raca">Raça</label> <select id="raca"
-										class="custom-select" size="6" th:field="*{nome}" multiple
+										class="custom-select" size="6" th:field="*{raca}" multiple
 										required>
 										<option value="SEM INFORMACAO">SEM INFORMACAO</option>
 										<option value="BRANCA">BRANCA</option>
@@ -147,7 +147,7 @@
 								
 								<div class="mb-3" >
 									<label for="escolaridade">Escolaridade</label> <select id="escolaridade"
-										class="custom-select" size="6" th:field="*{nome}" multiple
+										class="custom-select" size="6" th:field="*{escolaridade}" multiple
 										required>
 										<option value="Educação infantil">Educação infantil</option>
 										<option value="Ensino fundamental">Ensino fundamental</option>
@@ -164,7 +164,7 @@
 								
 								<div class="mb-3" >
 									<label for="escolaridade">Estudou em escola pública ou particular?</label> <select id="escolaridade"
-										class="custom-select" size="2" th:field="*{nome}" multiple
+										class="custom-select" size="2" th:field="*{escolaridade}" multiple
 										required>
 										<option value="Escola Publica">Escola Pública</option>
 										<option value="Escola Particular">Escola Particular</option>
@@ -176,7 +176,7 @@
 								
 								<div class="mb-3" >
 									<label for="estadoCivil">Estado Civil</label> <select id="estadoCivil"
-										class="custom-select" size="2" th:field="*{nome}" multiple
+										class="custom-select" size="2" th:field="*{estadoCivil}" multiple
 										required>
 										<option value="casado(a)">Casado(a)</option>
 										<option value="solteiro(a)">Solteiro(a)</option>
@@ -234,7 +234,7 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label id="label_endereco" for="endereco" class="form-group">Endereco (Nome da Rua)</label> <input
-											type="text" class="form-control" th:field="*{bairro}"
+											type="text" class="form-control" th:field="*{endereco}"
 											id="endereco" placeholder="Escreva seu endereco" required
 											readonly />
 										<div class="invalid-feedback">Endereco (Rua) é requerido.</div>
@@ -265,7 +265,7 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										<label for="uf" id="label_uf" class="form-group">UF (Estado)</label> <input
-											type="text" class="form-control" th:field="*{cidade}"
+											type="text" class="form-control" th:field="*{uf}"
 											id="uf" placeholder="Escreva seu estado" required
 											readonly />
 										<div class="invalid-feedback">Estado é requerido.</div>

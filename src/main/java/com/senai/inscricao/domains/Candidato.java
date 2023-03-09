@@ -60,8 +60,8 @@ public class Candidato extends AbstractEntity {
 	@Column(name = "escola", nullable = true)
 	private String escola;
 	
-	@Column(name = "filiacaPai", nullable = true)
-	private String filiacaPai;
+	@Column(name = "filiacaoPai", nullable = true)
+	private String filiacaoPai;
 	
 	@Column(name = "filiacaoMae", nullable = true)
 	private String filiacaoMae;
@@ -252,12 +252,13 @@ public class Candidato extends AbstractEntity {
 		this.escola = escola;
 	}
 
-	public String getFiliacaPai() {
-		return filiacaPai;
+
+	public String getFiliacaoPai() {
+		return filiacaoPai;
 	}
 
-	public void setFiliacaPai(String filiacaPai) {
-		this.filiacaPai = filiacaPai;
+	public void setFiliacaoPai(String filiacaoPai) {
+		this.filiacaoPai = filiacaoPai;
 	}
 
 	public String getFiliacaoMae() {

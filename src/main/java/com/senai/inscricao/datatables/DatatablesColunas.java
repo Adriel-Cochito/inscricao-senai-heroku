@@ -2,7 +2,7 @@ package com.senai.inscricao.datatables;
 
 public class DatatablesColunas {
 	
-	public static final String[] CANDIDATOS = {"id", "nome", "bairro", "cidade", "usuario.email", "dtNascimento", "telefone", "rendaPercapta"};
+	public static final String[] CANDIDATOS = {"id", "nome", "bairro", "cidade", "usuario.email", "dtNascimento", "telefone", "rendaPercapta", "endereco", "escola", "escolaridade", "estadoCivil", "filiacaoMae", "filiacaoPai", "naturalidade", "raca", "rg", "uf"};
 
 	public static final String[] ASSISTENTES = {"id", "nome", "re"};
 
