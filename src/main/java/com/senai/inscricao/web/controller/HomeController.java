@@ -101,10 +101,10 @@ public class HomeController {
 					LocalDate dataAtual = LocalDate.now();
 					usuario.setPerfis(perfil);
 					usuario.setAtivo(true);
-					usuario.setCpf("12345678");
+					usuario.setCpf("12345678901");
 					usuario.setEmail("123@123");
 					usuario.setDtInscricao(dataAtual);
-					usuario.setSenha("123123");
+					usuario.setSenha("12345678901");
 					usuario.setStatusCadastro(0);	
 					try {
 						usuarioService.salvarUsuario(usuario);
