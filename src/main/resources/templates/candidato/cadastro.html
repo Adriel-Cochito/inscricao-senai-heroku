@@ -531,13 +531,106 @@
 						th:action="${candidato.id == null} ? @{/candidatos/salvar} : @{/candidatos/editar}"
 						th:object="${candidato}" method="POST" class="was-validated"
 						sec:authorize="hasAnyAuthority('ADMIN','ASSISTENTE' )">
-
-						<div class="form-row">
+						
+						<hr>
+						<h5 style="text-decoration: underline;">Dados de Identificação:</h5>
+						
+						<div class="form-row"> 
 							<div class="form-group col-md-6">
 								<label for="nome" class="form-group">Nome Completo</label> <input
 									disabled="" type="text" class="form-control" th:field="*{nome}"
 									id="nome" />
 							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="cpf" class="form-group">CPF</label> <input
+									disabled="" type="text" class="form-control" th:field="*{usuario.cpf}"
+									id="cpf" />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="rg" class="form-group">RG</label> <input
+									disabled="" type="text" class="form-control" th:field="*{rg}"
+									id="rg" />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="telefone" class="form-group">Telefone</label> <input
+									disabled="" type="number" class="form-control"
+									th:field="*{telefone}" id="telefone" />
+							</div>
+							
+						</div>
+						
+						
+						<hr>
+						<h5 style="text-decoration: underline;">Dados pessoais:</h5>
+						
+						<div class="form-row"> 
+							
+							<div class="form-group col-md-6">
+								<label for="dtNascimento">Data de Nascimento</label> <input
+									disabled="" type="text" class="form-control" id="dtNascimento"
+									th:field="*{dtNascimento}"  />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="raca">Raça/Cor</label> <input
+									disabled="" type="text" class="form-control" id="raca"
+									th:field="*{raca}"  />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="estadoCivil">Estado civil</label> <input
+									disabled="" type="text" class="form-control" id="estadoCivil"
+									th:field="*{estadoCivil}"  />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="naturalidade">Naturalidade</label> <input
+									disabled type="text" class="form-control" id="naturalidade"
+									th:field="*{naturalidade}"  />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="filiacaoMae">Filiação Mãe</label> <input
+									disabled type="text" class="form-control" id="filiacaoMae"
+									th:field="*{filiacaoMae}"  />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="filiacaoPai">Filiação Pai</label> <input
+									disabled type="text" class="form-control" id="filiacaoPai"
+									th:field="*{filiacaoPai}"  />
+							</div>
+							
+						</div>
+						
+						
+												<hr>
+						<h5 style="text-decoration: underline;">Formação:</h5>
+						
+						<div class="form-row">
+							
+							<div class="form-group col-md-6">
+								<label for="escola" class="form-group">Escola onde estudou
+								</label> <input disabled="" type="text" class="form-control"
+									th:field="*{escola}" id="escola" placeholder=""
+									required />
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label for="escolaridade" class="form-group">Escolaridade</label> <input
+									disabled="" type="text" class="form-control"
+									th:field="*{escolaridade}" id="escolaridade" />
+							</div>
+	
+						</div>
+						
+						
+						<hr>
+						<h5 style="text-decoration: underline;">Endereço:</h5>
+						<div class="form-row"> 
 							<div class="form-group col-md-6">
 								<label for="cidade" class="form-group">Cidade</label> <input
 									disabled="" type="text" class="form-control" th:field="*{cidade}"
@@ -556,40 +649,25 @@
 									th:field="*{bairro}" id="bairro" />
 							</div>
 							
+							<div class="form-group col-md-6">
+								<label for="endereco" class="form-group">Endereco</label> <input
+									disabled="" type="text" class="form-control"
+									th:field="*{endereco}" id="endereco" />
+							</div>
 							
-						</div>
-
-						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="telefone" class="form-group">Telefone</label> <input
-									disabled="" type="number" class="form-control"
-									th:field="*{telefone}" id="telefone" />
+								<label for="uf" class="form-group">UF</label> <input
+									disabled="" type="text" class="form-control"
+									th:field="*{uf}" id="uf" />
 							</div>
-
-
-							<div class="form-group col-md-6">
-								<label for="rendaPercapta" class="form-group">Renda
-									PerCapita</label> <input disabled="" type="number" class="form-control"
-									th:field="*{rendaPercapta}" id="rendaPercapta" placeholder=""
-									required />
-							</div>
+						
 						</div>
 
-						<div class="form-row">
-							<div class="form-group col-md-6">
-								<label for="dtNascimento">Data de Nascimento</label> <input
-									disabled type="date" class="form-control" id="dtNascimento"
-									th:field="*{dtNascimento}"  />
-							</div>
-						</div>
 
-						<div class="p-3 mb-5 rounded card"
-							style="background-color: #ebeef2; padding: 20px;">
-							<div id="resultado" class="form-group col-md-6">
-								<h6>Familiares cadastrados:</h6>
-								[(${listaFamiliares})]
-							</div>
-						</div>
+
+						
+
+						<br>
 
 						<input type="hidden" name="uid" th:field="*{usuario.id}">
 						<input type="hidden" name="id" th:field="*{id}">

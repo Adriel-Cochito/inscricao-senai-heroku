@@ -58,16 +58,17 @@ public class CandidatoController {
 		
 		model.addAttribute("listaFamiliares", service.buscarPorCandidatoId(id).getFamiliares());
 		
+		model.addAttribute("cpfCandidato", service.buscarPorCandidatoId(id).getFamiliares());
+		
 		return new ModelAndView("candidato/cadastro", "candidato", service.buscarPorCandidatoId(id));
 	} 
 
 	// Pre edição de credenciais de usuarios
 	@GetMapping("/dados/usuario/{id}")
 	public ModelAndView dadosCandidatoPorUsuarioId(@PathVariable("id") Long id, ModelMap model) {	
-		
+		Candidato candidato = service.buscarPorUsuarioId(id);
 		model.addAttribute("listaFamiliares", service.buscarPorUsuarioId(id).getFamiliares());
-		
-		return new ModelAndView("candidato/cadastro", "candidato", service.buscarPorUsuarioId(id));
+		return new ModelAndView("candidato/cadastro", "candidato", candidato);
 	}
 	
 	// Salvar assistente
