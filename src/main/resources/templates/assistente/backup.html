@@ -161,37 +161,49 @@
 	      
 	     function generateCsvInscricoes() {
 	    		
-	         var csv = 'cpf, email, dtCadastro, nome, telefone, cep, bairro, cidade, zonaRural, dtNascimento, rendaPercapta, curso, dtInscricao, familiares, dataDownload\n';
+	         var csv = 'idInscricao, curso, cpf, rg, email, dtCadastro, nome, telefone, cep, bairro, endereco, cidade, uf, zonaRural, escolaridade, escola, dtNascimento, estadoCivil, naturalidade, raca, filiacaoPai, filiacaoMae, dtInscricao, dataDownload\n';
+		        
 	         var i = 0;
 	       	[# th:each="inscricao : ${inscricoes}"]
 	       		
 	       		var nome;
 	       		var telefone;
 	       		
+	       		var idInscricao = [[${inscricao.id}]];
 	       		var cpf = [[${inscricao.candidato.usuario.cpf}]];
 	       		var email = [[${inscricao.candidato.usuario.email}]];
 	       		var dtCadastro = [[${inscricao.candidato.usuario.dtInscricao}]];
+	       		var rg = [[${inscricao.candidato.rg}]];
 	       		
 	       		var nome = [[${inscricao.candidato.nome}]];
 	       		var telefone = [[${inscricao.candidato.telefone}]];
 	       		var dtNascimento = [[${inscricao.candidato.dtNascimento}]];
-	       		
-	       		var cep = [[${inscricao.candidato.cep}]];
 	       		var bairro = [[${inscricao.candidato.bairro}]];
-	       		var bairro = [[${inscricao.candidato.cep}]];
 	       		var cidade = [[${inscricao.candidato.cidade}]];
-	       		var zonaRural = [[${inscricao.candidato.zonaRural}]];
-	       		
-	       		var rendaPercapta = [[${inscricao.candidato.rendaPercapta}]];
+// 	       		var rendaPercapta = [[${inscricao.candidato.rendaPercapta}]];
 	       		
 	       		var curso = [[${inscricao.curso.titulo}]];
+	       		
+	       		var uf = [[${inscricao.candidato.uf}]];
+	       		var cep = [[${inscricao.candidato.cep}]];
+	       		var endereco = [[${inscricao.candidato.endereco}]];
+	       		var zonaRural = [[${inscricao.candidato.zonaRural}]];
+	       		
+	       		var escolaridade = [[${inscricao.candidato.escolaridade}]];
+	       		var escola = [[${inscricao.candidato.escola}]];
+	       		var estadoCivil = [[${inscricao.candidato.estadoCivil}]];
+	       		var naturalidade = [[${inscricao.candidato.naturalidade}]];
+	       		
+	       		var raca = [[${inscricao.candidato.raca}]];
+	       		var filiacaoPai = [[${inscricao.candidato.filiacaoPai}]];
+	       		var filiacaoMae = [[${inscricao.candidato.filiacaoMae}]];
+	       		
 	       		var dtInscricao = [[${inscricao.dtInscricao}]];
 	       		
-	       		var familiares = [[${inscricao.candidato.familiares}]];
-	       		
 	       		var dataDownload = [[${dataTimeAtual}]];
+	       		
 
-	       		listaInscricoes[i] = [cpf, email, dtCadastro, nome, telefone, cep, bairro, cidade, zonaRural, dtNascimento, rendaPercapta, curso, dtInscricao, familiares, dataDownload];
+	       		listaInscricoes[i] = [idInscricao, curso, cpf, rg, email, dtCadastro, nome, telefone, cep, bairro, endereco, cidade, uf, zonaRural, escolaridade, escola, dtNascimento, estadoCivil, naturalidade, raca, filiacaoPai, filiacaoMae, dtInscricao, dataDownload];
 	       		i++;
 	     	[/]
 	        
@@ -215,34 +227,45 @@
 	     function generateCsvCandidatos() {
 	    	 console.log("Iniciando CSV Candidatos...");
 	    		
-	         var csv = 'cpf, email, dtCadastro, nome, telefone, cep, bairro, cidade, zonaRural, dtNascimento, rendaPercapta, familiares, dataDownload\n';
+	         var csv = 'cpf, rg, email, dtCadastro, nome, telefone, cep, bairro, endereco, cidade, uf, zonaRural, escolaridade, escola, dtNascimento, estadoCivil, naturalidade, raca, filiacaoPai, filiacaoMae, dataDownload\n';
+	         
 	         var i = 0;
 	       	[# th:each="candidato : ${candidatos}"]
 	       		
 	       		var nome;
 	       		var telefone;
 	       		
-	       		var cpf = [[${candidato.usuario.cpf}]];
+                var cpf = [[${candidato.usuario.cpf}]];
 	       		var email = [[${candidato.usuario.email}]];
 	       		var dtCadastro = [[${candidato.usuario.dtInscricao}]];
+	       		var rg = [[${candidato.rg}]];
 	       		
 	       		var nome = [[${candidato.nome}]];
 	       		var telefone = [[${candidato.telefone}]];
 	       		var dtNascimento = [[${candidato.dtNascimento}]];
-	       		
-	       		var cep = [[${candidato.cep}]];
 	       		var bairro = [[${candidato.bairro}]];
-	       		var bairro = [[${candidato.cep}]];
 	       		var cidade = [[${candidato.cidade}]];
+// 	       		var rendaPercapta = [[${candidato.rendaPercapta}]];
+	       		
+	       		
+	       		var uf = [[${candidato.uf}]];
+	       		var cep = [[${candidato.cep}]];
+	       		var endereco = [[${candidato.endereco}]];
 	       		var zonaRural = [[${candidato.zonaRural}]];
 	       		
-	       		var rendaPercapta = [[${candidato.rendaPercapta}]];
+	       		var escolaridade = [[${candidato.escolaridade}]];
+	       		var escola = [[${candidato.escola}]];
+	       		var estadoCivil = [[${candidato.estadoCivil}]];
+	       		var naturalidade = [[${candidato.naturalidade}]];
 	       		
-	       		var familiares = [[${candidato.familiares}]];
+	       		var raca = [[${candidato.raca}]];
+	       		var filiacaoPai = [[${candidato.filiacaoPai}]];
+	       		var filiacaoMae = [[${candidato.filiacaoMae}]];
+	       		
 	       		
 	       		var dataDownload = [[${dataTimeAtual}]];
 
-	       		listaCandidatos[i] = [cpf, email, dtCadastro, nome, telefone, cep, bairro, cidade, zonaRural, dtNascimento, rendaPercapta, familiares, dataDownload];
+	       		listaCandidatos[i] = [cpf, rg, email, dtCadastro, nome, telefone, cep, bairro, endereco, cidade, uf, zonaRural, escolaridade, escola, dtNascimento, estadoCivil, naturalidade, raca, filiacaoPai, filiacaoMae, dataDownload];
 	       		i++;
 	     	[/]
 	        

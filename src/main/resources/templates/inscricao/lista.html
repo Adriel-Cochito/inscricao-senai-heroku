@@ -150,7 +150,7 @@
 	     function generateCSV() {
 	    	
 	    		
-	         var csv = 'idInscricao, cpf, email, dtCadastro, nome, telefone, bairro, cidade, dtNascimento, curso, dtInscricao, familiares\n';
+	         var csv = 'idInscricao, curso, cpf, rg, email, dtCadastro, nome, telefone, cep, bairro, endereco, cidade, uf, zonaRural, escolaridade, escola, dtNascimento, estadoCivil, naturalidade, raca, filiacaoPai, filiacaoMae, dtInscricao\n';
 	        
 	         var i = 0;
 	       	[# th:each="inscricao : ${inscricoes}"]
@@ -162,6 +162,7 @@
 	       		var cpf = [[${inscricao.candidato.usuario.cpf}]];
 	       		var email = [[${inscricao.candidato.usuario.email}]];
 	       		var dtCadastro = [[${inscricao.candidato.usuario.dtInscricao}]];
+	       		var rg = [[${inscricao.candidato.rg}]];
 	       		
 	       		var nome = [[${inscricao.candidato.nome}]];
 	       		var telefone = [[${inscricao.candidato.telefone}]];
@@ -171,12 +172,25 @@
 // 	       		var rendaPercapta = [[${inscricao.candidato.rendaPercapta}]];
 	       		
 	       		var curso = [[${inscricao.curso.titulo}]];
+	       		
+	       		var uf = [[${inscricao.candidato.uf}]];
+	       		var cep = [[${inscricao.candidato.cep}]];
+	       		var endereco = [[${inscricao.candidato.endereco}]];
+	       		var zonaRural = [[${inscricao.candidato.zonaRural}]];
+	       		
+	       		var escolaridade = [[${inscricao.candidato.escolaridade}]];
+	       		var escola = [[${inscricao.candidato.escola}]];
+	       		var estadoCivil = [[${inscricao.candidato.estadoCivil}]];
+	       		var naturalidade = [[${inscricao.candidato.naturalidade}]];
+	       		
+	       		var raca = [[${inscricao.candidato.raca}]];
+	       		var filiacaoPai = [[${inscricao.candidato.filiacaoPai}]];
+	       		var filiacaoMae = [[${inscricao.candidato.filiacaoMae}]];
+	       		
 	       		var dtInscricao = [[${inscricao.dtInscricao}]];
 	       		
-	       		var familiares = [[${inscricao.candidato.familiares}]];
-	       		
 
-	       		listaUsuarios[i] = [idInscricao, cpf, email, dtCadastro, nome, telefone, bairro, cidade, dtNascimento, curso, dtInscricao, familiares];
+	       		listaUsuarios[i] = [idInscricao, curso, cpf, rg, email, dtCadastro, nome, telefone, cep, bairro, endereco, cidade, uf, zonaRural, escolaridade, escola, dtNascimento, estadoCivil, naturalidade, raca, filiacaoPai, filiacaoMae, dtInscricao];
 	       		i++;
 	     	[/]
 	        
